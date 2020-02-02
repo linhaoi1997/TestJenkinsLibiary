@@ -4,6 +4,6 @@ package utils
  */
 
 
-def callstring() {
+static def callstring() {
     return "test gaofei"
 }
