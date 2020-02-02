@@ -3,6 +3,6 @@
  */
 
 def call(){
-    println(testUtile.callstring())
+    println(callstring())
     println('This is test')
 }
