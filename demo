@@ -1,3 +1,8 @@
+properties([gitLabConnection('4pdgitlab')])
+checkout scm
+updateGitlabCommitStatus name: 'build', state: 'pending'
+
+
 library 'qa-pipeline-library'
 
 pipeline {
@@ -6,9 +11,9 @@ pipeline {
            label 'devops'
        }
    }
-   
-   parameters { 
-       string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '') 
+
+   parameters {
+       string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '')
    }
 
    stages {
@@ -37,10 +42,10 @@ pipeline {
                         echo "On Branch B"
                     }
                 }
-          }    
+          }
       }
    }
-   
+
    post{
         always{
             allure jdk: '', report: "allure-report", results: [[path: "UIAutomation/target/allure-results"]]
