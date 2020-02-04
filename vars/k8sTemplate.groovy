@@ -4,12 +4,11 @@ package utils
  */
 
 
-def static String getK8sYaml(String templateName){
-    def yaml = ""
+def call(String templateName){
     switch (templateName){
         case "java":
             def label = "java" + UUID.randomUUID()
-            yaml = """
+            yaml  """
 apiVersion: v1
 kind: Pod
 metadata:
@@ -45,5 +44,4 @@ spec:
 """
 
     }
-    return yaml
 }

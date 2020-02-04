@@ -1,3 +1,4 @@
+import k8sTemplate
 import utils.test
 
 /**
