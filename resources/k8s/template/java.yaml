@@ -5,9 +5,8 @@ metadata:
     qa: java
 spec:
   containers:
-  - name: maven
-    image: registry.4paradigm.com/tester_container
-#    image: registry.4paradigm.com/tester_jenkins_slave
+  - name: jnlp
+    image: registry.4paradigm.com/tester_jenkins_slave
     imagePullPolicy: Always
     env:
       - name: TZ
@@ -17,9 +16,6 @@ spec:
         name: "chromedownload"
       - mountPath: "/etc/localtime"
         name: "host-time"
-    command:
-    - cat
-    tty: true
   volumes:
     - name: "host-time"
       hostPath:
@@ -30,5 +26,3 @@ spec:
         path: "/home/nfs-share"
   imagePullSecrets:
     - name: docker4paradigm
-  nodeSelector:
-      kubernetes.io/hostname: 172.27.128.190
