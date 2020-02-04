@@ -1,9 +1,10 @@
+package utils
 /**
  * Created by sungaofei on 20/2/4.
  */
 
 
-def String call(String templateName){
+def static String getK8sYaml(String templateName){
     def yaml = ""
     switch (templateName){
         case "java":
