@@ -3,7 +3,6 @@ checkout scm
 updateGitlabCommitStatus name: 'build', state: 'pending'
 
 
-library 'qa-pipeline-library'
 
 pipeline {
    agent{
@@ -20,7 +19,6 @@ pipeline {
       stage('环境部署') {
          steps {
             echo 'Hello World'
-            demo()
          }
       }
       stage('拉取测试代码'){
