@@ -1,7 +1,5 @@
 properties([gitLabConnection('4pdgitlab')])
 checkout scm
-updateGitlabCommitStatus name: 'build', state: 'pending'
-
 
 
 pipeline {
