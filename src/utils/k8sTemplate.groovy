@@ -4,7 +4,7 @@ package utils
  */
 
 
-def static String getK8sYaml(String templateName){
+def String getK8sYaml(String templateName){
     def yaml = ""
     switch (templateName){
         case "java":
