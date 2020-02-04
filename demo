@@ -1,5 +1,3 @@
-properties([gitLabConnection('4pdgitlab')])
-checkout scm
 
 
 pipeline {
