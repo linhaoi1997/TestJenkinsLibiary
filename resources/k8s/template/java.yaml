@@ -6,7 +6,8 @@ metadata:
 spec:
   containers:
   - name: maven
-    image: registry.4paradigm.com/tester_jenkins_slave
+    image: registry.4paradigm.com/tester_container
+#    image: registry.4paradigm.com/tester_jenkins_slave
     imagePullPolicy: Always
     env:
       - name: TZ
