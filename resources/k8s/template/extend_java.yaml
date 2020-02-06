@@ -17,7 +17,7 @@ spec:
       - mountPath: "/etc/localtime"
         name: "host-time"
   - name: make
-    image: registry.4paradigm.com/tester_jenkins_java
+    image: registry.4paradigm.com/tester_java
     imagePullPolicy: Always
     command:
     - cat
