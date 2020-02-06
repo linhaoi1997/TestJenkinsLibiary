@@ -5,8 +5,8 @@ metadata:
     qa: java
 spec:
   containers:
-  - name: jnlp
-    image: registry.4paradigm.com/tester_jenkins_slave
+  - name: java
+    image: registry.4paradigm.com/tester_java
     imagePullPolicy: Always
     env:
       - name: TZ
@@ -16,8 +16,6 @@ spec:
         name: "chromedownload"
       - mountPath: "/etc/localtime"
         name: "host-time"
-  - name: make
-    image: centos:6.6
     command:
     - cat
     tty: true
