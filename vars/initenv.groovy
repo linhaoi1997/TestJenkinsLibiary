@@ -1,4 +1,10 @@
-def initenv1(){
+import utils.test
+
+
+def call(){
+    def test = new test()
+    println(test.callstring())
+
 
      def remote = [:]
      remote.name = 'docker02'
