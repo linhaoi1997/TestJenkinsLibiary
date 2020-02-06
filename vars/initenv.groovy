@@ -1,4 +1,4 @@
-def initenv(){
+def initenv1(){
 
      def remote = [:]
      remote.name = 'docker02'
