@@ -19,6 +19,14 @@ spec:
   - name: make
     image: registry.4paradigm.com/tester_java
     imagePullPolicy: Always
+    env:
+      - name: TZ
+        value: "Asia/Shanghai"
+    volumeMounts:
+      - mountPath: "/mnt"
+        name: "chromedownload"
+      - mountPath: "/etc/localtime"
+        name: "host-time"
     command:
     - cat
     tty: true
