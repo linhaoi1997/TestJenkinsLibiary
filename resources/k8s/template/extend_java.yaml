@@ -17,7 +17,7 @@ spec:
       - mountPath: "/etc/localtime"
         name: "host-time"
   - name: make
-    image: centos:6.5
+    image: centos:6.6
     command:
     - cat
     tty: true
