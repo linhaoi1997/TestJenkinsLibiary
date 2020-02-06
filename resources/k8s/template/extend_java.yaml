@@ -19,8 +19,8 @@ spec:
   - name: make
     image: centos
     command:
-      - cat
-      tty: true
+    - cat
+    tty: true
   volumes:
     - name: "host-time"
       hostPath:
