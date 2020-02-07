@@ -9,6 +9,16 @@ JACOCO_APP_NAME=$7
 
 DOWNLOAD_JACOCO_FROM="ftp://m7-qa-test03:21213/jacoco/jacocoagent.jar"
 echo "#####"
+echo $1
+echo $2
+echo $NAMESPACES
+echo $DEPLOY_NAME
+echo $JACOCO_AGENT_ENABLED
+echo $JACOCO_AGENT_INCLUDES
+echo $JACOCO_AGENT_PORT
+echo $JACOCO_AGENT_APPEND
+echo $JACOCO_APP_NAME
+
 echo $JACOCO_AGENT_PORT
 echo $JACOCO_APP_NAME
 echo "########"
