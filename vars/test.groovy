@@ -6,5 +6,5 @@ def call(){
     println(sdp_util.sdp())
     println("AAA")
     println(sdp_util.DEV)
-    println(DEV)
+ 
 }
