@@ -11,6 +11,11 @@ DOWNLOAD_JACOCO_FROM="ftp://m7-qa-test03:21213/jacoco/jacocoagent.jar"
 echo "#####"
 echo $1
 echo $2
+echo $3
+echo $4
+echo $5
+echo $6
+echo $7
 echo $NAMESPACES
 echo $DEPLOY_NAME
 echo $JACOCO_AGENT_ENABLED
