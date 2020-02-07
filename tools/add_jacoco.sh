@@ -12,11 +12,8 @@ if [ "$?" == 1 ]
 then
    exit 1
 fi
-if [ ! -d jacoco_svc  ];then
-  mkdir jacoco_svc
-else
-  echo dir exist
-fi
+rm -rf jacoco_svc
+mkdir jacoco_svc
 pushd jacoco_svc
 cat>svc_jacoco.yaml<<EOF
 apiVersion: v1
