@@ -1,11 +1,10 @@
 def call(){
 
-   def jacocoServer = [:]
-   jacocoServer.name = JACOCO_SERVER_NAME
-   jacocoServer.host = JACOCO_SERVER_HOST
-   jacocoServer.user = JACOCO_SERVER_USER
-   jacocoServer.password = JACOCO_SERVER_PASSWORD
-   jacocoServer.allowAnyHosts = JACOCO_SERVER_ALLOWANYHOSTS
-   sshCommand remote: jacocoServer, command: JACOCO_SERVER_COMMOND
+    sh """
+    
+    /usr/bin/sshpass -p $JACOCO_SERVER_PASSWORD ssh -o StrictHostKeyChecking=no $JACOCO_SERVER_USER@$JACOCO_SERVER_HOST bash -s < jenkins-sharelib/tools/add_jacoco.sh $NAMESPACES $DEPLOY_NAME $JACOCO_AGENT_ENABLED $JACOCO_AGENT_INCLUDES $JACOCO_AGENT_PORT $JACOCO_AGENT_APPEND $APP_NAME
+
+    """
+
    
 }
