@@ -1,6 +1,9 @@
 package utils
-static def DEV="ABC"
-static def sdp() {
+import groovy.transform.Field
+@Field String DEV = 'var2'
+
+def sdp() {
+    
     return "test sdp"
 }
 
