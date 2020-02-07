@@ -1,3 +1,7 @@
 import groovy.transform.Field
 //global variable
-@Field String OPDEV = "sdp"
+def call(){
+    
+    @Field String OPDEV = "sdp"
+}
+
