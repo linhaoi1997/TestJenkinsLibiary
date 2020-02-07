@@ -1,5 +1,4 @@
 #!/bin/bash
-
 NAMESPACES="380cdhruntime"
 DEPLOY_NAME="telamon"
 JACOCO_AGENT_ENABLED="true"
