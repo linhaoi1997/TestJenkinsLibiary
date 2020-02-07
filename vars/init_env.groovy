@@ -1,14 +1,13 @@
 import utils.test
 
 def call(){
-     
-     def remote = [:]
-     remote.name = 'docker02'
-     remote.host = '172.27.2.52'
-     remote.user = 'gaofei'
-     remote.port = 22
-     remote.password = '1987720sgf'
-     remote.allowAnyHosts = true   
-     sshCommand remote: remote, command: "cd /opt/public/prophetee-deploy-autoui;cat 380cdhruntime.ini"
-                    
+
+    def remote = [:]
+    remote.name = DEPLOY_ENV_NAME
+    remote.host = DEPLOY_ENV_HOST
+    remote.user = DEPLOY_ENV_USER
+    remote.password = DEPLOY_ENV_PASSWORD
+    remote.allowAnyHosts = DEPLOY_ENV_AllowAnyHosts  
+    sshCommand remote: remote, command: DEPLOY_ENV_COMMOND
+
 }
