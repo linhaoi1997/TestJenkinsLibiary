@@ -1,7 +1,7 @@
 def call(){
      
     println("testgroovy")
-    println(DEPLOY_ENV)
+    println(DEPLOY_ENV_NAME)
     def remote = [:]
     remote.name = DEPLOY_ENV_NAME
     remote.host = DEPLOY_ENV_HOST
