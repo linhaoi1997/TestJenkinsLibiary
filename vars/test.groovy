@@ -1,4 +1,5 @@
 def call(){
      
-    echo DEV 
+    println("AAA")
+    println(OPDEV)
 }
