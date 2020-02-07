@@ -5,6 +5,7 @@ def call(){
    jacocoServer.host = JACOCO_SERVER_HOST
    jacocoServer.user = JACOCO_SERVER_USER
    jacocoServer.password = JACOCO_SERVER_PASSWORD
-   jacocoServer.allowAnyHosts = JACOCO_SERVER_AllowAnyHosts
+   jacocoServer.allowAnyHosts = JACOCO_SERVER_ALLOWANYHOSTS
    sshCommand remote: jacocoServer, command: JACOCO_SERVER_COMMOND
+   
 }
