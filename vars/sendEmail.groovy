@@ -29,7 +29,9 @@ def call(){
         passed = json.statistic.passed
     }
 
-    emailext body: "测试结束。 通过：111", subject: 'sage-sdk 测试结束', to: 'sungaofei@4paradigm.com'
+    println(passed)
+
+//    emailext body: "测试结束。 通过：${passed}", subject: 'sage-sdk 测试结束', to: 'sungaofei@4paradigm.com'
 
 }
 
