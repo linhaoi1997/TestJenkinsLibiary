@@ -12,7 +12,7 @@ import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
 
 
-@@NonCPS
+@NonCPS
 def call() {
     def fileContents = ""
     def passed = ""
@@ -66,12 +66,6 @@ def call() {
        <li>skip数量 : ${skipped}</li>
        <li>broken数量 : ${broken}</li>
       </ul>
-  </div>
-  <div id="sum0">
-  <h2>GIT Branch</h2>
-  <ul>
-
-  </ul>
   </div>
   </div></body></html>
     """, mimeType: 'text/html', subject: "${JOB_NAME} 测试结束", to: 'sungaofei@4paradigm.com'
