@@ -27,13 +27,9 @@ def call(){
     http.get(path:'/view/API/job/sage-sdk-test/45/allure/widgets/summary.json'){resp,json->
         println resp.status
         passed = json.statistic.passed
-
-        json.each{
-            println it
-        }
     }
 
-    emailext body: "测试结束。 通过：${passed}", subject: 'sage-sdk 测试结束', to: 'sungaofei@4paradigm.com'
+    emailext body: "测试结束。 通过：111", subject: 'sage-sdk 测试结束', to: 'sungaofei@4paradigm.com'
 
 }
 
