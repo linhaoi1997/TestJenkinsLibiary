@@ -12,7 +12,7 @@ import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
 
 
-@NonCPS
+@@NonCPS
 def call() {
     def fileContents = ""
     def passed = ""
