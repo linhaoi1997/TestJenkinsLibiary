@@ -30,7 +30,7 @@ def call(){
     }
 
     println(passed)
-    emailext body: '234234', subject: 'sage-sdk 测试结束', to: 'sungaofei@4paradigm.com'
+
 //    emailext body: "测试结束。 通过：${passed}", subject: 'sage-sdk 测试结束', to: 'sungaofei@4paradigm.com'
 
 }
