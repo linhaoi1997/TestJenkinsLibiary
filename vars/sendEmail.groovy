@@ -20,12 +20,14 @@ def call(){
 
     def fileContents = ""
     def passed = ""
+    def reportURL = "http://auto.4paradigm.com/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
 
     def http = new HTTPBuilder('http://auto.4paradigm.com')
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path:"/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/widgets/summary.json"){resp,json->
         println resp.status
         passed = json.statistic.passed
+
     }
 
     println(passed)
@@ -43,8 +45,8 @@ def call(){
   <div id="sum2">
       <h2>Jenkins Build</h2>
       <ul>
-      <li>Job URL : <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></li>
-       <li>Build Result URL : <a href='${result_url}'>${result_url}</a></li>
+      <li>Job URL : <a href='${BUILD_URL}'>${BUILD_URL}</a></li>
+       <li>Build Result URL : <a href='${reportURL}'>${reportURL}</a></li>
       </ul>
   </div>
   <div id="sum0">
