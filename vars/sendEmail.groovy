@@ -23,7 +23,7 @@ def call(){
 
     def http = new HTTPBuilder('http://auto.4paradigm.com')
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
-    http.get(path:"/view/API/job/${JOB_NAME}/45/allure/widgets/summary.json"){resp,json->
+    http.get(path:"/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/widgets/summary.json"){resp,json->
         println resp.status
         passed = json.statistic.passed
     }
@@ -31,8 +31,30 @@ def call(){
     println(passed)
 
     emailext body: """
-        通过数量：${passed}
-    """, subject: 'sage-sdk 测试结束', to: 'sungaofei@4paradigm.com'
+<html>
+  <style type="text/css">
+  <!--
+  ${fileContents}
+  -->
+  </style>
+  <body>
+  <div id="content">
+  <h1>Summary</h1>
+  <div id="sum2">
+      <h2>Jenkins Build</h2>
+      <ul>
+      <li>Job URL : <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></li>
+       <li>Build Result URL : <a href='${result_url}'>${result_url}</a></li>
+      </ul>
+  </div>
+  <div id="sum0">
+  <h2>GIT Branch</h2>
+  <ul>
+
+  </ul>
+  </div>
+  </div></body></html>
+    """,charset:'UTF-8', mimeType:'text/plain', subject: "${JOB_NAME} 测试结束", to: 'sungaofei@4paradigm.com'
 
 }
 
