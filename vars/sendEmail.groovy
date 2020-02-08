@@ -68,7 +68,7 @@ def call() {
       </ul>
   </div>
   </div></body></html>
-    """, mimeType: 'text/html', subject: "${JOB_NAME} 测试结束", to: 'sungaofei@4paradigm.com; shangyuan@4paradigm.com'
+    """, mimeType: 'text/html', subject: "${JOB_NAME} 测试结束", to: 'sungaofei@4paradigm.com'
 
 }
 
