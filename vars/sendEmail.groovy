@@ -18,7 +18,7 @@ import static groovyx.net.http.Method.*
 @NonCPS
 def call(){
 
-    def body = ""
+    def fileContents = ""
     def passed = ""
 
     def http = new HTTPBuilder('http://auto.4paradigm.com')
