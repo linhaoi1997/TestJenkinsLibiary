@@ -17,6 +17,9 @@ import static groovyx.net.http.Method.*
 
 
 def call(){
+
+    echo '111111111111'
+
     def http = new HTTPBuilder('http://auto.4paradigm.com')
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path:'/view/API/job/sage-sdk-test/45/allure/widgets/summary.json'){resp,json->
