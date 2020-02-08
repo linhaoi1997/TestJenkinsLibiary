@@ -20,22 +20,22 @@ def call(){
 
     echo '111111111111'
 
-    def http = new HTTPBuilder('http://auto.4paradigm.com')
-    //根据responsedata中的Content-Type header，调用json解析器处理responsedata
-    http.get(path:'/view/API/job/sage-sdk-test/45/allure/widgets/summary.json'){resp,json->
-        println resp.status
-
-        println(json.statistic.passed)
-
-        json.each{
-            println it
-        }
-    }
-
-    emailext body: """
-    测试结束。 通过：${json.statistic.passed}
-
-    """, subject: 'sage-sdk 测试结束', to: 'sungaofei@4paradigm.com'
+//    def http = new HTTPBuilder('http://auto.4paradigm.com')
+//    //根据responsedata中的Content-Type header，调用json解析器处理responsedata
+//    http.get(path:'/view/API/job/sage-sdk-test/45/allure/widgets/summary.json'){resp,json->
+//        println resp.status
+//
+//        println(json.statistic.passed)
+//
+//        json.each{
+//            println it
+//        }
+//    }
+//
+//    emailext body: """
+//    测试结束。 通过：${json.statistic.passed}
+//
+//    """, subject: 'sage-sdk 测试结束', to: 'sungaofei@4paradigm.com'
 
 }
 
