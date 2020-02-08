@@ -15,7 +15,7 @@ import static groovyx.net.http.Method.*
 
 
 
-
+@NonCPS
 def call(){
 
     def body = ""
@@ -30,8 +30,7 @@ def call(){
 
     println(passed)
 
-    mail bcc: '', body: '231', cc: '', from: 'sungaofei@4paradigm.com', replyTo: '', subject: 'sage sdk 测试结束', to: 'sungaofei@4paradigm.com'
-//    emailext body: "123。 passed：${passed}", subject: '123123', to: 'sungaofei@4paradigm.com'
+    emailext body: "123。 passed：${passed}", subject: '123123', to: 'sungaofei@4paradigm.com'
 
 }
 
