@@ -33,12 +33,17 @@ def String checkJobStatus() {
 
         for (int i = 0; i < stages.size(); i++) {
             def stageStatus = json.stages[i].status
-
-            println("当前阶段状态为 ${stageStatus}")
-
-            if (stageStatus != success && stageStatus != inProgress) {
-
+            if (stageStatus == failed) {
+                status = failed
+                break
             }
+
+            if (stageStatus == abort) {
+                status = abort
+                break
+            }
+
+            status = success
         }
     }
 
