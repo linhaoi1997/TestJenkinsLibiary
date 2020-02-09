@@ -42,8 +42,6 @@ def String checkJobStatus() {
                 status = abort
                 break
             }
-
-            status = success
         }
     }
 
