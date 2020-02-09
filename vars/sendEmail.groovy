@@ -32,7 +32,7 @@ def String checkJobStatus() {
         if (json.status == abort){
             status = abort
         }else{
-
+            println(json.class)
             List stages = json.stages
             JsonSlurper jsonSlurper = new JsonSlurper()
 
