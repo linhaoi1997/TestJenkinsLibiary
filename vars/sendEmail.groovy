@@ -22,13 +22,11 @@ import groovy.transform.Field
 def String checkJobStatus() {
     def url = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
-    String status = "SUCCESS"
+    String status = success
     http.get(path: url) { resp, json ->
         if (resp.status != 200) {
             throw new RuntimeException("请求 ${url} 返回 ${resp.status} ")
         }
-
-
         List stages = json.stages
 
         for (int i = 0; i < stages.size(); i++) {
@@ -37,7 +35,6 @@ def String checkJobStatus() {
                 status = failed
                 break
             }
-
             if (stageStatus == abort) {
                 status = abort
                 break
