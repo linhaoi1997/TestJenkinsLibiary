@@ -26,6 +26,10 @@ def String checkJobStatus() {
         }
 
         assert json.stages instanceof List
+        def stages = json.stages
+        for (int i = 0; i < status.size(); i ++){
+            println(stages)
+        }
     //        json.stages.foreach{
 //            if (it.status != 'SUCCESS') {
 //                status = it.status
