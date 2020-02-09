@@ -37,7 +37,7 @@ def String checkJobStatus() {
             JsonSlurper jsonSlurper = new JsonSlurper()
 
             for (int i = 0; i < stages.size(); i++) {
-                def stageStatus = jsonSlurper.parseText(stages.get(i) as String)
+                def stageStatus = stages.get(i) as String
                 println("当前阶段状态为 ${stageStatus}")
 
                 if (stageStatus != success && stageStatus != inProgress){
