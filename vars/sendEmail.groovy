@@ -17,8 +17,8 @@ import groovy.transform.Field
 
 
 def String checkJobStatus() {
-    def url = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
-    HTTPBuilder http = new HTTPBuilder()
+    def url = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
+    HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     String status = ""
     http.get(path: url) { resp, json ->
         if (resp.status != 200) {
