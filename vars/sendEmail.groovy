@@ -15,7 +15,7 @@ import groovy.transform.Field
 //global variable
 @Field jenkinsURL = "http://auto.4paradigm.com"
 
-
+@NonCPS
 def String checkJobStatus() {
     def url = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
@@ -34,6 +34,7 @@ def String checkJobStatus() {
 
 @NonCPS
 def call(String to) {
+    println("邮件列表：${to}")
 
     def sendSuccess = {
         def reportURL = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
