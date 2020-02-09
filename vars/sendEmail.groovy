@@ -113,6 +113,7 @@ def call(String to) {
     }
 
     String status = checkJobStatus()
+    println("当前job 的运行状态为： ${status}")
     switch (status) {
         case ["SUCCESS", "UNSTABLE"]:
             sendSuccess()
