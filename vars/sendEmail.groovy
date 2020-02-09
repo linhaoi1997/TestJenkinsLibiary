@@ -20,7 +20,7 @@ def String checkJobStatus() {
     def url = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
     HTTPBuilder http = new HTTPBuilder()
     String status = ""
-    http.get(path: "${url}") { resp, json ->
+    http.get(path: url) { resp, json ->
         if (resp.status != 200) {
             throw new RuntimeException("请求 ${url} 返回 ${resp.status} ")
         }
@@ -34,10 +34,11 @@ def String checkJobStatus() {
 
 @NonCPS
 def call(String to) {
-    def reportURL = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
-    def blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
 
     def sendSuccess = {
+        def reportURL = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+        def blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
+
         def fileContents = ""
         def passed = ""
         def failed = ""
