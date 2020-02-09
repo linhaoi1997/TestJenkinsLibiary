@@ -4,7 +4,6 @@
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
 
 import groovyx.net.http.HTTPBuilder
-import groovy.json.JsonSlurper
 
 import static groovyx.net.http.ContentType.*
 
@@ -29,21 +28,16 @@ def String checkJobStatus() {
             throw new RuntimeException("请求 ${url} 返回 ${resp.status} ")
         }
 
-        if (json.status == abort){
-            status = abort
-        }else{
-            println(json.class)
-            List stages = json.stages
-            JsonSlurper jsonSlurper = new JsonSlurper()
 
-            for (int i = 0; i < stages.size(); i++) {
-                tmp = stages.get(i) as String
-                def stageStatus = jsonSlurper.parseText("{${tmp}")
-                println("当前阶段状态为 ${stageStatus}")
+        List stages = json.stages
 
-                if (stageStatus != success && stageStatus != inProgress){
+        for (int i = 0; i < stages.size(); i++) {
+            def stageStatus = json.stages[i].status
 
-                }
+            println("当前阶段状态为 ${stageStatus}")
+
+            if (stageStatus != success && stageStatus != inProgress) {
+
             }
         }
     }
