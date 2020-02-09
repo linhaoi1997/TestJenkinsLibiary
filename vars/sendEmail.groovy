@@ -14,6 +14,10 @@ import groovy.transform.Field
 
 //global variable
 @Field jenkinsURL = "http://auto.4paradigm.com"
+@Field failed = "FAILED"
+@Field success = "SUCCESS"
+@Field inProgress = "IN_PROGRESS"
+@Field abort = "ABORTED"
 
 @NonCPS
 def String checkJobStatus() {
@@ -25,16 +29,19 @@ def String checkJobStatus() {
             throw new RuntimeException("请求 ${url} 返回 ${resp.status} ")
         }
 
-        assert json.stages instanceof List
-        def stages = json.stages
-        for (int i = 0; i < status.size(); i ++){
-            println(stages)
+        if (json.status == abort){
+            status = abort
+        }else{
+            List stages = json.stages
+            JsonSlurper jsonSlurper = new JsonSlurper()
+
+            for (int i = 0; i < stages.size(); i++) {
+                def stageStatus = jsonSlurper.parseText(stages.get(i))
+                if (stageStatus != success && stageStatus != inProgress){
+
+                }
+            }
         }
-    //        json.stages.foreach{
-//            if (it.status != 'SUCCESS') {
-//                status = it.status
-//            }
-//        }
     }
 
     return status;
@@ -104,7 +111,7 @@ def call(String to) {
 
     }
 
-    def send =  { String subject ->
+    def send = { String subject ->
         emailext body: """
 <html>
   <style type="text/css">
