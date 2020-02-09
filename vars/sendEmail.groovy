@@ -24,11 +24,13 @@ def String checkJobStatus() {
         if (resp.status != 200) {
             throw new RuntimeException("请求 ${url} 返回 ${resp.status} ")
         }
-        json.stages.foreach{
-            if (it.status != 'SUCCESS') {
-                status = it.status
-            }
-        }
+
+        assert json.stages instanceof List
+    //        json.stages.foreach{
+//            if (it.status != 'SUCCESS') {
+//                status = it.status
+//            }
+//        }
     }
 
     return status;
