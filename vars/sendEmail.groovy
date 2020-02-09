@@ -10,37 +10,57 @@ import static groovyx.net.http.ContentType.*
 
 
 import static groovyx.net.http.Method.*
+import groovy.transform.Field
+
+//global variable
+@Field jenkinsURL = "http://auto.4paradigm.com"
+
+
+def String checkJobStatus() {
+    def url = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
+    HTTPBuilder http = new HTTPBuilder()
+    String status = ""
+    http.get(path: "${url}") { resp, json ->
+        if (resp.status != 200) {
+            throw new RuntimeException("请求 ${url} 返回 ${resp.status} ")
+        }
+        status = json.status
+    }
+
+    return status;
+
+}
 
 
 @NonCPS
-def call() {
-    def fileContents = ""
-    def passed = ""
-    def failed = ""
-    def skipped = ""
-    def broken = ""
-    def unknown = ""
-    def total = ""
+def call(String to) {
+    def reportURL = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+    def blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
 
-    def reportURL = "http://auto.4paradigm.com/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
-    def blueOCeanURL = "http://auto.4paradigm.com/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
+    def sendSuccess = {
+        def fileContents = ""
+        def passed = ""
+        def failed = ""
+        def skipped = ""
+        def broken = ""
+        def unknown = ""
+        def total = ""
+        HTTPBuilder http = new HTTPBuilder('http://auto.4paradigm.com')
+        //根据responsedata中的Content-Type header，调用json解析器处理responsedata
+        http.get(path: "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/widgets/summary.json") { resp, json ->
+            println resp.status
+            passed = json.statistic.passed
+            failed = json.statistic.failed
+            skipped = json.statistic.skipped
+            broken = json.statistic.broken
+            unknown = json.statistic.unknown
+            total = json.statistic.total
 
-    def http = new HTTPBuilder('http://auto.4paradigm.com')
-    //根据responsedata中的Content-Type header，调用json解析器处理responsedata
-    http.get(path: "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/widgets/summary.json") { resp, json ->
-        println resp.status
-        passed = json.statistic.passed
-        failed = json.statistic.failed
-        skipped = json.statistic.skipped
-        broken = json.statistic.broken
-        unknown = json.statistic.unknown
-        total = json.statistic.total
+        }
 
-    }
+        println(passed)
 
-    println(passed)
-
-    emailext body: """
+        emailext body: """
 <html>
   <style type="text/css">
   <!--
@@ -68,7 +88,42 @@ def call() {
       </ul>
   </div>
   </div></body></html>
-    """, mimeType: 'text/html', subject: "${JOB_NAME} 测试结束", to: 'sungaofei@4paradigm.com'
+    """, mimeType: 'text/html', subject: "${JOB_NAME} 测试结束", to: to
+
+    }
+
+    def send =  { String subject ->
+        emailext body: """
+<html>
+  <style type="text/css">
+  <!--
+  -->
+  </style>
+  <body>
+  <div id="sum2">
+      <h2>Jenkins Build</h2>
+      <ul>
+      <li>Job 地址 : <a href='${BUILD_URL}'>${BUILD_URL}</a></li>
+      </ul>
+  </div>
+  </div></body></html>
+    """, mimeType: 'text/html', subject: subject, to: to
+    }
+
+    String status = checkJobStatus()
+    switch (status) {
+        case ["SUCCESS", "UNSTABLE"]:
+            sendSuccess()
+            break
+        case "FAILED":
+            send("Job运行失败")
+            break
+        case "ABORTED":
+            send("Job在运行中被取消")
+            break
+        default:
+            send("Job运行结束")
+    }
 
 }
 
