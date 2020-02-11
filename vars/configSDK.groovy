@@ -1,6 +1,10 @@
 def call(){
 
   sh """
+    ls
+    cd src
+    ls
+    cd main
     cat ./src/main/resources/config.properties
     
     echo a >> ./src/main/resources/config.properties
