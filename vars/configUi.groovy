@@ -33,6 +33,27 @@ def call(){
    " >> src/main/resources/config.properties
 
    cat src/main/resources/config.properties
+   
+   if [ $isOpenLdb = true ];then 	
+	sed -i '/dango.cases.sdp.sqlPreprocess/d'  testsuite/sdp/sdp+modelCenter.xml
+   fi
+
+   if [ $hive_Kerberos_open = CDHOPEN ];then
+	sed -i '/dango.cases.sdp.hivecdhker/d'  testsuite/sdp/sdp+modelCenter.xml
+   elif [ $hive_Kerberos_open = CDHCLOSE ];then
+	sed -i '/dango.cases.sdp.hivecdh/d'  testsuite/sdp/sdp+modelCenter.xml
+   elif [ $hive_Kerberos_open = C60OPEN ];then
+	sed -i '/dango.cases.sdp.hivec60/d'  testsuite/sdp/sdp+modelCenter.xml
+   elif [ $hive_Kerberos_open = C70OPEN ];then
+	sed -i '/dango.cases.sdp.hivec70/d'  testsuite/sdp/sdp+modelCenter.xml
+   elif [ $hive_Kerberos_open = HDP ];then
+	sed -i '/dango.cases.sdp.hivehdp/d'  testsuite/sdp/sdp+modelCenter.xml
+   elif [ $hive_Kerberos_open = LEAP ];then
+	sed -i '/dango.cases.sdp.hiveleap/d' testsuite/sdp/sdp+modelCenter.xml
+  fi
+
+
+  cat testsuite/sdp/sdp+modelCenter.xml
 
 
     """
