@@ -52,6 +52,20 @@ def call(){
 
   cat testsuite/sdp/sdp+modelCenter.xml
 
+  cd ..
+
+  if [ "$deletedata" = "true" -a "$importdata" = "true" ]; then 
+	mvn clean test -Dmaven.test.failure.ignore=true -DsuiteXmlFile=dataCleanDeleteData.xml
+    mvn clean test -DsuiteXmlFile=befortest.xml
+    
+  elif [ "$deletedata" = "false" -a "$importdata" = "true" ]; then 
+   mvn clean test -DsuiteXmlFile=befortest.xml  
+ 
+  elif [ "$deletedata" = "true" -a "$importdata" = "false" ]; then 
+   mvn clean test -Dmaven.test.failure.ignore=true -DsuiteXmlFile=dataCleanDeleteData.xml
+  else
+    echo "您没有删除数据也没有引入数据哦"
+  fi
 
     """
 }
