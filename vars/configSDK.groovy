@@ -4,9 +4,9 @@ def call(){
     cd runtime
     cat ./src/main/resources/config.properties
     
-    echo a >> ./src/main/resources/config.properties
+    echo " "  >> ./src/main/resources/config.properties
     echo jdbc.url=jdbc:mysql://$HOST:$DB_PORT >> ./src/main/resources/config.properties
-    echo prophet.workspace=$WORKSPACE >> ./src/main/resources/config.properties
+    echo prophet.workspace=$ENV_WORKSPACE >> ./src/main/resources/config.properties
     echo prophet.accessKey=$ACCESSKEY  >> ./src/main/resources/config.properties
 
     if [ -z $ENV_PORT ];then
