@@ -52,8 +52,6 @@ def call(){
 
   cat testsuite/sdp/sdp+modelCenter.xml
 
-  cd UIAutomation/UIAutomation
-
   if [ "$deletedata" = "true" -a "$importdata" = "true" ]; then 
 	mvn clean test -Dmaven.test.failure.ignore=true -DsuiteXmlFile=dataCleanDeleteData.xml
     mvn clean test -DsuiteXmlFile=befortest.xml
