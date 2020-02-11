@@ -1,5 +1,3 @@
-import utils.*
-
 def call(){
    
    sh """
@@ -57,7 +55,6 @@ def call(){
 
 
   cat testsuite/sdp/sdp+modelCenter.xml
-
 
     """
 }
