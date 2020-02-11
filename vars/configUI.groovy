@@ -22,26 +22,14 @@ def call(){
    if [ -n "$ENV_WORKSPACE" ];then
      echo "workspace=$ENV_WORKSPACE" >> $config
    fi
+   
+   echo "jdbc.url=jdbc:mysql://$HOST:$DB_PORT" >> $config
 
-   if [[ $HOST =~ autoui.4pd.io ]];then
-      prophet_ns=$(echo $HOST |awk -F '[.]' '{print $2}')
-      db_port_auto=$(ssh root@$HOST "k get svc -n $prophet_ns |grep mysql |head -n 1 |awk -F '[:/]' '{print \$2}'")
-   fi
-   
-   echo "db_port_auto:"
-   echo $db_port_auto
-   
-   if [ -z $db_port_auto ];then
-    echo "jdbc.url=jdbc:mysql://$HOST:$DB_PORT" >> $config
-   else
-	echo "jdbc.url=jdbc:mysql://$HOST:$db_port_auto" >> $config
-   fi
    if [[ $hive_Kerberos_open = CDHOPEN ]];then
 	  hdfs_url=""
    fi
    echo "jenkins_workspace=$WORKSPACE" >> $config
    echo "
-
    browser=$browser
    timeout=20000
    hdfs.nameNodeUrl=$hdfs_url
