@@ -48,7 +48,8 @@ def call(){
    elif [ $hive_Kerberos_open = LEAP ];then
 	sed -i '/dango.cases.sdp.hiveleap/d' testsuite/sdp/sdp+modelCenter.xml
   fi
-
+    sed -i 's/sdptest+modelCenter/sdp/g'
+    sed -i '/dango.cases.modelCenter/d' testsuite/sdp/sdp+modelCenter.xml
 
   cat testsuite/sdp/sdp+modelCenter.xml
 
