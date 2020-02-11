@@ -56,7 +56,6 @@ if [ $isOpenLdb = true ];then
 	sed -i '/<exclude name="dango.cases.sdp.sqlPreprocess\"\/>/d'  testsuite/sdp/sdp+modelCenter.xml
 fi
 
-
 if [ $hive_Kerberos_open = CDHOPEN ];then
 	sed -i '/<exclude name=\"dango.cases.sdp.hivecdhker\"\/>/d'  testsuite/sdp/sdp+modelCenter.xml
 elif [ $hive_Kerberos_open = CDHCLOSE ];then
