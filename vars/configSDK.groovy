@@ -15,7 +15,6 @@ def call(){
        echo prophet.url=https://$HOST:$ENV_PORT >> ./src/main/resources/config.properties
     fi
 
-    
     cat ./src/main/resources/config.properties
 
     """
