@@ -20,9 +20,6 @@ def call(){
      echo "workspace=$ENV_WORKSPACE" >> src/main/resources/config.properties
    fi
 
-   if [[ $hive_Kerberos_open = CDHOPEN ]];then
-	  hdfs_url=""
-   fi
    echo "jenkins_workspace=$WORKSPACE" >> src/main/resources/config.properties
    echo "
    browser=$browser
