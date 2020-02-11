@@ -15,6 +15,10 @@ def call(){
        echo prophet.url=https://$HOST:$ENV_PORT >> ./src/main/resources/config.properties
     fi
 
+    cd ..
+    
+    sed -i "s/thread-count=\".*\"/thread-count=\"$THREAD\"/g" sdp.xml
+    
     cat ./src/main/resources/config.properties
 
     """
