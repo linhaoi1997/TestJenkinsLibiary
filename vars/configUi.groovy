@@ -38,7 +38,7 @@ def call(){
    if [ $hive_Kerberos_open = CDHOPEN ];then
 	sed -i '/dango.cases.sdp.hivecdhker/d'  testsuite/sdp/sdp+modelCenter.xml
    elif [ $hive_Kerberos_open = CDHCLOSE ];then
-	sed -i '/dango.cases.sdp.hivecdh/d'  testsuite/sdp/sdp+modelCenter.xml
+	sed -i '/dango.cases.sdp.hivecdh\"/d'  testsuite/sdp/sdp+modelCenter.xml
    elif [ $hive_Kerberos_open = C60OPEN ];then
 	sed -i '/dango.cases.sdp.hivec60/d'  testsuite/sdp/sdp+modelCenter.xml
    elif [ $hive_Kerberos_open = C70OPEN ];then
