@@ -1,7 +1,8 @@
 def call(){
 
   sh """
-    echo " " >> src/main/resources/config.properties
+    echo "
+    " >> src/main/resources/config.properties
     
     echo jdbc.url=jdbc:mysql://$HOST:$DB_PORT >> src/main/resources/config.properties
     echo prophet.workspace=$WORKSPACE >> src/main/resources/config.properties
