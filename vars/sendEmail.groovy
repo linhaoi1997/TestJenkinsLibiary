@@ -10,8 +10,7 @@ import static groovyx.net.http.ContentType.*
 
 import static groovyx.net.http.Method.*
 import groovy.transform.Field
-import hudson.model.*
-import com.tikal.jenkins.plugins.multijob.*;
+
 
 //global variable
 @Field jenkinsURL = "http://auto.4paradigm.com"
@@ -22,43 +21,39 @@ import com.tikal.jenkins.plugins.multijob.*;
 
 @NonCPS
 def String checkJobStatus() {
-    mainJob = manager.build.getProject().getName()
-    job = hudson.model.Hudson.instance.getItem(mainJob)
-    buildResult = job.getLastBuild().getResult().toString()
-    return buildResult
 
-//    def url = ""
-//
-//    if (env.BRANCH_NAME!= "" && env.BRANCH_NAME != null){
-//        url = "/view/API/job/${JOB_NAME}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/wfapi/describe"
-//    }else {
-//        url = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
-//    }
-//    HTTPBuilder http = new HTTPBuilder(jenkinsURL)
-//    String status = success
-//
-//    println("1111111111")
-//    println(url)
-//    http.get(path: url) { resp, json ->
-//        if (resp.status != 200) {
-//            throw new RuntimeException("请求 ${url} 返回 ${resp.status} ")
-//        }
-//        List stages = json.stages
-//
-//        for (int i = 0; i < stages.size(); i++) {
-//            def stageStatus = json.stages[i].status
-//            if (stageStatus == failed) {
-//                status = failed
-//                break
-//            }
-//            if (stageStatus == abort) {
-//                status = abort
-//                break
-//            }
-//        }
-//    }
-//
-//    return status;
+    def url = ""
+
+    if (env.BRANCH_NAME!= "" && env.BRANCH_NAME != null){
+        url = "/view/API/job/${JOB_NAME}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/wfapi/describe"
+    }else {
+        url = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
+    }
+    HTTPBuilder http = new HTTPBuilder(jenkinsURL)
+    String status = success
+
+    println("1111111111")
+    println(url)
+    http.get(path: url) { resp, json ->
+        if (resp.status != 200) {
+            throw new RuntimeException("请求 ${url} 返回 ${resp.status} ")
+        }
+        List stages = json.stages
+
+        for (int i = 0; i < stages.size(); i++) {
+            def stageStatus = json.stages[i].status
+            if (stageStatus == failed) {
+                status = failed
+                break
+            }
+            if (stageStatus == abort) {
+                status = abort
+                break
+            }
+        }
+    }
+
+    return status;
 
 }
 
