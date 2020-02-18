@@ -66,9 +66,11 @@ def call(String to) {
 
     def sendSuccess = {
         def reportURL = ""
+        String jobName = "${JOB_NAME}"
 
         if (env.BRANCH_NAME!= "" && env.BRANCH_NAME != null){
-            reportURL = "/view/API/job/${JOB_NAME}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
+            jobName = "${JOB_NAME}".split("/")[0]
+            reportURL = "/view/API/job/${jobName}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
         }else{
             reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
         }
