@@ -33,7 +33,7 @@ def String checkJobStatus() {
     String status = success
 
     println("1111111111")
-    println(${JOB_NAME})
+    println("${JOB_NAME}")
     println(url)
     http.get(path: url) { resp, json ->
         if (resp.status != 200) {
