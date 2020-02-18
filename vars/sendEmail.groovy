@@ -20,7 +20,14 @@ import groovy.transform.Field
 
 @NonCPS
 def String checkJobStatus() {
-    def url = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
+
+    def url = ""
+
+    if (env.BRANCH_NAME!= "" && env.BRANCH_NAME != null){
+        url = "/view/API/job/${JOB_NAME}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/wfapi/describe"
+    }else {
+        url = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
+    }
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     String status = success
     http.get(path: url) { resp, json ->
@@ -55,9 +62,9 @@ def call(String to) {
         def reportURL = ""
 
         if (env.BRANCH_NAME!= "" && env.BRANCH_NAME != null){
-            reportURL = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+            reportURL = "/view/API/job/${JOB_NAME}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
         }else{
-            reportURL = "${jenkinsURL}/view/API/job/${JOB_NAME}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
+            reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
         }
 
 
@@ -72,7 +79,7 @@ def call(String to) {
         def total = ""
         HTTPBuilder http = new HTTPBuilder('http://auto.4paradigm.com')
         //根据responsedata中的Content-Type header，调用json解析器处理responsedata
-        http.get(path: "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/widgets/summary.json") { resp, json ->
+        http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
             println resp.status
             passed = json.statistic.passed
             failed = json.statistic.failed
