@@ -114,7 +114,7 @@ def call(String to) {
       <h2>Jenkins Build</h2>
       <ul>
       <li>Job 地址 : <a href='${BUILD_URL}'>${BUILD_URL}</a></li>
-       <li>测试报告地址 : <a href='${reportURL}'>${reportURL}</a></li>
+       <li>测试报告地址 : <a href='${jenkinsURL}${reportURL}'>${reportURL}</a></li>
        <li>Pipeline 流程地址 : <a href='${blueOCeanURL}'>${blueOCeanURL}</a></li>
       </ul>
 
