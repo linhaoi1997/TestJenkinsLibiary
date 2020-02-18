@@ -52,7 +52,15 @@ def call(String to) {
     println("邮件列表：${to}")
 
     def sendSuccess = {
-        def reportURL = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+        def reportURL = ""
+
+        if (env.BRANCH_NAME!= "" && env.BRANCH_NAME != null){
+            reportURL = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+        }else{
+            reportURL = "${jenkinsURL}/view/API/job/${JOB_NAME}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
+        }
+
+
         def blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
 
         def fileContents = ""

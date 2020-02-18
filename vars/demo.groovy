@@ -5,6 +5,5 @@ import utils.test
  */
 
 def call(){
-    def test = new test()
-    println(test.callstring())
+    println("这是一个测试")
 }
