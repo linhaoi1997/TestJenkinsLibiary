@@ -67,16 +67,20 @@ def call(String to) {
     def sendSuccess = {
         def reportURL = ""
         String jobName = "${JOB_NAME}"
+        String blueOCeanURL = ""
 
         if (env.BRANCH_NAME!= "" && env.BRANCH_NAME != null){
             jobName = "${JOB_NAME}".split("/")[0]
             reportURL = "/view/API/job/${jobName}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
+//            http://auto.4paradigm.com/blue/organizations/jenkins/gitlabtest/detail/master/217/pipeline
+            blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${jobName}/detail/${env.BRANCH_NAME}/${BUILD_NUMBER}/pipeline"
         }else{
             reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+            blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
         }
 
 
-        def blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
+//        blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
 
         def fileContents = ""
         def passed = ""
@@ -114,7 +118,7 @@ def call(String to) {
       <h2>Jenkins Build</h2>
       <ul>
       <li>Job 地址 : <a href='${BUILD_URL}'>${BUILD_URL}</a></li>
-       <li>测试报告地址 : <a href='${jenkinsURL}${reportURL}'>${reportURL}</a></li>
+       <li>测试报告地址 : <a href='${jenkinsURL}${reportURL}'>${jenkinsURL}${reportURL}</a></li>
        <li>Pipeline 流程地址 : <a href='${blueOCeanURL}'>${blueOCeanURL}</a></li>
       </ul>
 
