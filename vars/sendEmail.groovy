@@ -30,6 +30,9 @@ def String checkJobStatus() {
     }
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     String status = success
+
+    println("1111111111")
+    println(url)
     http.get(path: url) { resp, json ->
         if (resp.status != 200) {
             throw new RuntimeException("请求 ${url} 返回 ${resp.status} ")
