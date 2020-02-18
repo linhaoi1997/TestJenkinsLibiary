@@ -145,9 +145,10 @@ def call(String to) {
     """, mimeType: 'text/html', subject: subject, to: to
     }
 
-    String status = checkJobStatus()
-    println("当前job 的运行状态为： ${status}")
-    switch (status) {
+//    String status = checkJobStatus()
+//    String status = $BUILD_STATUS
+    println("当前job 的运行状态为： ${BUILD_STATUS}")
+    switch (${BUILD_STATUS}) {
         case ["SUCCESS", "UNSTABLE"]:
             sendSuccess()
             break
