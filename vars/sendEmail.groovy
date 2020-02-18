@@ -25,7 +25,8 @@ def String checkJobStatus() {
     def url = ""
 
     if (env.BRANCH_NAME!= "" && env.BRANCH_NAME != null){
-        url = "/view/API/job/${JOB_NAME}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/wfapi/describe"
+        String jobName = "${JOB_NAME}".split("/")[0]
+        url = "/view/API/job/${jobName}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/wfapi/describe"
     }else {
         url = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/wfapi/describe"
     }
