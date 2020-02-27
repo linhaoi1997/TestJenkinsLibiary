@@ -64,22 +64,21 @@ def String checkJobStatus() {
 def call(String to) {
     println("邮件列表：${to}")
 
-    def sendSuccess = {
-        def reportURL = ""
-        String jobName = "${JOB_NAME}"
-        String blueOCeanURL = ""
+    def reportURL = ""
+    String jobName = "${JOB_NAME}"
+    String blueOCeanURL = ""
 
-        if (env.BRANCH_NAME!= "" && env.BRANCH_NAME != null){
-            jobName = "${JOB_NAME}".split("/")[0]
-            reportURL = "/view/API/job/${jobName}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
+    if (env.BRANCH_NAME!= "" && env.BRANCH_NAME != null){
+        jobName = "${JOB_NAME}".split("/")[0]
+        reportURL = "/view/API/job/${jobName}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
 //            http://auto.4paradigm.com/blue/organizations/jenkins/gitlabtest/detail/master/217/pipeline
-            blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${jobName}/detail/${env.BRANCH_NAME}/${BUILD_NUMBER}/pipeline"
-        }else{
-            reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
-            blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
-        }
+        blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${jobName}/detail/${env.BRANCH_NAME}/${BUILD_NUMBER}/pipeline"
+    }else{
+        reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+        blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
+    }
 
-
+    def sendSuccess = {
 //        blueOCeanURL = "${jenkinsURL}/blue/organizations/jenkins/${JOB_NAME}/detail/${JOB_NAME}/${BUILD_NUMBER}/pipeline"
 
         def fileContents = ""
