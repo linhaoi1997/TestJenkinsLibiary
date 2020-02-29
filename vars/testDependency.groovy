@@ -27,13 +27,16 @@ def call(List<String> marks, int timeout=60){
     for (int i = 0; i < marks.size(); i ++){
         println("提交任务：${marks.get(i)}")
         pool.submit({
+            sh """
+            python3 -m pytest test/ -m "${marks.get(i)}
+            """
 
-            def command = """python3 -m pytest test/ -m "${marks.get(i)}"""
-            def proc = command.execute()
-            proc.waitFor()
-            println "return code: ${ proc.exitValue()}"
-            println "stderr: ${proc.err.text}"
-            println "stdout: ${proc.in.text}"
+//            def command = """python3 -m pytest test/ -m "${marks.get(i)}"""
+//            def proc = command.execute()
+//            proc.waitFor()
+//            println "return code: ${ proc.exitValue()}"
+//            println "stderr: ${proc.err.text}"
+//            println "stdout: ${proc.in.text}"
         })
     }
     pool.shutdown()
