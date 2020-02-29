@@ -21,13 +21,13 @@ import java.util.concurrent.TimeUnit
 //println(44)
 
 
-def call(String[] marks){
+def call(List<String> marks){
     def pool = Executors.newFixedThreadPool( marks.size() )
 
     for (int i = 0; i <= marks.size(); i ++){
-        println("提交任务：${marks[i]}")
+        println("提交任务：${marks.get(i)}")
         pool.submit({
-            sh "python3 -m pytest -m ${marks[i]}"
+            sh "python3 -m pytest -m ${marks.get(i)}"
         })
     }
     pool.shutdown()
