@@ -61,8 +61,7 @@ def call(List<String> marks) {
     def tmp = '${module[*]}'
     def m = '$m'
     def script = """
-cat << EOF > run.sh
-
+echo 00000
 module=(${ms})
 echo 11111
 cd sage-sdk-test
@@ -73,9 +72,6 @@ do {
 } &
 done
 wait
-EOF
-chmod 777 run.sh
-./run.sh
     """
     echo script
     sh script
