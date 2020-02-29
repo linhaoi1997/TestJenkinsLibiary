@@ -56,7 +56,7 @@ def call(List<String> marks) {
 
     def tmp = '${module[@]}'
 
-    sh """
+    def script = """
     module = (${ms})
 
     cd sage-sdk-test
@@ -68,6 +68,8 @@ def call(List<String> marks) {
     wait
 
     """
+    echo script
+    sh script
 
 }
 
