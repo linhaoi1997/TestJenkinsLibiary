@@ -27,10 +27,13 @@ def call(List<String> marks){
     for (int i = 0; i <= marks.size(); i ++){
         println("提交任务：${marks.get(i)}")
         pool.submit({
-            sh "python3 -m pytest -m ${marks.get(i)}"
+            sh
+            """
+            python3 -m pytest test/ -m "${marks.get(i)}"
+            """
         })
     }
-    pool.shutdown()
+//    pool.shutdown()
 //    pool.awaitTermination( timeout, TimeUnit.MINUTES )
 //    pool.shutdownNow()
 
