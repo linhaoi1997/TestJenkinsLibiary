@@ -28,7 +28,8 @@ def call(List<String> marks, int timeout=60){
         pool.submit({
             println("开启线程")
             sh """
-            python3 -m pytest sage-sdk-test/test/ -m "${marks.get(i)}"
+            cd sage-sdk-test
+            python3 -m pytest test/ -m "${marks.get(i)}"
             """
 
 //            def command = """python3 -m pytest test/ -m "${marks.get(i)}"""
