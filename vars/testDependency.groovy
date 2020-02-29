@@ -39,7 +39,6 @@ def call(List<String> marks, int timeout=60){
 //            println "stdout: ${proc.in.text}"
         })
     }
-    pool.shutdown()
     println(11111111)
     pool.awaitTermination( timeout, TimeUnit.MINUTES )
     println(22222222)
