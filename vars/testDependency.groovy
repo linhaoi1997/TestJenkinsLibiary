@@ -36,8 +36,8 @@ def call(List<String> marks){
             println "stdout: ${proc.in.text}"
         })
     }
-//    pool.shutdown()
-//    pool.awaitTermination( timeout, TimeUnit.MINUTES )
-//    pool.shutdownNow()
+    pool.shutdown()
+    pool.awaitTermination( timeout, TimeUnit.MINUTES )
+    pool.shutdownNow()
 
 }
