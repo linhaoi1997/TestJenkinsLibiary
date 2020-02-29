@@ -51,7 +51,9 @@ def call(List<String> marks) {
 
     def ms = ""
     for (int i=0; i<marks.size();i++){
-        ms = marks.get(i) + " " + ms
+        if (marks.size() > 1){
+            ms = marks.get(i) + " " + ms
+        }
     }
 
     def tmp = '${module[@]}'
