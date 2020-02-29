@@ -62,7 +62,7 @@ def call(List<String> marks) {
     def m = '$m'
     def script = """
 echo 00000
-module=(${ms})
+module="${ms}"
 echo 11111
 cd sage-sdk-test
 echo 22222
