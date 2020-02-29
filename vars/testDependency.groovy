@@ -52,9 +52,10 @@ println(44)
 
 def call(List<String> marks, int timeout = 60) {
     def mytask = { mark ->
-        sh """
-            python3 -m pytest test/ -m "${mark}
-            """
+//        sh """
+//            python3 -m pytest test/ -m "${mark}
+//            """
+        println("fasdfsadfsdfsadfsadf")
     }
 
     def threads = new ArrayList<Thread>()
