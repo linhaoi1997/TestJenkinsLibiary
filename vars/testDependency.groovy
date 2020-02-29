@@ -53,7 +53,7 @@ import java.util.concurrent.TimeUnit
 def call(List<String> marks, int timeout = 60) {
     for (int i = 0; i < marks.size(); i++) {
         sh """
-        python3 -m pytest test/ -m "${marks.get(i)}"
+        python3 -m pytest sage-sdk-test/test/ -m "${marks.get(i)}"
         """
     }
 //    def mytask = { mark ->
