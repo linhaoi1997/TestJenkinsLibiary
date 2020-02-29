@@ -53,6 +53,8 @@ def call(List<String> marks) {
     for (int i=0; i<marks.size();i++){
         if (marks.size() > 1){
             ms = marks.get(i) + " " + ms
+        }else{
+            ms = marks.get(0)
         }
     }
 
