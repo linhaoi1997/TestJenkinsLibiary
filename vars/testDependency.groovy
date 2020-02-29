@@ -3,22 +3,22 @@ import java.util.concurrent.TimeUnit
 
 
 //// How many threads to kick off
-def nThreads = 3
-def pool = Executors.newFixedThreadPool(nThreads)
-
-
-
-
-pool.submit({
-    println("123123123123123")
-})
-
-def timeout = 3
-pool.shutdown()
-println(33)
-pool.awaitTermination(timeout, TimeUnit.SECONDS)
-pool.shutdownNow()
-println(44)
+//def nThreads = 3
+//def pool = Executors.newFixedThreadPool(nThreads)
+//
+//
+//
+//
+//pool.submit({
+//    println("123123123123123")
+//})
+//
+//def timeout = 3
+//pool.shutdown()
+//println(33)
+//pool.awaitTermination(timeout, TimeUnit.SECONDS)
+//pool.shutdownNow()
+//println(44)
 
 //def call(List<String> marks, int timeout=60){
 //    def pool = Executors.newFixedThreadPool( marks.size() )
@@ -51,27 +51,34 @@ println(44)
 
 
 def call(List<String> marks, int timeout = 60) {
-    def mytask = { mark ->
-//        sh """
-//            python3 -m pytest test/ -m "${mark}
-//            """
-        println("fasdfsadfsdfsadfsadf")
-    }
-
-    def threads = new ArrayList<Thread>()
-
     for (int i = 0; i < marks.size(); i++) {
-        def t = new Thread({
-            mytask(marks.get(i))
-
-        })
-        t.start()
-        threads.add(t)
+        sh """
+        python3 -m pytest test/ -m "${marks.get(i)}"
+        """
     }
-
-    for (int i =0; i < threads.size(); i++){
-        threads.get(i).join(timeout * 1000)
-        println(111111111)
-    }
+//    def mytask = { mark ->
+////        sh """
+////            python3 -m pytest test/ -m "${mark}
+////            """
+//        println("fasdfsadfsdfsadfsadf")
+//    }
+//
+//    def threads = new ArrayList<Thread>()
+//
+//    for (int i = 0; i < marks.size(); i++) {
+//        def t = new Thread({
+//            mytask(marks.get(i))
+//
+//        })
+//        t.start()
+//        threads.add(t)
+//    }
+//
+//    for (int i = 0; i < threads.size(); i++) {
+//        threads.get(i).join(timeout * 1000 * 60)
+//        println(111111111)
+//    }
 
 }
+
+
