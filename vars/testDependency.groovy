@@ -25,8 +25,9 @@ def call(String[] marks){
     def pool = Executors.newFixedThreadPool( marks.size() )
 
     for (int i = 0; i <= marks.size(); i ++){
+        println("提交任务：${marks[i]}")
         pool.submit({
-            sh "python3 -m pytest -m ${mark}"
+            sh "python3 -m pytest -m ${marks[i]}"
         })
     }
     pool.shutdown()
