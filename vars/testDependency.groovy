@@ -59,18 +59,16 @@ def call(List<String> marks) {
     }
 
     def tmp = '${module[@]}'
-
+    def m = '$m'
     def script = """
-    module=(${ms})
-
-    cd sage-sdk-test
-    for m in ${tmp}
-    do {
-        python3 -m pytest test/ -m "m"
-    } &
-    done
-    wait
-
+module=(${ms})
+cd sage-sdk-test
+for m in ${tmp}
+do {
+    python3 -m pytest test/ -m ${m}
+} &
+done
+wait
     """
     echo script
     sh script
