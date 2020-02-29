@@ -70,6 +70,7 @@ def call(List<String> marks, int timeout = 60) {
 
     for (int i =0; i < threads.size(); i++){
         threads.get(i).join(timeout * 1000)
+        println(111111111)
     }
 
 }
