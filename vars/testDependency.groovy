@@ -47,36 +47,30 @@ import java.util.concurrent.TimeUnit
 //}
 
 
-def call(List<String> marks, int timeout = 60) {
-//    for (int i = 0; i < marks.size(); i++) {
-//        sh """
-//        python3 -m pytest sage-sdk-test/test/ -m "${marks.get(i)}"
-//        """
-//    }
-    def mytask = { mark ->
-        sh """
-            cd sage-sdk-test
-            python3 -m pytest test/ -m "${mark}"
-            """
-        println("fasdfsadfsdfsadfsadf")
+def call(List<String> marks) {
+
+    def ms = ""
+    for (int i=0; i<marks.size();i++){
+        ms = marks.get(i) + " " + ms
     }
 
-    def threads = new ArrayList<Thread>()
+    def tmp = '${module[@]}'
 
-    for (int i = 0; i < marks.size(); i++) {
-        def t = new Thread({
-            mytask(marks.get(i))
+    sh """
+    module = (${ms})
 
-        })
-        t.start()
-        threads.add(t)
-    }
+    cd sage-sdk-test
+    for m in ${tmp}
+    do {
+        python3 -m pytest test/ -m "m"
+    } &
+    done
+    wait
 
-    for (int i = 0; i < threads.size(); i++) {
-        threads.get(i).join(timeout * 1000 * 60)
-        println(111111111)
-    }
+    """
 
 }
+
+
 
 
