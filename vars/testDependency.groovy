@@ -24,7 +24,7 @@ println(44)
 def call(List<String> marks, int timeout=60){
     def pool = Executors.newFixedThreadPool( marks.size() )
 
-    for (int i = 0; i <= marks.size(); i ++){
+    for (int i = 0; i < marks.size(); i ++){
         println("提交任务：${marks.get(i)}")
         pool.submit({
 
