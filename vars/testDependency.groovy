@@ -40,7 +40,11 @@ def call(List<String> marks, int timeout=60){
         })
     }
     pool.shutdown()
+    println(11111111)
     pool.awaitTermination( timeout, TimeUnit.MINUTES )
+    println(22222222)
     pool.shutdownNow()
+    println(33333333)
+
 
 }
