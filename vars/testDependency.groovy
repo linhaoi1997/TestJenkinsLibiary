@@ -27,6 +27,7 @@ def call(List<String> marks, int timeout=60){
     for (int i = 0; i < marks.size(); i ++){
         println("提交任务：${marks.get(i)}")
         pool.submit({
+            println("开启线程")
             sh """
             python3 -m pytest test/ -m "${marks.get(i)}
             """
@@ -39,6 +40,7 @@ def call(List<String> marks, int timeout=60){
 //            println "stdout: ${proc.in.text}"
         })
     }
+    pool.shutdown()
     println(11111111)
     pool.awaitTermination( timeout, TimeUnit.MINUTES )
     println(22222222)
