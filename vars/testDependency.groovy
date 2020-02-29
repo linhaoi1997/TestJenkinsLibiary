@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 //println(44)
 
 
-def call(String[] marks, int timeout=60){
+def call(String[] marks){
     def pool = Executors.newFixedThreadPool( marks.size() )
 
     for (int i = 0; i <= marks.size(); i ++){
@@ -30,7 +30,7 @@ def call(String[] marks, int timeout=60){
         })
     }
     pool.shutdown()
-    pool.awaitTermination( timeout, TimeUnit.MINUTES )
-    pool.shutdownNow()
+//    pool.awaitTermination( timeout, TimeUnit.MINUTES )
+//    pool.shutdownNow()
 
 }
