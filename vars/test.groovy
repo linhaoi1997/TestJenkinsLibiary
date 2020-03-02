@@ -57,7 +57,8 @@ def getResultFromAllure(){
 def call() {
     def version = "release/3.8.2"
     getResultFromAllure()
-    this.class.classLoader.rootLoader.addURL(new URL("file:///root/mysql-connector-java-8.0.13.jar"))
+
+    getClass().classLoader.rootLoader.addURL(new URL("file:///root/mysql-connector-java-8.0.13.jar"))
 
     Class.forName("com.mysql.cj.jdbc.Driver.class", true, this.class.classLoader)
     def sql = Sql.newInstance("jdbc:mysql://m7-qa-test03:3306/sage_sdk", "root", "root", "com.mysql.cj.jdbc.Driver.class")
