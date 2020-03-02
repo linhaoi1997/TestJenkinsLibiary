@@ -58,7 +58,7 @@ def call() {
     def version = "release/3.8.2"
     getResultFromAllure()
     this.class.classLoader.addURL(new URL("file://mnt/disk1/jenkins/plugins/database-mysql/WEB-INF/lib/mysql-connector-java-8.0.13.jar"))
-    def sql = Sql.newInstance("jdbc:mysql://m7-qa-test03/sage_sdk", "root", "root", "com.mysql.jdbc.Driver")
+    def sql = Sql.newInstance("jdbc:mysql://m7-qa-test03:3306/sage_sdk", "root", "root", "com.mysql.jdbc.Driver")
     query = "INSERT INTO func_test (name, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${version}', " +
             "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
     sql.close()
