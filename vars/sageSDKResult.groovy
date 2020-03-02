@@ -22,7 +22,7 @@ import groovy.sql.Sql
 //global variable
 @Field jenkinsURL = "http://auto.4paradigm.com"
 
-
+@NonCPS
 def call(String version) {
 //    ClassLoader classLoader = new GroovyClassLoader()
 //    Map[] grapez = [[group : 'mysql', module : 'mysql-connector-java', version : '5.1.25']]
