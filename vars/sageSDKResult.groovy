@@ -22,12 +22,15 @@ import groovy.sql.Sql
 //global variable
 @Field jenkinsURL = "http://auto.4paradigm.com"
 
-@NonCPS
-def call(String version) {
-//    ClassLoader classLoader = new GroovyClassLoader()
-//    Map[] grapez = [[group : 'mysql', module : 'mysql-connector-java', version : '5.1.25']]
-//    Grape.grab(classLoader: classLoader, grapez)
+@Field int passed
+@Field int failed
+@Field int skipped
+@Field int broken
+@Field int unknown
+@Field int total
 
+@NonCPS
+def getResultFromAllure(){
     def reportURL = ""
     if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
         reportURL = "/view/API/job/${jobName}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
@@ -36,12 +39,7 @@ def call(String version) {
     }
 
 
-    int passed
-    int failed
-    int skipped
-    int broken
-    int unknown
-    int total
+
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
@@ -53,20 +51,14 @@ def call(String version) {
         unknown = Integer.parseInt((String) json.statistic.unknown)
         total = Integer.parseInt((String) json.statistic.total)
     }
-    //创建sql实例
-//    Class.forName("com.mysql.jdbc.Driver")
-//    url = 'jdbc:mysql://m7-qa-test03:3306/sage_sdk?useUnicode=true&characterEncoding=utf8'
-//    driver = 'com.mysql.jdbc.Driver'
-//    username = 'root'
-//    passwd = 'root'
+}
+
+
+def call(String version) {
+
     getDatabaseConnection(type: 'GLOBAL') {
         def sqlString = "INSERT INTO func_test (name, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${version}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
-//        def params = ['test', 11]
         sql sql: sqlString
     }
-//    def s = Sql.withInstance(url, username, passwd, driver) { sql ->
-//        sql.execute "INSERT INTO func_test (name, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${version}', " +
-//                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
-//    }
 }
