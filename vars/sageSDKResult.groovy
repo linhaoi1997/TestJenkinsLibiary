@@ -31,12 +31,12 @@ def call(String version) {
     }
 
 
-    int passed
-    int failed
-    int skipped
-    int broken
-    int unknown
-    int total
+    Integer passed
+    Integer failed
+    Integer skipped
+    Integer broken
+    Integer unknown
+    Integer total
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
