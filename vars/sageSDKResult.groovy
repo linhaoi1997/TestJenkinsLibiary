@@ -55,7 +55,8 @@ def call(String version) {
         total = Integer.parseInt((String)json.statistic.total)
     }
     //创建sql实例
-    url = 'jdbc:mysql://m7-qa-test03:3306/sage_sdk?useUnicode=true&characterEncoding=utf8'
+    url = 'jdbc:mysql://m7-qa-test03:3306/sage_sdk'
+//    url = 'jdbc:mysql://m7-qa-test03:3306/sage_sdk?useUnicode=true&characterEncoding=utf8'
     driver = 'com.mysql.jdbc.Driver'
     username = 'root'
     passwd = 'root'
