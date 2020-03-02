@@ -60,7 +60,7 @@ def call() {
     println System.getProperty("java.ext.dirs")
     sh "ls -l /root"
     this.class.classLoader.addURL(new URL("file://root/mysql-connector-java-8.0.13.jar"))
-    Class.forName("com.mysql.jdbc.Driver")
+//    Class.forName("com.mysql.jdbc.Driver")
     def sql = Sql.newInstance("jdbc:mysql://m7-qa-test03:3306/sage_sdk", "root", "root", "com.mysql.jdbc.Driver")
     query = "INSERT INTO func_test (name, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${version}', " +
             "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
