@@ -25,9 +25,9 @@ import groovy.sql.Sql
 
 
 def call(String version) {
-//    ClassLoader classLoader = new GroovyClassLoader()
-//    Map[] grapez = [[group : 'mysql', module : 'mysql-connector-java', version : '5.1.25']]
-//    Grape.grab(classLoader: classLoader, grapez)
+    ClassLoader classLoader = new GroovyClassLoader()
+    Map[] grapez = [[group : 'mysql', module : 'mysql-connector-java', version : '5.1.25']]
+    Grape.grab(classLoader: classLoader, grapez)
 
     def reportURL = ""
     if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
