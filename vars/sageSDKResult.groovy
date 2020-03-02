@@ -54,8 +54,9 @@ def getResultFromAllure(){
 }
 
 
-def call(String version) {
-
+def call() {
+    def version = "release/3.8.2"
+    getResultFromAllure()
     getDatabaseConnection(type: 'GLOBAL') {
         def sqlString = "INSERT INTO func_test (name, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${version}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
