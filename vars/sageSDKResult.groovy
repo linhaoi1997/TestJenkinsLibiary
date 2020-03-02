@@ -1,5 +1,7 @@
 package utils
 
+import groovy.grape.Grape
+
 /**
  * Created by sungaofei on 20/3/1.
  */
