@@ -1,4 +1,4 @@
-
+#!/usr/bin/env groovy
 import groovy.grape.Grape
 
 /**
