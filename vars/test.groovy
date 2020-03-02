@@ -8,6 +8,9 @@ import groovy.grape.Grape
 
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
 import groovyx.net.http.HTTPBuilder
+
+import java.sql.DriverManager
+
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
 import groovy.transform.Field
@@ -61,8 +64,14 @@ def call() {
     sh "ls -l ${System.getProperty("java.ext.dirs")}"
     this.class.classLoader.addURL(new URL("file://root/mysql-connector-java-8.0.13.jar"))
     Class.forName("com.mysql.jdbc.Driver", true, this.class.classLoader)
-    def sql = Sql.newInstance("jdbc:mysql://m7-qa-test03:3306/sage_sdk", "root", "root")
-    query = "INSERT INTO func_test (name, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${version}', " +
-            "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
-    sql.close()
+    DriverManager.getConnection("jdbc:mysql://m7-qa-test03:3306/sage_sdk", "root", "root")
+    stmt = conn.createStatement();
+    String sql;
+    sql = "SELECT * from func_test";
+    ResultSet rs = stmt.executeQuery(sql);
+
+//    def sql = Sql.newInstance("jdbc:mysql://m7-qa-test03:3306/sage_sdk", "root", "root")
+//    query = "INSERT INTO func_test (name, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${version}', " +
+//            "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
+//    sql.close()
 }
