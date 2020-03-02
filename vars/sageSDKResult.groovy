@@ -17,7 +17,7 @@ import groovy.sql.Sql
 //@GrabResolver(name = 'aliyun', root = 'http://maven.aliyun.com/nexus/content/groups/public/')
 //加载数据库连接驱动包
 @Grab('mysql:mysql-connector-java:5.1.25')
-//@GrabConfig(systemClassLoader=true)
+@GrabConfig(systemClassLoader=true)
 
 //global variable
 @Field jenkinsURL = "http://auto.4paradigm.com"
@@ -25,9 +25,9 @@ import groovy.sql.Sql
 
 
 def call(String version) {
-    ClassLoader classLoader = new GroovyClassLoader()
-    Map[] grapez = [[group : 'mysql', module : 'mysql-connector-java', version : '5.1.25']]
-    Grape.grab(classLoader: classLoader, grapez)
+//    ClassLoader classLoader = new GroovyClassLoader()
+//    Map[] grapez = [[group : 'mysql', module : 'mysql-connector-java', version : '5.1.25']]
+//    Grape.grab(classLoader: classLoader, grapez)
 
     def reportURL = ""
     if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
