@@ -16,7 +16,7 @@ import groovy.sql.Sql
 //可以指定maven仓库
 //@GrabResolver(name = 'aliyun', root = 'http://maven.aliyun.com/nexus/content/groups/public/')
 //加载数据库连接驱动包
-@Grab('mysql:mysql-connector-java:5.1.25')
+//@Grab('mysql:mysql-connector-java:5.1.25')
 //@GrabConfig(systemClassLoader=true)
 
 //global variable
