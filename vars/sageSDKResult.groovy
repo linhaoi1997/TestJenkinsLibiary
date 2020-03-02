@@ -25,9 +25,9 @@ import groovy.sql.Sql
 
 
 def call(String version) {
-    ClassLoader classLoader = new GroovyClassLoader()
-    Map[] grapez = [[group : 'mysql', module : 'mysql-connector-java', version : '5.1.25']]
-    Grape.grab(classLoader: classLoader, grapez)
+//    ClassLoader classLoader = new GroovyClassLoader()
+//    Map[] grapez = [[group : 'mysql', module : 'mysql-connector-java', version : '5.1.25']]
+//    Grape.grab(classLoader: classLoader, grapez)
 
     def reportURL = ""
     if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
@@ -55,8 +55,8 @@ def call(String version) {
         total = Integer.parseInt((String)json.statistic.total)
     }
     //创建sql实例
-    url = 'jdbc:mysql://m7-qa-test03:3306/sage_sdk'
-//    url = 'jdbc:mysql://m7-qa-test03:3306/sage_sdk?useUnicode=true&characterEncoding=utf8'
+    Class.forName("com.mysql.jdbc.Driver")
+    url = 'jdbc:mysql://m7-qa-test03:3306/sage_sdk?useUnicode=true&characterEncoding=utf8'
     driver = 'com.mysql.jdbc.Driver'
     username = 'root'
     passwd = 'root'
