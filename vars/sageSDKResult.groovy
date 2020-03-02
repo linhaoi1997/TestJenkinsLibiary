@@ -31,22 +31,22 @@ def call(String version) {
     }
 
 
-    Integer passed
-    Integer failed
-    Integer skipped
-    Integer broken
-    Integer unknown
-    Integer total
+    int passed
+    int failed
+    int skipped
+    int broken
+    int unknown
+    int total
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
         println resp.status
-        passed = Integer.parseInt(json.statistic.passed)
-        failed = Integer.parseInt(json.statistic.failed)
-        skipped = Integer.parseInt(json.statistic.skipped)
-        broken = Integer.parseInt(json.statistic.broken)
-        unknown = Integer.parseInt(json.statistic.unknown)
-        total = Integer.parseInt(json.statistic.total)
+        passed = Integer.parseInt((String)json.statistic.passed)
+        failed = Integer.parseInt((String)json.statistic.failed)
+        skipped = Integer.parseInt((String)json.statistic.skipped)
+        broken = Integer.parseInt((String)json.statistic.broken)
+        unknown = Integer.parseInt((String)json.statistic.unknown)
+        total = Integer.parseInt((String)json.statistic.total)
     }
     //创建sql实例
     url = 'jdbc:mysql://m7-qa-test03:3306/sage_sdk?useUnicode=true&characterEncoding=utf8'
