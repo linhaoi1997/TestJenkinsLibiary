@@ -98,7 +98,7 @@ def call() {
 
     map.each { feature, valueMap ->
 
-        value.each { status, value ->
+        valueMap.each { status, value ->
             getDatabaseConnection(type: 'GLOBAL') {
                 def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${feature}', '${version}', " +
                         "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
