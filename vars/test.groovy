@@ -91,11 +91,6 @@ def getResultFromAllure() {
 def call() {
     def version = "release/3.8.2"
     getResultFromAllure()
-//    getDatabaseConnection(type: 'GLOBAL') {
-//        def sqlString = "INSERT INTO func_test (name,build_id, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_TAG}', '${version}', " +
-//                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
-//        sql sql: sqlString
-//    }
     def sqlString = ""
     map.each { feature, valueMap ->
         sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${feature}', '${version}', " +
