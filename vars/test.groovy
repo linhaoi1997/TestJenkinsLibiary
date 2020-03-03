@@ -71,12 +71,9 @@ def getResultFromAllure() {
                 for (int k = 0; k < caseJson.size(); k++) {
                     def caseInfo = caseJson.get(i)
                     String status = caseInfo.status
-//                    if (results.containsKey(status)){
                     int num = results.get(status) + 1
                     results[status] = num
-//                    }else {
-                    results[status] = 1
-//                    }
+
                 }
             }
             int total = 0
