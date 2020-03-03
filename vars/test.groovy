@@ -57,31 +57,35 @@ def getResultFromAllure() {
         for (int i = 0; i < featureJson.size(); i++) {
             String featureName = featureJson.get(i).name
             Map<String, Integer> results = new HashMap<>()
+            results['passed'] = 0
+            results['failed'] = 0
+            results['skipped'] = 0
+            results['broken'] = 0
+            results['unknown'] = 0
+
 
             List storyJson = featureJson.get(i).children
             for (int j = 0; j < storyJson.size(); j++) {
 
                 List caseJson = storyJson.get(j).children
-                for (int k = 0; k < caseJson.size(); k++){
+                for (int k = 0; k < caseJson.size(); k++) {
                     def caseInfo = caseJson.get(i)
                     String status = caseInfo.status
-                    if (results.containsKey(status)){
-                        int num = results.get(status) +1
-                        results[status] = num
-                    }else {
-                        results[status] = 1
-                    }
+//                    if (results.containsKey(status)){
+                    int num = results.get(status) + 1
+                    results[status] = num
+//                    }else {
+                    results[status] = 1
+//                    }
                 }
             }
             int total = 0
-            results.each{ key,value ->
+            results.each { key, value ->
                 total = total + value
             }
             results['total'] = total
             map.put(featureName, results)
         }
-
-
 
 
     }
@@ -101,7 +105,7 @@ def call() {
         valueMap.each { status, value ->
             getDatabaseConnection(type: 'GLOBAL') {
                 def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${feature}', '${version}', " +
-                        "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
+                        "${value.total}, ${value.passed}, ${value.unknown}, ${value.skipped}, ${value.failed}, ${value.broken}, NOW())"
                 sql sql: sqlString
             }
         }
