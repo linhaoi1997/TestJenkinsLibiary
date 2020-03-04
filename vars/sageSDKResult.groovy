@@ -69,7 +69,7 @@ def getResultFromAllure() {
 
                 List caseJson = storyJson.get(j).children
                 for (int k = 0; k < caseJson.size(); k++) {
-                    def caseInfo = caseJson.get(i)
+                    def caseInfo = caseJson.get(k)
                     String status = caseInfo.status
                     int num = results.get(status) + 1
                     results[status] = num
