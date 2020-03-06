@@ -92,7 +92,7 @@ def getResultFromAllure() {
 def getCov(){
     def tagsoupParser = new org.ccil.cowan.tagsoup.Parser()
     def slurper = new XmlSlurper(tagsoupParser)
-    File file = new File("${WORKSPACE}/sage-sdk-test/htmlcov/index.html")
+    File file = new File("${WORKSPACE}/htmlcov/index.html")
     InputStream s = new FileInputStream(file)
     def htmlParser = slurper.parse(s)
 
