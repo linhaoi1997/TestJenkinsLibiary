@@ -1,15 +1,16 @@
 import groovy.grape.Grape
 
+
 /**
  * Created by sungaofei on 20/3/1.
  */
 
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
+@Grab(group='org.ccil.cowan.tagsoup', module='tagsoup', version='1.2' )
 import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
 import groovy.transform.Field
-import groovy.sql.Sql
 
 //可以指定maven仓库
 //@GrabResolver(name = 'aliyun', root = 'http://maven.aliyun.com/nexus/content/groups/public/')
@@ -20,12 +21,12 @@ import groovy.sql.Sql
 //global variable
 @Field jenkinsURL = "http://auto.4paradigm.com"
 
-//@Field int passed
-//@Field int failed
-//@Field int skipped
-//@Field int broken
-//@Field int unknown
-//@Field int total
+@Field int passed
+@Field int failed
+@Field int skipped
+@Field int broken
+@Field int unknown
+@Field int total
 @Field Map<String, Map<String, Integer>> map = new HashMap<>()
 
 @NonCPS
@@ -41,15 +42,15 @@ def getResultFromAllure() {
 
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
-//    http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
-//        println resp.status
-//        passed = Integer.parseInt((String) json.statistic.passed)
-//        failed = Integer.parseInt((String) json.statistic.failed)
-//        skipped = Integer.parseInt((String) json.statistic.skipped)
-//        broken = Integer.parseInt((String) json.statistic.broken)
-//        unknown = Integer.parseInt((String) json.statistic.unknown)
-//        total = Integer.parseInt((String) json.statistic.total)
-//    }
+    http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
+        println resp.status
+        passed = Integer.parseInt((String) json.statistic.passed)
+        failed = Integer.parseInt((String) json.statistic.failed)
+        skipped = Integer.parseInt((String) json.statistic.skipped)
+        broken = Integer.parseInt((String) json.statistic.broken)
+        unknown = Integer.parseInt((String) json.statistic.unknown)
+        total = Integer.parseInt((String) json.statistic.total)
+    }
 
     http.get(path: "${reportURL}data/behaviors.json") { resp, json ->
         List featureJson = json.children
@@ -88,6 +89,21 @@ def getResultFromAllure() {
     }
 }
 
+def getCov(){
+    def tagsoupParser = new org.ccil.cowan.tagsoup.Parser()
+    def slurper = new XmlSlurper(tagsoupParser)
+    File file = new File("htmlcov/index.html")
+    InputStream s = new FileInputStream(file)
+    def htmlParser = slurper.parse(s)
+
+    def cov = 0
+    htmlParser.'**'.findAll{ it.@class == 'pc_cov'}.each { String it ->
+        cov = Integer.parseInt(it.replace("%", ""))
+    }
+
+    return  cov
+}
+
 def call() {
     def version = "release/3.8.2"
     getResultFromAllure()
@@ -101,14 +117,11 @@ def call() {
             sql sql: sqlString
         }
 
+        def cov = getCov()
+        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
+                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${cov}, NOW())"
 
-//        valueMap.each { status, value ->
-//            getDatabaseConnection(type: 'GLOBAL') {
-//                def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${feature}', '${version}', " +
-//                        "${value['total']}, ${value['passed']}, ${value['unknown']}, ${value['skipped']}, ${value['failed']}, ${value['broken']}, NOW())"
-//                sql sql: sqlString
-//            }
-//        }
+        sql sql: sqlString
     }
 }
 
