@@ -95,8 +95,8 @@ def getCov(){
     def tagsoupParser = new org.ccil.cowan.tagsoup.Parser()
     def slurper = new XmlSlurper(tagsoupParser)
 //    File file = new File("${WORKSPACE}/htmlcov/index.html")
-    InputStream s = new FileInputStream(htmlurl)
-    def htmlParser = slurper.parse(s)
+//    InputStream s = new FileInputStream(htmlurl)
+    def htmlParser = slurper.parse(htmlurl)
 
     def cov = 0
     htmlParser.'**'.findAll{ it.@class == 'pc_cov'}.each { String it ->
