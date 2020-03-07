@@ -6,7 +6,8 @@ import groovy.grape.Grape
  */
 
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
-@Grab(group='org.ccil.cowan.tagsoup', module='tagsoup', version='1.2' )
+@Grab(group = 'org.jsoup', module = 'jsoup', version = '1.10.3')
+import org.jsoup.Jsoup
 import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
@@ -90,28 +91,10 @@ def getResultFromAllure() {
 }
 
 def int getCov(){
-//    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/"
-
-    def command = ['/bin/bash', '-c', 'cat  /home/jenkins/agent/workspace/k8stest/htmlcov/index.html |grep pc_cov|awk -F ">" \'{print $2}\'|awk -F "%" \'{print $1}\'']
-    def proc = command.execute()                 // Call *execute* on the string
-    proc.waitFor()
-    int cov =  Integer.parseInt(((String)proc.in.text).trim())
-
-//    def tagsoupParser = new org.ccil.cowan.tagsoup.Parser()
-//    def slurper = new XmlSlurper(tagsoupParser)
-////    File file = new File("${WORKSPACE}/htmlcov/index.html")
-////    File file = new File("index.html")
-////    InputStream s = new FileInputStream(file)
-//    def htmlParser = slurper.parse(htmlurl)
-//
-//    def cov = 0
-//    htmlParser.'**'.findAll{ it.@class == 'pc_cov'}.each { String it ->
-//        println("The cov is ${it}")
-//        cov = Integer.parseInt(it.replace("%", ""))
-//        println("The cov is ${cov}")
-//
-//    }
-
+    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
+    String doc = Jsoup.connect(htmlurl).get().getElementsByClass("pc_cov").text();
+    int cov = Integer.parseInt(doc.replace("%", ""))
+    println("当前覆盖率为 ${cov}")
     return  cov
 }
 
