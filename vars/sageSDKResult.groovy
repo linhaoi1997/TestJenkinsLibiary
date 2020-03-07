@@ -92,7 +92,7 @@ def getResultFromAllure() {
 def int getCov(){
 //    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/"
 
-    def command = ['/bin/bash', '-c', 'cat  htmlcov/index.html |grep pc_cov|awk -F ">" \'{print $2}\'|awk -F "%" \'{print $1}\'']
+    def command = ['/bin/bash', '-c', 'cat  /home/jenkins/agent/workspace/k8stest/htmlcov/index.html |grep pc_cov|awk -F ">" \'{print $2}\'|awk -F "%" \'{print $1}\'']
     def proc = command.execute()                 // Call *execute* on the string
     proc.waitFor()
     int cov =  Integer.parseInt(((String)proc.in.text).trim())
