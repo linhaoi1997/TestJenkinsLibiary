@@ -90,7 +90,7 @@ def getResultFromAllure() {
 }
 
 def int getCov(){
-//    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/"
+    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/"
 
 
     sh "cp ${WORKSPACE}/htmlcov/index.html ."
@@ -98,9 +98,9 @@ def int getCov(){
     def tagsoupParser = new org.ccil.cowan.tagsoup.Parser()
     def slurper = new XmlSlurper(tagsoupParser)
 //    File file = new File("${WORKSPACE}/htmlcov/index.html")
-    File file = new File("index.html")
-    InputStream s = new FileInputStream(file)
-    def htmlParser = slurper.parse(s)
+//    File file = new File("index.html")
+//    InputStream s = new FileInputStream(file)
+    def htmlParser = slurper.parse(htmlurl)
 
     def cov = 0
     htmlParser.'**'.findAll{ it.@class == 'pc_cov'}.each { String it ->
