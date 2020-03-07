@@ -90,10 +90,12 @@ def getResultFromAllure() {
 }
 
 def getCov(){
+    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/"
+
     def tagsoupParser = new org.ccil.cowan.tagsoup.Parser()
     def slurper = new XmlSlurper(tagsoupParser)
-    File file = new File("${WORKSPACE}/htmlcov/index.html")
-    InputStream s = new FileInputStream(file)
+//    File file = new File("${WORKSPACE}/htmlcov/index.html")
+    InputStream s = new FileInputStream(htmlurl)
     def htmlParser = slurper.parse(s)
 
     def cov = 0
