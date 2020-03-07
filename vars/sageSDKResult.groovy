@@ -100,7 +100,10 @@ def getCov(){
 
     def cov = 0
     htmlParser.'**'.findAll{ it.@class == 'pc_cov'}.each { String it ->
+        println("The cov is ${it}")
         cov = Integer.parseInt(it.replace("%", ""))
+        println("The cov is ${cov}")
+
     }
 
     return  cov
