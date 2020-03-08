@@ -90,12 +90,20 @@ def getResultFromAllure() {
     }
 }
 
-def int getCov(){
+def int getLineCov(){
     def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
     String doc = Jsoup.connect(htmlurl).get().getElementsByClass("pc_cov").text();
     int cov = Integer.parseInt(doc.replace("%", ""))
-    println("当前覆盖率为 ${cov}")
+    println("当前行覆盖率为 ${cov}")
     return  cov
+}
+
+def int getBranchCov(){
+    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
+    String branchAll = Jsoup.connect(htmlurl).get().select(".total > :nth-child(4)").text();
+    String branchPartial = Jsoup.connect(htmlurl).get().select(".total > :nth-child(5)").text();
+    return Integer.parseInt(branchPartial)/Integer.parseInt(branchAll)
+
 }
 
 def call() {
@@ -111,9 +119,10 @@ def call() {
             sql sql: sqlString
         }
 
-        def cov = getCov()
-        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
-                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${cov}, NOW())"
+        def lineCov = getLineCov()
+        def branchCov = getBranchCov()
+        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
+                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${lineCov}, ${branchCov}, NOW())"
 
         sql sql: sqlString
     }
