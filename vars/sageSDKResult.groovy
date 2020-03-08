@@ -102,7 +102,14 @@ def int getBranchCov(){
     def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
     String branchAll = Jsoup.connect(htmlurl).get().select(".total > :nth-child(5)").text();
     String branchPartial = Jsoup.connect(htmlurl).get().select(".total > :nth-child(6)").text();
-    return Integer.parseInt(branchPartial)/Integer.parseInt(branchAll)
+
+    println("all branch number: ${branchAll}")
+    println("cover branch number: ${branchPartial}")
+
+    def cov = Integer.parseInt(branchAll)/Integer.parseInt(branchPartial)
+    println("the branch cov is ${cov}")
+
+    return cov
 
 }
 
