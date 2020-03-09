@@ -9,6 +9,8 @@ import groovy.grape.Grape
 @Grab(group = 'org.jsoup', module = 'jsoup', version = '1.10.3')
 import org.jsoup.Jsoup
 import groovyx.net.http.HTTPBuilder
+
+
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
 import groovy.transform.Field
@@ -106,8 +108,10 @@ def int getBranchCov(){
     println("all branch number: ${branchAll}")
     println("cover branch number: ${branchPartial}")
 
-    def cov = Integer.parseInt(branchAll)/Integer.parseInt(branchPartial)
+    def cov = Integer.parseInt(branchPartial)/Integer.parseInt(branchAll)
     println("the branch cov is ${cov}")
+
+
 
     return cov
 
