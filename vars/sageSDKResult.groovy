@@ -2,7 +2,7 @@ import groovy.grape.Grape
 
 
 /**
- * Created by sungaofei on 20/3/1.
+ * Created by sungaofei on 19/3/1.
  */
 
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
@@ -131,7 +131,7 @@ def call() {
         }
 
         def lineCov = getLineCov()
-        def branchCov = getBranchCov()
+        def branchCov = getBranchCov() * 100
         def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${lineCov}, ${branchCov}, NOW())"
 
