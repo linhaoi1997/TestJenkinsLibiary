@@ -117,8 +117,7 @@ def int getBranchCov() {
 
 }
 
-def call(boolean ifSaveCov = false) {
-    def version = "release/3.8.2"
+def call(String coverage = null, String version="release/3.8.2") {
     getResultFromAllure()
 
     getDatabaseConnection(type: 'GLOBAL') {
@@ -130,7 +129,7 @@ def call(boolean ifSaveCov = false) {
             sql sql: sqlString
         }
 
-        if (ifSaveCov){
+        if (coverage == null || coverage == ""){
             def lineCov = getLineCov()
             def branchCov = getBranchCov() * 100
             def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
