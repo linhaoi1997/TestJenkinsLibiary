@@ -30,13 +30,14 @@ import groovy.transform.Field
 @NonCPS
 def getResultFromAllure() {
     def reportURL = ""
-    if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
-        reportURL = "/view/API/job/${JKS_jobName}/job/${env.JKS_BRANCH_NAME}/${JKS_BUILD_NUMBER}/allure/"
-    } else {
-        reportURL = "/view/API/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/allure/"
-    }
-
-//    reportURL = "/view/API/job/sage-sdk-test/185/allure/"
+    println  "Numbers:${JKS_jobName}"   
+    println "Numbers:${JKS_BUILD_NUMBER}" 
+    println "${JKS_BRANCH_NAME}"
+    println "${reportURL}"
+    
+    reportURL = "/view/API/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/allure/"
+    
+//  reportURL = "/view/API/job/sage-sdk-test/185/allure/"
 
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
