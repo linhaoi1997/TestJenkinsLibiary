@@ -88,7 +88,7 @@ def getResultFromAllure() {
 }
 
 def int getLineCov() {
-    def htmlurl = "${JKS_jenkinsURL}/view/API/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
+    def htmlurl = "${jenkinsURL}/view/API/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
     String doc = Jsoup.connect(htmlurl).get().getElementsByClass("pc_cov").text();
     int cov = Integer.parseInt(doc.replace("%", ""))
     println("当前行覆盖率为 ${cov}")
@@ -96,7 +96,7 @@ def int getLineCov() {
 }
 
 def int getBranchCov() {
-    def htmlurl = "${JKS_jenkinsURL}/view/API/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
+    def htmlurl = "${jenkinsURL}/view/API/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
     String branchAll = Jsoup.connect(htmlurl).get().select(".total > :nth-child(5)").text();
     String branchPartial = Jsoup.connect(htmlurl).get().select(".total > :nth-child(6)").text();
 
