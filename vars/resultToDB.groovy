@@ -117,7 +117,7 @@ def call(String coverage = null, String version="release/3.8.2") {
 
     getDatabaseConnection(type: 'GLOBAL') {
         map.each { feature, valueMap ->
-            def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JKS_JOB_NAME}', '${JKS_BUILD_ID}', '${feature}', '${version}', " +
+            def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JKS_JOB_NAME}', '${JKS_BUILD_NUMBER}', '${feature}', '${version}', " +
                     "${valueMap['total']}, ${valueMap['passed']}, ${valueMap['unknown']}, ${valueMap['skipped']}, ${valueMap['failed']}, ${valueMap['broken']}, NOW())"
             println(sqlString)
 
@@ -132,7 +132,7 @@ def call(String coverage = null, String version="release/3.8.2") {
 
         }
 
-        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JKS_JOB_NAME}', '${JKS_BUILD_ID}', '${version}', " +
+        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JKS_JOB_NAME}', '${JKS_BUILD_NUMBER}', '${version}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${lineCov}, ${branchCov}, NOW())"
 
         sql sql: sqlString
