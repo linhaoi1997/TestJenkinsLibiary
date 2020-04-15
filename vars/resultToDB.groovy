@@ -1,10 +1,5 @@
 import groovy.grape.Grape
 
-
-/**
- * Created by sungaofei on 19/3/1.
- */
-
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
 @Grab(group = 'org.jsoup', module = 'jsoup', version = '1.10.3')
 import org.jsoup.Jsoup
@@ -36,9 +31,9 @@ import groovy.transform.Field
 def getResultFromAllure() {
     def reportURL = ""
     if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
-        reportURL = "/view/API/job/${jobName}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
+        reportURL = "/view/API/job/${JKS_jobName}/job/${env.JKS_BRANCH_NAME}/${JKS_BUILD_NUMBER}/allure/"
     } else {
-        reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+        reportURL = "/view/API/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/allure/"
     }
 
 //    reportURL = "/view/API/job/sage-sdk-test/185/allure/"
@@ -93,7 +88,7 @@ def getResultFromAllure() {
 }
 
 def int getLineCov() {
-    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
+    def htmlurl = "${JKS_jenkinsURL}/view/API/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
     String doc = Jsoup.connect(htmlurl).get().getElementsByClass("pc_cov").text();
     int cov = Integer.parseInt(doc.replace("%", ""))
     println("当前行覆盖率为 ${cov}")
@@ -101,7 +96,7 @@ def int getLineCov() {
 }
 
 def int getBranchCov() {
-    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
+    def htmlurl = "${JKS_jenkinsURL}/view/API/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
     String branchAll = Jsoup.connect(htmlurl).get().select(".total > :nth-child(5)").text();
     String branchPartial = Jsoup.connect(htmlurl).get().select(".total > :nth-child(6)").text();
 
@@ -122,7 +117,7 @@ def call(String coverage = null, String version="release/3.8.2") {
 
     getDatabaseConnection(type: 'GLOBAL') {
         map.each { feature, valueMap ->
-            def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${feature}', '${version}', " +
+            def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JKS_JOB_NAME}', '${JKS_BUILD_ID}', '${feature}', '${version}', " +
                     "${valueMap['total']}, ${valueMap['passed']}, ${valueMap['unknown']}, ${valueMap['skipped']}, ${valueMap['failed']}, ${valueMap['broken']}, NOW())"
             println(sqlString)
 
@@ -137,7 +132,7 @@ def call(String coverage = null, String version="release/3.8.2") {
 
         }
 
-        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
+        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JKS_JOB_NAME}', '${JKS_BUILD_ID}', '${version}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${lineCov}, ${branchCov}, NOW())"
 
         sql sql: sqlString
