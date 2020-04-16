@@ -30,7 +30,8 @@ import groovy.transform.Field
 @NonCPS
 def getResultFromAllure() {
     def reportURL = ""
-    reportURL = "/view/SDP/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/allure/"
+    //reportURL = "/view/SDP/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/allure/"
+    reportURL = "/view/%E4%B8%AA%E4%BA%BA%E6%B5%8B%E8%AF%95/job/382-offline/18/allure/"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
