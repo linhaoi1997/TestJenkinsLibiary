@@ -17,7 +17,7 @@ import groovy.transform.Field
 //@GrabConfig(systemClassLoader=true)
 
 //global variable
-@Field jenkinsURL = "http://172.27.232.34:8080"
+@Field jenkinsURL = "http://auto.4paradigm.com/"
 
 @Field int passed
 @Field int failed
@@ -30,8 +30,8 @@ import groovy.transform.Field
 @NonCPS
 def getResultFromAllure() {
     def reportURL = ""
-    reportURL = "/view/SDP/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/allure/"
-    //reportURL = "/job/UI-382/6/allure"
+    //reportURL = "/view/SDP/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/allure/"
+    reportURL = "/job/UI-382/6/allure"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
@@ -120,16 +120,9 @@ def call(String coverage = null, String version="release/3.8.2") {
 
         def lineCov = 0
         def branchCov = 0
-        if (coverage != null && coverage != ""){
-            lineCov = getLineCov()
-            branchCov = getBranchCov() * 100
-
-        }
-
+        
         def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JKS_JOB_NAME}', '${JKS_BUILD_NUMBER}', '${version}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${lineCov}, ${branchCov}, NOW())"
-
-        sql sql: sqlString
 
     }
 }
