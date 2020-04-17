@@ -17,7 +17,7 @@ import groovy.transform.Field
 //@GrabConfig(systemClassLoader=true)
 
 //global variable
-@Field jenkinsURL = "http://auto.4paradigm.com/"
+@Field jenkinsURL = "http://172.27.232.34:8080"
 
 @Field int passed
 @Field int failed
@@ -30,8 +30,8 @@ import groovy.transform.Field
 @NonCPS
 def getResultFromAllure() {
     def reportURL = ""
-    //reportURL = "/view/SDP/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/allure/"
-    reportURL = "/view/SDP/job/sdp_ui_test/1327/allure/"
+    reportURL = "/view/SDP/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/allure/"
+    //reportURL = "/view/SDP/job/sdp_ui_test/1327/allure/"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
