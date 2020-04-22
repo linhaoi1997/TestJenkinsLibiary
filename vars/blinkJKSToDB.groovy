@@ -56,18 +56,21 @@ def getResultFromAllure() {
             results['unknown'] = 0
 
 
-            List storyJson = featureJson.get(i).children
-            for (int j = 0; j < storyJson.size(); j++) {
+            String status = featureJson.get(i).status
+            int num = results.get(status) + 1
+            results[status] = num
+            // List storyJson = featureJson.get(i).children
+            // for (int j = 0; j < storyJson.size(); j++) {
 
-                List caseJson = storyJson.get(j).children
-                for (int k = 0; k < caseJson.size(); k++) {
-                    def caseInfo = caseJson.get(k)
-                    String status = caseInfo.status
-                    int num = results.get(status) + 1
-                    results[status] = num
+            //     List caseJson = storyJson.get(j).children
+            //     for (int k = 0; k < caseJson.size(); k++) {
+            //         def caseInfo = caseJson.get(k)
+            //         String status = caseInfo.status
+            //         int num = results.get(status) + 1
+            //         results[status] = num
 
-                }
-            }
+            //     }
+            // }
             int total = 0
             results.each { key, value ->
                 total = total + value
