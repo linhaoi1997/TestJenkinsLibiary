@@ -17,7 +17,7 @@ import groovy.transform.Field
 //@GrabConfig(systemClassLoader=true)
 
 //global variable
-@Field jenkinsURL = "http://172.27.232.34:8080"
+@Field jenkinsURL = "http://172.27.234.42:8080"
 
 @Field int passed
 @Field int failed
