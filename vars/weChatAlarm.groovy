@@ -37,7 +37,7 @@ import java.net.URLConnection
 def sendWechatAlarm() {
     def reportURL = ""
     reportURL = "/view/SDP/job/${JKS_JOB_NAME}/${JKS_BUILD_NUMBER}/allure/"
-   
+    reportURL = "/view/SDP/job/ui-auto-linkoop/9/allure/"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
@@ -58,10 +58,18 @@ def sendWechatAlarm() {
     
     http1.request( POST, JSON ) { req ->
 	    
-	    String content="""<font color=\"info\">【pipeline自动化运行结果通知】</font>\n 
+	    String content="""<font color=\"info\">【pipeline自动化运行结果通知】</font>
 	    \n环境信息：${SAGE_URL}
+	    \n运行结果汇总如下：
+	    \ntotal：${total}
+	    \npassed：${passed}
+	    \nfailed：${failed}
+	    \nkipped：${skipped}
+	    \nbroken：${broken}
+	    \nunknown：${unknown}
 	    \n[jenkins任务链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER})
 	    \n[allure报告链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors)
+	   
 	    """
 	    print content
 	    Map<String, String> bodyParam = new HashMap<>()
