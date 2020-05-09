@@ -49,12 +49,13 @@ def sendWechatAlarm() {
     HTTPBuilder http1 = new HTTPBuilder("${WEBHOOK_URL}")
     
     http1.request( POST, JSON ) { req ->
-	   
+	    
+	    ct = "<font color=\"info\">【${version}自动化运行结果通知】</font>\n >环境信息：${URL}"
 	    body = [
 	    msgtype : 'markdown',
 	    
 	    markdown : [
-	        content: '<font color=\"info\">【\"${version}\"自动化运行结果通知】</font>\n >环境信息：\"${URL}\"'
+	        content: "${ct}"
 	        
 	        ]
 
