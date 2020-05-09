@@ -37,7 +37,7 @@ import java.net.URLConnection
 def sendWechatAlarm() {
     def reportURL = ""
     reportURL = "/view/SDP/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
-    //reportURL = "/view/SDP/job/ui-auto-linkoop/9/allure/"
+    reportURL = "/view/SDP/job/ui-auto-linkoop/9/allure/"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
@@ -65,7 +65,7 @@ def sendWechatAlarm() {
 	    \npassed：${passed}
 	    \nfailed：${failed}
 	    \nkipped：${skipped}
-	    \nbroken：${broken}
+	    \n>broken：${broken}
 	    \n>unknown：${unknown}
 	    \n[jenkins任务链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER})
 	    \n[allure报告链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors)
