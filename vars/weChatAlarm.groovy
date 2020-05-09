@@ -11,6 +11,8 @@ def call(){
     version=$(echo $BRANCH | awk -F "/" '{print $2}')
     echo $build_status > build_status 
     echo $version > version
+    CONTEXT="Content-type:application/json"
+    version=$(echo $BRANCH | awk -F "/" '{print $2}')
   
     curl -l -H $CONTEXT -X POST -d \'{"msgtype": "markdown", "markdown": {"content": 【\'"$version"\'自动化运行结果通知】\n >运行结果：<font color=\"warning\">\'"$build_status"\'</font>\n >版本信息：\'"$BRANCH"\'\n >环境信息：\'"$URL"\'\n >[jenkins任务链接](\'"$JENKINS_URL/job/$JKS_JOB_NAME/$JKS_BUILD_NUMBER"\')\n >[allure报告链接](\'"$JENKINS_URL/job/$JKS_JOB_NAME/$JKS_BUILD_NUMBER/allure/#/behaviors"\')"}}\' ${WEBHOOK_URL}
    
