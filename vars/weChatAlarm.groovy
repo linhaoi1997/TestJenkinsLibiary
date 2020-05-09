@@ -31,7 +31,6 @@ import java.net.URLConnection
 @Field int broken
 @Field int unknown
 @Field int total
-@Field String t1
 @Field Map<String, Map<String, Integer>> map = new HashMap<>()
 
 @NonCPS
@@ -61,17 +60,12 @@ def sendWechatAlarm() {
 	    
 	    t1="\'【${version}自动化运行结果通知】\n >环境信息：${SAGE_URL}\'"
 	    println t1
-	    
 	    body1= [
-	            content: t1
-	        
+	            content: "【自动化运行结果通知】"
 	        ]
-	        
 	    body = [
 	    msgtype : 'markdown',
-	    
 	    markdown : body1
-
 	    ]
 	
 	response.success = { resp, json ->
