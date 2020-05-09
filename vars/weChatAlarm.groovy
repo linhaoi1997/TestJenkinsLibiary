@@ -62,7 +62,7 @@ def sendWechatAlarm() {
 	    println t1
 	    
 	    body1= [
-	            content: "【"""${version}"""自动化运行结果通知】\n >环境信息：172.27.128.1"
+	            content: "\"${t1}\""
 	        
 	        ]
 	        
