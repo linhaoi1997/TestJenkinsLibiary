@@ -54,7 +54,10 @@ def sendWechatAlarm() {
 	        ]
 	    body = [
 	    msgtype : 'markdown',
-	    markdown : ${body1}
+	    markdown : [
+	        content: 'testpipeline'
+	        ]
+
 	    ]
 	
 	response.success = { resp, json ->
