@@ -45,17 +45,17 @@ def sendWechatAlarm() {
         total = Integer.parseInt((String) json.statistic.total)
     }
     
-    webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
-    HTTPBuilder http1 = new HTTPBuilder(webURL)
+    // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
+    HTTPBuilder http1 = new HTTPBuilder("${WEBHOOK_URL}")
     
     http1.request( POST, JSON ) { req ->
-	    body1 = [
-	        content: 'testpipeline'
-	        ]
+	   
 	    body = [
 	    msgtype : 'markdown',
+	    
 	    markdown : [
-	        content: 'testpipeline'
+	        content: '<font color=\"info\">【"${version}"自动化运行结果通知】</font>\n >环境信息："${URL}"'
+	        
 	        ]
 
 	    ]
