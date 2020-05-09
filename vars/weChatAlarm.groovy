@@ -49,6 +49,8 @@ def sendWechatAlarm() {
         broken = Integer.parseInt((String) json.statistic.broken)
         unknown = Integer.parseInt((String) json.statistic.unknown)
         total = Integer.parseInt((String) json.statistic.total)
+        println passed
+        println total
     }
     
     // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
@@ -58,8 +60,10 @@ def sendWechatAlarm() {
 	    
 	    t1="【${version}自动化运行结果通知】\n >环境信息：${SAGE_URL}"
 	    println t1
+	    
 	    body1= [
-	            content: '【pipeline自动化运行结果通知】\n >环境信息：172.27.128.1'
+	            content: "【pipeline自动化运行结果通知】\n >环境信息：172.27.128.1"
+	        
 	        ]
 	        
 	    body = [
