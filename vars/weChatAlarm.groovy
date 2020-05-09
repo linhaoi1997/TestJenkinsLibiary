@@ -99,7 +99,7 @@ sendPostRequest("http://www.something.com", "param1=abc&param2=def")
 
 def call(String coverage = null, String version="release/3.8.2") {
     //sendWechatAlarm()
-    sendPostRequest("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5", "msgtype=markdown&markdown="{\"content\": \"test2\"}")
+    sendPostRequest("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5", "msgtype=markdown&markdown={\"content\": \"test2\"}")
 
 }
 
