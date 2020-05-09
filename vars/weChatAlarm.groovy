@@ -59,9 +59,9 @@ def sendWechatAlarm() {
     http1.request( POST, JSON ) { req ->
 	    
 	    String content="""<font color=\"info\">【pipeline自动化运行结果通知】</font>\n 
-	    >环境信息：${SAGE_URL}
-	    >[jenkins任务链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER})
-	    >[allure报告链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors)
+	    \>环境信息：${SAGE_URL}
+	    \>[jenkins任务链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER})
+	    \>[allure报告链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors)
 	    """
 	    print content
 	    Map<String, String> bodyParam = new HashMap<>()
