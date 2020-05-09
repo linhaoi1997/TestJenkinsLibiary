@@ -49,11 +49,12 @@ def sendWechatAlarm() {
     HTTPBuilder http1 = new HTTPBuilder(webURL)
     
     http1.request( POST, JSON ) { req ->
+	    body1 = [
+	        content: 'testpipeline'
+	        ]
 	    body = [
 	    msgtype : 'markdown',
-	    markdown : {
-	        "content": "testpipeline"
-            }
+	    markdown : ${body1}
 	    ]
 	
 	response.success = { resp, json ->
