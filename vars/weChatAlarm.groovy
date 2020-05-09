@@ -94,7 +94,7 @@ def sendPostRequest(urlString, paramString) {
     reader.close()
 }
 
-sendPostRequest("http://www.something.com", "param1=abc&param2=def")
+
 
 
 def call(String coverage = null, String version="release/3.8.2") {
