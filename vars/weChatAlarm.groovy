@@ -59,7 +59,7 @@ def sendWechatAlarm() {
 	    t1="【${version}自动化运行结果通知】\n >环境信息：${SAGE_URL}"
 	    println t1
 	    body1= [
-	            content: 'test1'
+	            content: t1
 	        ]
 	        
 	    body = [
