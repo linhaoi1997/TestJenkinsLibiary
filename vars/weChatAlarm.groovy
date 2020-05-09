@@ -66,14 +66,14 @@ def sendWechatAlarm() {
 	    \nfailed：${failed}
 	    \nkipped：${skipped}
 	    \nbroken：${broken}
-	    \nunknown：${unknown}
+	    \n>unknown：${unknown}
 	    \n[jenkins任务链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER})
 	    \n[allure报告链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors)
 	   
 	    """
 	    print content
 	    Map<String, String> bodyParam = new HashMap<>()
-        bodyParam['content'] = content
+	    bodyParam['content'] = content
 	    body = [
 	       msgtype : 'markdown',
 	       markdown : bodyParam
