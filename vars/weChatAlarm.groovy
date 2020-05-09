@@ -57,7 +57,7 @@ def sendWechatAlarm() {
 	    
 	    markdown : [
 	        
-	        content: """${t1}"""
+	        content: '''\"\${t1}\"'''
 	        
 	        ]
 
