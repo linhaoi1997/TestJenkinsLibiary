@@ -59,16 +59,7 @@ def sendWechatAlarm() {
     http1.request( POST, JSON ) { req ->
 	    
 	    String content="""<font color=\"info\">【${VERSION}pipeline自动化运行结果通知】</font>
-	    \n环境信息：${SAGE_URL}
-	    \n运行结果汇总如下：
-	    \ntotal：${total}
-	    \npassed：${passed}
-	    \nfailed：${failed}
-	    \nkipped：${skipped}
-	    \n>broken：${broken}
-	    \n>unknown：${unknown}
-	    \n[jenkins任务链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER})
-	    \n[allure报告链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors)
+	    \n>环境信息：${SAGE_URL}>运行结果汇总如下：>total：${total}>passed：${passed}>failed：${failed}>skipped：${skipped}>broken：${broken}>unknown：${unknown}>[jenkins任务链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER})>[allure报告链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors)
 	   
 	    """
 	    print content
