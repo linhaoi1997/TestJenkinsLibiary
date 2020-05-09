@@ -58,14 +58,16 @@ def sendWechatAlarm() {
     
     http1.request( POST, JSON ) { req ->
 	    
-	    t1="\'【${version}自动化运行结果通知】\n >环境信息：${SAGE_URL}\'"
-	    println t1
+	    String t1="【${version}自动化运行结果通知】\n >环境信息：${SAGE_URL}"
+	    print t1
+	    Map<String, String> r1 = new HashMap<>()
+        r1['content'] = t1
 	    body1= [
 	            content: "【自动化运行结果通知】"
 	        ]
 	    body = [
 	    msgtype : 'markdown',
-	    markdown : body1
+	    markdown : r1
 	    ]
 	
 	response.success = { resp, json ->
