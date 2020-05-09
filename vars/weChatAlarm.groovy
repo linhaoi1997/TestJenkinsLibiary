@@ -10,6 +10,12 @@ import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
 import groovy.transform.Field
 
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.net.URL
+import java.net.URLConnection
+
 //可以指定maven仓库
 //@GrabResolver(name = 'aliyun', root = 'http://maven.aliyun.com/nexus/content/groups/public/')
 //加载数据库连接驱动包
@@ -71,10 +77,29 @@ def sendWechatAlarm() {
 }
 
 }
+def sendPostRequest(urlString, paramString) {
+    def url = new URL(urlString)
+    def conn = url.openConnection()
+    conn.setDoOutput(true)
+    def writer = new OutputStreamWriter(conn.getOutputStream())
+
+    writer.write(paramString)
+    writer.flush()
+    String line
+    def reader = new BufferedReader(new     InputStreamReader(conn.getInputStream()))
+    while ((line = reader.readLine()) != null) {
+      println line
+    }
+    writer.close()
+    reader.close()
+}
+
+sendPostRequest("http://www.something.com", "param1=abc&param2=def")
 
 
 def call(String coverage = null, String version="release/3.8.2") {
-    sendWechatAlarm()
+    //sendWechatAlarm()
+    sendPostRequest("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5", "msgtype=markdown&markdown="{\"content\": \"test2\"}")
 
 }
 
