@@ -54,7 +54,7 @@ def sendWechatAlarm() {
 	    msgtype : 'markdown',
 	    
 	    markdown : [
-	        content: '<font color=\"info\">【\"${version}\"自动化运行结果通知】</font>\n >环境信息：\"${URL}\"'
+	        content: '<font color=\"info\">【${version}自动化运行结果通知】</font>\n >环境信息：${URL}'
 	        
 	        ]
 
