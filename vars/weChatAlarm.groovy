@@ -50,13 +50,13 @@ def sendWechatAlarm() {
     
     http1.request( POST, JSON ) { req ->
 	    
-	    ct="【${version}自动化运行结果通知】\n >环境信息：${URL}"
+	    t1="【${version}自动化运行结果通知】\n >环境信息：${URL}"
 	    body = [
 	    msgtype : 'markdown',
 	    
 	    markdown : [
 	        
-	        content: "${ct}"
+	        content: t1
 	        
 	        ]
 
