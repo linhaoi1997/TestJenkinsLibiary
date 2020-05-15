@@ -42,7 +42,6 @@ def sendWechatAlarm() {
     
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
         println resp.status
-        println "testA"
         passed = Integer.parseInt((String) json.statistic.passed)
         failed = Integer.parseInt((String) json.statistic.failed)
         skipped = Integer.parseInt((String) json.statistic.skipped)
@@ -58,7 +57,7 @@ def sendWechatAlarm() {
     
     http1.request( POST, JSON ) { req ->
 	    
-	    String content="""<font color=\"info\">【${VERSION}pipeline自动化运行结果通知】</font>
+	    String content="""<font color=\"info\">【${VERSION}sage-sdk自动化运行结果通知】</font>
 	    \n>环境信息：${SAGE_URL}
 	    >运行结果汇总如下：
 	    >total：${total}
