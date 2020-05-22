@@ -36,7 +36,13 @@ import java.net.URLConnection
 @NonCPS
 def sendWechatAlarm() {
     def reportURL = ""
-    reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+    if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
+        reportURL = "/view/API/job/${jobName}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
+    } else {
+        reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+    }
+
+    //reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
     //reportURL = "/view/SDP/job/ui-auto-linkoop/9/allure/"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     
