@@ -87,7 +87,6 @@ def sendWechatAlarm() {
 	response.success = { resp, json ->
 		// TODO process json data
 		println resp.status
-		println "testB"
 	}
 }
 
