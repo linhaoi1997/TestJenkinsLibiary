@@ -64,7 +64,7 @@ def sendWechatAlarm() {
     http1.request( POST, JSON ) { req ->
 	    
 	    String content="""<font color=\"info\">【${VERSION}sage-sdk自动化运行结果通知】</font>
-	    \n>环境信息：${SAGE_URL}
+	    \n>环境信息：${SGAE_URL}
 	    >运行结果汇总如下：
 	    >total：${total}
 	    >passed：${passed}
