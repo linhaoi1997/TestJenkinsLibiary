@@ -30,7 +30,7 @@ import groovy.transform.Field
 @NonCPS
 def getResultFromAllure() {
     def reportURL = ""
-    reportURL = "/view/PICO/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/allure/"
+    reportURL = "/view/PICO/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
@@ -84,7 +84,7 @@ def getResultFromAllure() {
 }
 
 def int getLineCov() {
-    def htmlurl = "${jenkinsURL}/view/SDP/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
+    def htmlurl = "${jenkinsURL}/view/SDP/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
     String doc = Jsoup.connect(htmlurl).get().getElementsByClass("pc_cov").text();
     int cov = Integer.parseInt(doc.replace("%", ""))
     println("当前行覆盖率为 ${cov}")
@@ -92,7 +92,7 @@ def int getLineCov() {
 }
 
 def int getBranchCov() {
-    def htmlurl = "${jenkinsURL}/view/SDP/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
+    def htmlurl = "${jenkinsURL}/view/SDP/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
     String branchAll = Jsoup.connect(htmlurl).get().select(".total > :nth-child(5)").text();
     String branchPartial = Jsoup.connect(htmlurl).get().select(".total > :nth-child(6)").text();
 
@@ -113,7 +113,7 @@ def call(String coverage = null, String version="release/3.8.2") {
 
     getDatabaseConnection(type: 'GLOBAL') {
         map.each { feature, valueMap ->
-            def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${env.JOB_NAME}', '${env.BUILD_NUMBER}', '${feature}', '${version}', " +
+            def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_NUMBER}', '${feature}', '${version}', " +
                     "${valueMap['total']}, ${valueMap['passed']}, ${valueMap['unknown']}, ${valueMap['skipped']}, ${valueMap['failed']}, ${valueMap['broken']}, NOW())"
             println(sqlString)
 
@@ -123,7 +123,7 @@ def call(String coverage = null, String version="release/3.8.2") {
         def lineCov = 0
         def branchCov = 0
         
-        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${env.JOB_NAME}', '${env.BUILD_NUMBER}', '${version}', " +
+        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_NUMBER}', '${version}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${lineCov}, ${branchCov}, NOW())"
 
     }
