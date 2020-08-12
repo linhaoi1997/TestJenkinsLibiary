@@ -1,8 +1,8 @@
 import java.util.concurrent.TimeUnit
 import groovy.grape.Grape
 
-@Grab(group = 'org.openqa', module = 'selenium', version = '0.6.1039')
-
+@Grab(group = 'org.seleniumhq.selenium', module = 'selenium-chrome-driver', version = '2.33.0')
+//@Grab("org.seleniumhq.selenium:selenium-firefox-driver:2.33.0")
 
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
