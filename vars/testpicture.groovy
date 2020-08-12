@@ -5,7 +5,8 @@ import groovy.grape.Grape
 //@Grab("org.seleniumhq.selenium:selenium-firefox-driver:2.33.0")
 @Grapes([
 
-    @Grab(group='org.openqa.selenium.webdriver', module='webdriver-parent', version='0.6.1039', type='pom')
+    @Grab(group='org.openqa.selenium.webdriver', module='webdriver-parent', version='0.6.1039', type='pom'),
+    @Grab(group='org.openqa.selenium', module='selenium', version='0.8.1', type='pom')
     
 
 ])
