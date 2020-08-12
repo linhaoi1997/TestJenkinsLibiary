@@ -11,8 +11,6 @@ import groovy.grape.Grape
 ])
 
 
-package korporation.test.SampleTestGroup
-
 import java.util.concurrent.TimeUnit
 
 import org.openqa.selenium.By
