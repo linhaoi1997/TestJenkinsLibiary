@@ -5,39 +5,11 @@ import groovy.grape.Grape
 //@Grab("org.seleniumhq.selenium:selenium-firefox-driver:2.33.0")
 @Grapes([
 
-@Grab("org.gebish:geb-core:0.9.0"),
-
-@Grab("org.gebish:geb-spock:0.9.0"),
-
-@Grab("org.seleniumhq.selenium:selenium-firefox-driver:2.33.0"),
-
-@Grab("org.seleniumhq.selenium:selenium-chrome-driver:2.33.0"),
-
-@Grab("org.seleniumhq.selenium:selenium-support:2.26.0"),
-
-@Grab( group='org.spockframework',
-
-module='spock-core',
-
-version='0.3'
-
-),
-
-@Grab(group='org.gebish', module='geb-implicit-assertions', version='0.9.0')
+    @Grab(group='org.openqa.selenium.webdriver', module='webdriver-parent', version='0.6.1039', type='pom')
 
 ])
 
-import geb.Browser
 
-import geb.spock.GebReportingSpec
-
-import org.openqa.selenium.chrome.*
-
-import spock.lang.Specification
-
-import geb.navigator.NonEmptyNavigator
-
-import geb.navigator.factory.*
 
 def call(String coverage = null, String version="release/3.8.2") {
    sh '''
