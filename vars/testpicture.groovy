@@ -1,4 +1,8 @@
 import java.util.concurrent.TimeUnit
+import groovy.grape.Grape
+
+@Grab(group = 'org.openqa', module = 'selenium')
+
 
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
