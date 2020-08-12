@@ -29,34 +29,14 @@ def call(String coverage = null, String version="release/3.8.2") {
  driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS)
 
 //And now use this to visit Google
- def link = context.expand( 'url'); 
+ def link = context.expand( 'www.baidu.com'); 
 
  driver.get(link)
-
- def username = context.expand( '${#Project#username}' )
-
-//Find the text input element by its name
- driver.findElement(By.name("email")).sendKeys(username)
-
-
-
-//Find the password element by its name
- driver.findElement(By.name("password")).sendKeys("asdfghjkl")
-
-//Click the Login button 
- driver.findElement(By.name("sbutton")).click();
-
-//Enter CVV2
- driver.findElement(By.id("cvv")).sendKeys("672");
-
- driver.findElement(By.name("termsAndConditionsAccepted")).click();
-
- driver.findElement(By.xpath("//*[@id="pay-now"]")).click();
-
-
-//log.info("Page title is:" + driver.getTitle())
-
- assert (driver.getTitle()=="Mobile Phones | Contract Phones | Cheap Mobile Phone Deals & SIMs")
-//Close the browser
+ brower.maximize_window() 
+ brower.save_screenshot('a.png') 
+ 
  driver.quit()
+ sh '''
+ ls
+ '''
 }
