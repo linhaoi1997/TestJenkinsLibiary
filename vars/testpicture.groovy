@@ -1,7 +1,7 @@
 import java.util.concurrent.TimeUnit
 import groovy.grape.Grape
 
-@Grab(group = 'org.openqa', module = 'selenium')
+@Grab(group = 'org.openqa', module = 'selenium', version = '0.6.1039')
 
 
 import org.openqa.selenium.By
