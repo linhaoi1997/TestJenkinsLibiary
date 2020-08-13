@@ -48,7 +48,7 @@ def sendWechatAlarm() {
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
         println resp.status
-        passed = I(String) json.statistic.passed
+        passed = (String) json.statistic.passed
         failed = Integer.parseInt((String) json.statistic.failed)
         skipped = Integer.parseInt((String) json.statistic.skipped)
         broken = Integer.parseInt((String) json.statistic.broken)
