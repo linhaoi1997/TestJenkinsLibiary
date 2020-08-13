@@ -59,13 +59,14 @@ def sendWechatAlarm() {
 	    bodyParam['title'] = "测试title"
         bodyParam['description'] = "测试description"
     
-	    articles = [ bodyParam ]
+        Map<String, Map<String, String>> bodyParam = new HashMap<>()
+        articles['articles']=bodyParam
+        
+	    articles1 = [ articles ]
 	        
 	    body = [
 	       msgtype : "news",
-	       news : [
-	           articles : articles
-	       ]
+	       news : articles1
 	    ]
 	    
 	    print 'aaa'
