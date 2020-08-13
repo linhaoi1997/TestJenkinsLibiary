@@ -46,18 +46,6 @@ def sendWechatAlarm() {
     //reportURL = "/view/SDP/job/ui-auto-linkoop/9/allure/"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     
-    http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
-        println resp.status
-        passed = Integer.parseInt((String) json.statistic.passed)
-        failed = Integer.parseInt((String) json.statistic.failed)
-        skipped = Integer.parseInt((String) json.statistic.skipped)
-        broken = Integer.parseInt((String) json.statistic.broken)
-        unknown = Integer.parseInt((String) json.statistic.unknown)
-        total = Integer.parseInt((String) json.statistic.total)
-        println passed
-        println total
-    }
-    
     // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
     HTTPBuilder http1 = new HTTPBuilder("${WEBHOOK_URL}")
     
