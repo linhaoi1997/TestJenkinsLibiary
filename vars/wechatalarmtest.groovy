@@ -51,7 +51,23 @@ def sendWechatAlarm() {
     
     def jsonSlurper = new groovy.json.JsonSlurper()
     def object = jsonSlurper.parseText('{ "myList": [4, 8, 15, 16, 23, 42] }')
-    print object
+    String s='''
+    {
+    "msgtype": "news",
+    "news": {
+       "articles" : [
+           {
+               "title" : "中秋节礼品领取",
+               "description" : "今年中秋节公司有豪礼相送",
+               "url" : "www.qq.com",
+               "picurl" : "http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png"
+           }
+        ]
+    }
+ }
+'''
+    def object1 = jsonSlurper.parseText(s)
+    print object1
     
     http1.request( POST, JSON ) { req ->
 	    
