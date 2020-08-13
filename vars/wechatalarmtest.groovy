@@ -61,7 +61,7 @@ def sendWechatAlarm() {
                "title" : "标题",
                "description" : "描述",
                "url" : "www.qq.com",
-               "picurl" : "/root/workspace/pipelinetest/tu-test/a.png"
+               "picurl" : "http://localhost/root/workspace/pipelinetest/tu-test/a.png"
            }
         ]
     }
