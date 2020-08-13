@@ -58,10 +58,10 @@ def sendWechatAlarm() {
     "news": {
        "articles" : [
            {
-               "title" : "标题1",
-               "description" : "描述1",
+               "title" : "自动化运行结果",
+               "description" : "总数：100\n成功：100\n失败：0\n成功率：100% ",
                "url" : "www.qq.com",
-               "picurl" : "http://auto.4paradigm.com/view/SDP/job/pipelinetest/lastSuccessfulBuild/artifact/tu-test/a.png"
+               "picurl" : "http://auto.4paradigm.com/view/SDP/job/pipelinetest/lastSuccessfulBuild/artifact/tu-test/aa.png"
            }
            
         ]
