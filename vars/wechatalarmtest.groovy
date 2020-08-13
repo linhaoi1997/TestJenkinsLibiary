@@ -73,7 +73,7 @@ def sendWechatAlarm() {
        "articles" : [
            {
                "title" : "自动化运行结果",
-               "description" : "总数：${total}\n成功：${passed}\n失败：${failed}\n查看测试报告",
+               "description" : "总数：${total}\n成功：${passed}\n失败：${failed}\n\n[查看测试报告]",
                "url" : "${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors",
                "picurl" : "http://auto.4paradigm.com/view/SDP/job/pipelinetest/lastSuccessfulBuild/artifact/tu-test/aa.png"
            }
