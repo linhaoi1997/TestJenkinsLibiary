@@ -66,7 +66,7 @@ def sendWechatAlarm() {
 	        
 	    body = [
 	       msgtype : "news",
-	       news : articles1
+	       news : articles
 	    ]
 	    
 	    print 'aaa'
