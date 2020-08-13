@@ -54,11 +54,7 @@ def sendWechatAlarm() {
 	   
 	    String picurl="http://a1.qpic.cn/psc?/V50K8Aj22Pi7jG1cQHUv13mYFX1nzj4i/ruAMsa53pVQWN7FLK88i5tHP1AzYWSQYCpP9GLLjmX2kVPpmgDpWYZyT7qEjJ9gca9K5NwjMAhXGJm7RwGD61afF2eRZuzBuLTCavKor4Pw!/m&ek=1&kp=1&pt=0&bo=2wEJAQAAAAABF.I!&tl=3&vuin=1677684467&tm=1597251600&sce=60-3-3&rf=0-0"
 
-        Map<String, String> bodyParam = new HashMap<>()
-	    bodyParam['picurl'] = picurl
-	    bodyParam['title'] = '测试title'
-	    bodyParam['description'] = '测试description'
-	    
+    
 	    articles = [
 	          picurl : picurl,
 	          title : '测试title',
@@ -69,7 +65,7 @@ def sendWechatAlarm() {
 	       news : articles
 	    ]
 	    
-	    print body
+	    print 'aaa'
 	
 	response.success = { resp, json ->
 		// TODO process json data
