@@ -51,23 +51,37 @@ def sendWechatAlarm() {
     HTTPBuilder http1 = new HTTPBuilder("${WEBHOOK_URL}")
     
     def jsonSlurper = new groovy.json.JsonSlurper()
-    def object = jsonSlurper.parseText('{ "myList": [4, 8, 15, 16, 23, 42] }')
-    String s='''
+    String content="""<font color=\"info\">【${VERSION}自动化运行结果通知】</font>
+	    \n>环境信息：${SGAE_URL}
+	    >运行结果汇总如下：
+	    >total：${total}
+	    >passed：${passed}
+	    >failed：${failed}
+	    >skipped：${skipped}
+	    >broken：${broken}
+	    >unknown：${unknown}
+	    >[jenkins任务链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER})
+	    >[allure报告链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors)
+	   
+	    """
+
+   
+    String s="""
     {
     "msgtype": "news",
     "news": {
        "articles" : [
            {
                "title" : "自动化运行结果",
-               "description" : "总数：100\n成功：100\n失败：0\n成功率：100% ",
-               "url" : "www.qq.com",
+               "description" : "总数：${total}\n成功：${passed}\n失败：${failed}\n\[查看测试报告\] ",
+               "url" : "${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors",
                "picurl" : "http://auto.4paradigm.com/view/SDP/job/pipelinetest/lastSuccessfulBuild/artifact/tu-test/aa.png"
            }
            
         ]
     }
  }
-'''
+"""
     def object1 = jsonSlurper.parseText(s)
     print object1
     
