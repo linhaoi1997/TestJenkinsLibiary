@@ -59,7 +59,7 @@ def sendWechatAlarm() {
 	    bodyParam['title'] = "测试title"
         bodyParam['description'] = "测试description"
     
-        Map<String, Map<String, String>> bodyParam = new HashMap<>()
+        Map<String, Map<String, String>> articles = new HashMap<>()
         articles['articles']=bodyParam
         
 	    articles1 = [ articles ]
