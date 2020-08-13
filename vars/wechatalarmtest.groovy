@@ -57,13 +57,15 @@ def sendWechatAlarm() {
     
 	    articles = [
 	          picurl : picurl,
-	          title : '测试title',
-	          description : '测试description'
+	          title : "测试title",
+	          description : "测试description"
 	        ]
 	    body = [
-	       msgtype : 'news',
+	       msgtype : "news",
 	       news : [
-	           articles : articles
+	           articles : [
+	               articles
+	               ]
 	       ]
 	    ]
 	    
