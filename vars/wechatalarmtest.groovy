@@ -61,7 +61,7 @@ def sendWechatAlarm() {
                "title" : "标题",
                "description" : "描述",
                "url" : "www.qq.com",
-               "picurl" : "http://localhost/root/workspace/pipelinetest/tu-test/a.png"
+               "picurl" : "http://auto.4paradigm.com/view/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/job/kb-test/94/allure/#packages/83edc06c07f9ae9e47eb6dd1b683e4e2/c40b2b5bbac2002e/"
            }
         ]
     }
