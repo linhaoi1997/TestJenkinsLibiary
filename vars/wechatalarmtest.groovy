@@ -76,7 +76,9 @@ def sendWechatAlarm() {
 	   
 	    """
 
-   
+        println passed
+        println total
+
     String s="""
     {
     "msgtype": "news",
@@ -93,6 +95,7 @@ def sendWechatAlarm() {
     }
  }
 """
+    println s
     def object1 = jsonSlurper.parseText(s)
     print object1
     
