@@ -61,7 +61,7 @@ def sendWechatAlarm() {
                "title" : "中秋节礼品领取",
                "description" : "今年中秋节公司有豪礼相送",
                "url" : "www.qq.com",
-               "picurl" : "http://res.mail.qq.com/node/ww/wwopenmng/images/independent/doc/test_pic_msg1.png"
+               "picurl" : "/root/workspace/pipelinetest/tu-test/a.png"
            }
         ]
     }
