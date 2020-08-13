@@ -42,7 +42,7 @@ def sendWechatAlarm() {
     } else {
         reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
     }
-
+    def s1=''
     //reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
     //reportURL = "/view/SDP/job/ui-auto-linkoop/9/allure/"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
@@ -56,6 +56,7 @@ def sendWechatAlarm() {
         total = (String) json.statistic.total
         println passed
         println total
+        s1="""总数:${total}  成功:${passed}  失败:${failed}\n\n[查看测试报告]"""
     }
 
     // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
@@ -64,9 +65,9 @@ def sendWechatAlarm() {
    
    
 
-        println passed
-        println total
+       
 
+    
     String s="""
     {
     "msgtype": "news",
@@ -74,7 +75,7 @@ def sendWechatAlarm() {
        "articles" : [
            {
                "title" : "自动化运行结果",
-               "description" : "总数:${total}  成功:${passed}  失败:${failed}\n\n[查看测试报告]",
+               "description" : "${s1}",
                "url" : "${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors",
                "picurl" : "http://auto.4paradigm.com/view/SDP/job/pipelinetest/lastSuccessfulBuild/artifact/tu-test/aa.png"
            }
