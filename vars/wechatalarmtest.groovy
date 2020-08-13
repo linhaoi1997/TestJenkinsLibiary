@@ -61,7 +61,7 @@ def sendWechatAlarm() {
                "title" : "标题1",
                "description" : "描述1",
                "url" : "www.qq.com",
-               "picurl" : "http://auto.4paradigm.com/view/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/job/kb-test/94/allure/#packages/83edc06c07f9ae9e47eb6dd1b683e4e2/c40b2b5bbac2002e/"
+               "picurl" : "http://auto.4paradigm.com/view/%E4%B8%AA%E4%BA%BA%E6%B5%8B%E8%AF%95/job/383-offline/16/allure/#/behaviors/e8fefbb45ac641a7/553a54cfd24d47a3/a646c2e2f5626af0/expanded"
            }
            
         ]
