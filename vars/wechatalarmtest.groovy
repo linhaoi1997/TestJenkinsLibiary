@@ -68,6 +68,8 @@ def sendWechatAlarm() {
 	       msgtype : 'news',
 	       news : articles
 	    ]
+	    
+	    print body
 	
 	response.success = { resp, json ->
 		// TODO process json data
