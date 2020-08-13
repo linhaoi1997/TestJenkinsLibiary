@@ -61,20 +61,8 @@ def sendWechatAlarm() {
     // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
     HTTPBuilder http1 = new HTTPBuilder("${WEBHOOK_URL}")
     
-    def jsonSlurper = new groovy.json.JsonSlurper()
-    String content="""<font color=\"info\">【${VERSION}自动化运行结果通知】</font>
-	    \n>环境信息：${SGAE_URL}
-	    >运行结果汇总如下：
-	    >total：${total}
-	    >passed：${passed}
-	    >failed：${failed}
-	    >skipped：${skipped}
-	    >broken：${broken}
-	    >unknown：${unknown}
-	    >[jenkins任务链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER})
-	    >[allure报告链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors)
-	   
-	    """
+   
+   
 
         println passed
         println total
@@ -96,6 +84,7 @@ def sendWechatAlarm() {
  }
 """
     println s
+     def jsonSlurper = new groovy.json.JsonSlurper()
     def object1 = jsonSlurper.parseText(s)
     print object1
     
