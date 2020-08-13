@@ -51,24 +51,11 @@ def sendWechatAlarm() {
     
     http1.request( POST, JSON ) { req ->
 	    
-	    String content="""<font color=\"info\">【${VERSION}自动化运行结果通知】</font>
-	    \n>环境信息：${SGAE_URL}
-	    >运行结果汇总如下：
-	    >total：${total}
-	    >passed：${passed}
-	    >failed：${failed}
-	    >skipped：${skipped}
-	    >broken：${broken}
-	    >unknown：${unknown}
-	    >[jenkins任务链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER})
-	    >[allure报告链接](${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors)
 	   
-	    """
-	    print content
 	    String picurl="http://a1.qpic.cn/psc?/V50K8Aj22Pi7jG1cQHUv13mYFX1nzj4i/ruAMsa53pVQWN7FLK88i5tHP1AzYWSQYCpP9GLLjmX2kVPpmgDpWYZyT7qEjJ9gca9K5NwjMAhXGJm7RwGD61afF2eRZuzBuLTCavKor4Pw!/m&ek=1&kp=1&pt=0&bo=2wEJAQAAAAABF.I!&tl=3&vuin=1677684467&tm=1597251600&sce=60-3-3&rf=0-0"
 
         Map<String, String> bodyParam = new HashMap<>()
-	    bodyParam['picurl'] = 'picurl'
+	    bodyParam['picurl'] = picurl
 	    bodyParam['title'] = '测试title'
 	    bodyParam['description'] = '测试description'
 	    body = [
