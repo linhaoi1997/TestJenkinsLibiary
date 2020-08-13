@@ -58,8 +58,8 @@ def sendWechatAlarm() {
     "news": {
        "articles" : [
            {
-               "title" : "中秋节礼品领取",
-               "description" : "今年中秋节公司有豪礼相送",
+               "title" : "标题",
+               "description" : "描述",
                "url" : "www.qq.com",
                "picurl" : "/root/workspace/pipelinetest/tu-test/a.png"
            }
