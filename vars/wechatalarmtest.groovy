@@ -58,9 +58,17 @@ def sendWechatAlarm() {
 	    bodyParam['picurl'] = picurl
 	    bodyParam['title'] = '测试title'
 	    bodyParam['description'] = '测试description'
+	    
+	    Map<String, String> bodyParam = new HashMap<>()
+	    
+	    articles = [
+	          picurl : picurl,
+	          title : '测试title',
+	          description : '测试description'
+	        ]
 	    body = [
 	       msgtype : 'news',
-	       news : bodyParam
+	       news : articles
 	    ]
 	
 	response.success = { resp, json ->
