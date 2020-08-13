@@ -49,6 +49,10 @@ def sendWechatAlarm() {
     // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
     HTTPBuilder http1 = new HTTPBuilder("${WEBHOOK_URL}")
     
+    def jsonSlurper = new groovy.json.JsonSlurper()
+    def object = jsonSlurper.parseText('{ "myList": [4, 8, 15, 16, 23, 42] }')
+    print object
+    
     http1.request( POST, JSON ) { req ->
 	    
 	   
