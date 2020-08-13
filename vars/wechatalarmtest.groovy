@@ -59,13 +59,12 @@ def sendWechatAlarm() {
 	    bodyParam['title'] = "测试title"
         bodyParam['description'] = "测试description"
     
-	    define articles = [ bodyParam ]
+	    articles = [ bodyParam ]
 	        
 	    body = [
 	       msgtype : "news",
 	       news : [
 	           articles : articles
-	               
 	       ]
 	    ]
 	    
