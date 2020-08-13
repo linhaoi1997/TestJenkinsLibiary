@@ -61,7 +61,7 @@ def sendWechatAlarm() {
                "title" : "标题1",
                "description" : "描述1",
                "url" : "www.qq.com",
-               "picurl" : "https://sm.ms/image/p86DCAM2YBc9GmH"
+               "picurl" : "https://i.loli.net/2020/08/14/p86DCAM2YBc9GmH.png"
            }
            
         ]
