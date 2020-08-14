@@ -60,6 +60,7 @@ def sendWechatAlarm() {
         println passed
         println total
         failed=total-passed
+        rate=Math.round(passed/total）
         if(total==passed) { 
           
                pic=pic1
@@ -68,7 +69,7 @@ def sendWechatAlarm() {
                pic=pic2
            }
            
-        s1="""总数:${total}  成功:${passed}  失败:${failed}\n\n[查看测试报告]"""
+        s1="""成功:${passed}  失败:${failed} 成功率：${rate}\n\n[查看测试报告]"""
     }
 
     // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
