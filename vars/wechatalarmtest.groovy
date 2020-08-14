@@ -63,7 +63,6 @@ def sendWechatAlarm() {
         println total
         failed=total-passed
         rate=Math.round(passed/total）
-        println rate
            
         s1="""成功:${passed}  失败:${failed} 成功率：${rate}\n\n[查看测试报告]"""
     }
