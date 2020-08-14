@@ -98,7 +98,7 @@ def sendWechatAlarm() {
  }
 """
     println s
-     def jsonSlurper = new groovy.json.JsonSlurper()
+    def jsonSlurper = new groovy.json.JsonSlurper()
     def object1 = jsonSlurper.parseText(s)
     print object1
     
