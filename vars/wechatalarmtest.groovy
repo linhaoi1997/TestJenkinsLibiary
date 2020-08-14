@@ -61,10 +61,10 @@ def sendWechatAlarm() {
         total = Integer.parseInt((String) json.statistic.total)
         println passed
         println total
-        s1="""Passed：${passed} Failed：${failed} Broken：${broken}\n版本：${VERSION} 环境：${SGAE_URL}\n[查看测试报告]"""
+        s1="""Passed：${passed} Failed：${failed} Broken：${broken}\n环境：${SGAE_URL}\n[查看测试报告]"""
         
     }
-        passed=1
+        
         if(total==passed) { 
           
                pic=pic1
@@ -83,7 +83,7 @@ def sendWechatAlarm() {
     "news": {
        "articles" : [
            {
-               "title" : "自动化运行结果",
+               "title" : "${VERSION}自动化运行结果",
                "description" : "${s1}",
                "url" : "${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors",
                "picurl" : "${pic}"
