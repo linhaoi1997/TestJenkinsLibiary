@@ -61,7 +61,7 @@ def sendWechatAlarm() {
         total = Integer.parseInt((String) json.statistic.total)
         println passed
         println total
-        s1="""Passed:${passed}  Failed:${failed} Broken：${broken}\n\n[查看测试报告]"""
+        s1="""Passed：${passed} Failed：${failed} Broken：${broken}\n版本：${VERSION} 环境：${SGAE_URL}\n[查看测试报告]"""
         
     }
         passed=1
