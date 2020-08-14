@@ -46,6 +46,8 @@ def sendWechatAlarm() {
     def pic1 = 'https://a1.qpic.cn/psc?/V50K8Aj22Pi7jG1cQHUv13mYFX1nzj4i/ruAMsa53pVQWN7FLK88i5tD45cdngcdQjsTSVi5*o5lEyjoe7mOItBetTiR97DTcNquldh*u9wz8kCo8hgP9NIufqR5EyOROUWzZNvoLrRE!/m&ek=1&kp=1&pt=0&bo=2wEJAQAAAAABF.I!&tl=3&vuin=1677684467&tm=1597251600&sce=60-3-3&rf=0-0'
     def pic2 = 'http://a1.qpic.cn/psc?/V50K8Aj22Pi7jG1cQHUv13mYFX1nzj4i/ruAMsa53pVQWN7FLK88i5tHP1AzYWSQYCpP9GLLjmX2kVPpmgDpWYZyT7qEjJ9gca9K5NwjMAhXGJm7RwGD61afF2eRZuzBuLTCavKor4Pw!/m&ek=1&kp=1&pt=0&bo=2wEJAQAAAAABF.I!&tl=3&vuin=1677684467&tm=1597251600&sce=60-3-3&rf=0-0'
     def pic = ''
+    def total=0
+    def passed=0
     //reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
     //reportURL = "/view/SDP/job/ui-auto-linkoop/9/allure/"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
@@ -61,25 +63,21 @@ def sendWechatAlarm() {
         println total
         failed=total-passed
         rate=Math.round(passed/total）
+        println rate
+           
+        s1="""成功:${passed}  失败:${failed} 成功率：${rate}\n\n[查看测试报告]"""
+    }
         if(total==passed) { 
           
                pic=pic1
    
         } else{ 
                pic=pic2
-           }
-           
-        s1="""成功:${passed}  失败:${failed} 成功率：${rate}\n\n[查看测试报告]"""
-    }
+        }
 
     // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
     HTTPBuilder http1 = new HTTPBuilder("${WEBHOOK_URL}")
     
-   
-   
-
-       
-
     
     String s="""
     {
