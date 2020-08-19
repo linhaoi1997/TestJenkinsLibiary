@@ -4,9 +4,9 @@
  */
 
 
-def call(targetHost,isHttps=false, sageVersion="4.0.0", hadoopUser="work", hadoopType="cdh"){
+def call(targetHost,hostUser="root" hostPassword="ai4every1_cloudops" isHttps=false, sageVersion="4.0.0", hadoopUser="work", hadoopType="cdh"){
     def run_status = sh (
-            script: """echo '123456' | ssh -t root@${targetHost} "wget http://pkg-plus.4paradigm.com/qa-tools/qa-scripts/init_sage_environment.sh && \
+            script: """echo ${hostPassword} | ssh -t ${hostUser}@${targetHost} "wget http://pkg-plus.4paradigm.com/qa-tools/qa-scripts/init_sage_environment.sh && \
                        sh -x init_sage_environment.sh ${isHttps} ${targetHost} ${sageVersion} ${hadoopUser} ${hadoopType}"
                     """,
             returnStatus:true
