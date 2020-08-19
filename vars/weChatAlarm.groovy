@@ -62,7 +62,7 @@ def sendWechatAlarm() {
         s1="""Passed:${passed}  Failed:${failed}  Broken:${broken}\n环境信息 ${SGAE_URL}\n\n[查看测试报告]"""
         
     }
-    if(total==passed) { 
+    if(total==passed && passed!=0) { 
             pic=pic1
     } else{ 
             pic=pic2
