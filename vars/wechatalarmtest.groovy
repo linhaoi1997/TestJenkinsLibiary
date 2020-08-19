@@ -90,7 +90,7 @@ def sendWechatAlarm() {
            {
                "title" : "${VERSION}自动化运行结果",
                "description" : "${s1}",
-               "url" : "${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors",
+               "url" : "${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure",
                "picurl" : "${pic}"
            }
            
