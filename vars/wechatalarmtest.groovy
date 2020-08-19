@@ -77,6 +77,7 @@ def sendWechatAlarm(String picture) {
     // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
    
     pic=picture
+    println picture
    
     HTTPBuilder http1 = new HTTPBuilder("${WEBHOOK_URL}")
     
@@ -149,6 +150,7 @@ def sendPostRequest(urlString, paramString) {
 
 
 def call(String pic = null) {
+    println pic
     sendWechatAlarm(pic)
     //sendPostRequest("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5", "msgtype=markdown&markdown={\"content\": \"test2\"}")
 
