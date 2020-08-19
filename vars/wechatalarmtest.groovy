@@ -35,7 +35,7 @@ import java.net.URLConnection
 @Field Map<String, Map<String, Integer>> map = new HashMap<>()
 
 @NonCPS
-def sendWechatAlarm(String picture) {
+def sendWechatAlarm() {
     def reportURL = ""
     if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
         reportURL = "/view/API/job/${jobName}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
@@ -76,8 +76,8 @@ def sendWechatAlarm(String picture) {
 
     // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
    
-    pic=picture
-    println picture
+    pic="http://auto.4paradigm.com/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/artifact/result.png"
+   
    
     HTTPBuilder http1 = new HTTPBuilder("${WEBHOOK_URL}")
     
@@ -149,9 +149,9 @@ def sendPostRequest(urlString, paramString) {
 
 
 
-def call(String pic = null) {
-    println pic
-    sendWechatAlarm(pic)
+def call() {
+
+    sendWechatAlarm()
     //sendPostRequest("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5", "msgtype=markdown&markdown={\"content\": \"test2\"}")
 
 }
