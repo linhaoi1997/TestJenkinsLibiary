@@ -48,6 +48,7 @@ def sendWechatAlarm() {
     def pic = ''
     def total=0
     def passed=0
+    
     //reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
     //reportURL = "/view/SDP/job/ui-auto-linkoop/9/allure/"
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
@@ -74,6 +75,10 @@ def sendWechatAlarm() {
         }
 
     // webURL="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5"
+   
+    pic="http://auto.4paradigm.com/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/artifact/result.png"
+   
+   
     HTTPBuilder http1 = new HTTPBuilder("${WEBHOOK_URL}")
     
     
@@ -85,7 +90,7 @@ def sendWechatAlarm() {
            {
                "title" : "${VERSION}自动化运行结果",
                "description" : "${s1}",
-               "url" : "${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure/#/behaviors",
+               "url" : "${JENKINS_URL}/job/${JOB_NAME}/${BUILD_NUMBER}/allure",
                "picurl" : "${pic}"
            }
            
@@ -144,7 +149,8 @@ def sendPostRequest(urlString, paramString) {
 
 
 
-def call(String coverage = null, String version="release/3.8.2") {
+def call() {
+
     sendWechatAlarm()
     //sendPostRequest("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c916b757-a1a2-416d-bf63-10fb8cf769e5", "msgtype=markdown&markdown={\"content\": \"test2\"}")
 
