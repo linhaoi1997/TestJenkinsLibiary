@@ -4,9 +4,9 @@
  */
 
 
-def call(targetHost,isHttps=false, sageVersion="4.0.0", hadoopUser="work", hadoopType="cdh"){
+def call(targetHost,sageVersion="4.x", hadoopUser="work", hadoopType="cdh"){
     def run_status = sh (
-            script: """ssh root@${targetHost} "mkdir -p tmp && cd tmp && rm -f init_pipeline_environment.sh && wget http://pkg-plus.4paradigm.com/qa-tools/qa-scripts/init_pipeline_environment.sh && sh -x init_pipeline_environment.sh ${isHttps} ${targetHost} ${sageVersion} ${hadoopUser} ${hadoopType}"
+            script: """ssh root@${targetHost} "mkdir -p tmp && cd tmp && rm -f init_pipeline_environment.sh && wget http://pkg-plus.4paradigm.com/qa-tools/qa-scripts/init_pipeline_environment.sh && sh -x init_pipeline_environment.sh ${targetHost} ${sageVersion} ${hadoopUser} ${hadoopType}"
                     """,
             returnStatus:true
     )
