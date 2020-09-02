@@ -4,8 +4,6 @@ import groovy.sql.Sql
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
 @Grab(group = 'org.jsoup', module = 'jsoup', version = '1.10.3')
 
-@Grab('mysql:mysql-connector-java:8.0.12')
-@GrabConfig(systemClassLoader = true)
 
 import org.jsoup.Jsoup
 import groovyx.net.http.HTTPBuilder
@@ -92,27 +90,21 @@ def call() {
     echo str
     
     getResultFromAllure()
-    
-    String userid = 'root'
-    String password = 'root'
 
-    //getDatabaseConnection(type: 'GLOBAL') {
-    
-    echo "database1" 
-    
-    def sql = Sql.newInstance('jdbc:mysql://172.27.234.3:53306/weatherinfo?' + 'useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8', userid, password, 'com.mysql.cj.jdbc.Driver')
-    
-    echo sql.connection.catalog 
-    echo "database2"
-        //map.each { feature, valueMap ->
-        //    def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${feature}', '${VERSION}', " +
-        //            "${valueMap['total']}, ${valueMap['passed']}, ${valueMap['unknown']}, ${valueMap['skipped']}, ${valueMap['failed']}, ${valueMap['broken']}, NOW())"
-        //    println(sqlString)
-        //    sql sql: sqlString
-        //}
-        //sql sql: sqlString
-
-    //}
+	def db_url="jdbc:mysql://172.27.234.3:53306/pdms_test"
+		def username="root"
+		def password="root"
+		def driverClass="com.mysql.jdbc.Driver"
+		def sql = Sql.newInstance(db_url, username, password, driverClass)
+		sql.eachRow("select * from SALES"){row ->
+            echo row.id
+			echo row.path
+			def con ="un"
+			def path = "D://asd"
+			def pan = "E:"
+			//sql.execute("insert into data_path (s_size, b_size, con,path,pan) values (1000, 10,${con}, ${path}, ${pan})")
+		}
+		
 }
 
 
