@@ -18,7 +18,7 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource
 import com.mysql.jdbc.*
 import com.mysql.jdbc.Driver
 import groovy.sql.*
-
+import java.sql.DriverManager
 
 //可以指定maven仓库
 //@GrabResolver(name = 'aliyun', root = 'http://maven.aliyun.com/nexus/content/groups/public/')
@@ -98,6 +98,10 @@ def call(String version) {
     */
     //d=Class.forName("com.mysql.jdbc.Driver").newInstance()
     //println d.class // class com.mysql.jdbc.Driver
+   
+
+     DriverManager.registerDriver(new com.mysql.jdbc.Driver())
+
     Sql sql=Sql.newInstance(
     'jdbc:mysql://172.27.234.3:53306/default',"root","root",'com.mysql.jdbc.Driver'
     )
