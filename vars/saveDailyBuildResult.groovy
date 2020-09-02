@@ -5,7 +5,7 @@ import groovy.grape.Grape
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
 @Grab(group = 'org.jsoup', module = 'jsoup', version = '1.10.3')
 
-@Grab('mysql:mysql-connector-java:5.1.25')
+@Grab('mysql:mysql-connector-java:8.0.3')
 //@GrabConfig(systemClassLoader = true)
 
 import org.jsoup.Jsoup
