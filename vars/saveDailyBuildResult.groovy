@@ -97,7 +97,7 @@ def call(String version) {
     sql.eachRow("select * from SALES"){row ->
             echo 'A'
 			echo 'B'
-
+    }
     sql.close()
     
     //d=Class.forName("com.mysql.jdbc.Driver").newInstance()
