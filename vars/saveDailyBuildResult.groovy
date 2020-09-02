@@ -81,6 +81,8 @@ def getResultFromAllure() {
 
 
     }
+    
+    echo "this is a test after getResultFromAllure"
 }
 
 
@@ -90,20 +92,20 @@ def call() {
     echo str
     
     getResultFromAllure()
-
-	def db_url="jdbc:mysql://172.27.234.3:53306/pdms_test"
-		def username="root"
-		def password="root"
-		def driverClass="com.mysql.jdbc.Driver"
-		def sql = Sql.newInstance(db_url, username, password, driverClass)
-		sql.eachRow("select * from SALES"){row ->
+    echo "this is a test bdfore sql"
+	db_url="jdbc:mysql://172.27.234.3:53306/pdms_test"
+	username="root"
+	password="root"
+    driverClass="com.mysql.jdbc.Driver"
+	sql = Sql.newInstance(db_url, username, password, driverClass)
+	sql.eachRow("select * from SALES"){row ->
             echo row.id
 			echo row.path
 			def con ="un"
 			def path = "D://asd"
 			def pan = "E:"
 			//sql.execute("insert into data_path (s_size, b_size, con,path,pan) values (1000, 10,${con}, ${path}, ${pan})")
-		}
+	}
 		
 }
 
