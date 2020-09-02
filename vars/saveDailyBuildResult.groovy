@@ -94,19 +94,15 @@ def call(String version) {
     ds.password = 'root'
     ds.url = 'jdbc:mysql://172.27.234.3:53306/pdms_test'
     Sql sql=Sql.newInstance(ds)
-    sqlString = "select * from SALES"
-
-    sql sql: sqlString
+    sql.eachRow("select * from SALES"){row ->
+            echo 'A'
+			echo 'B'
 
     sql.close()
     
-    
     //d=Class.forName("com.mysql.jdbc.Driver").newInstance()
     //println d.class // class com.mysql.jdbc.Driver
-   
-
     // DriverManager.registerDriver(new com.mysql.jdbc.Driver())
-
     // Sql sql=Sql.newInstance(
     // 'jdbc:mysql://172.27.234.3:53306/default',"root","root",'com.mysql.jdbc.Driver'
     // )
