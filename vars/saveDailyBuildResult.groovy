@@ -62,7 +62,7 @@ def getResultFromAllure() {
 }
 
 
-def call(String version) {
+def call(String version='release/1.0.0') {
     
     getResultFromAllure()
 //  echo "this is a test bdfore sql"
@@ -102,8 +102,8 @@ def call(String version) {
     sql.execute("insert into Decimal_test (column_1, column_2, column_3,column_4) values (1000, 10,3, 'a')")
     sql.close()
     
-    //d=Class.forName("com.mysql.jdbc.Driver").newInstance()
-    //println d.class // class com.mysql.jdbc.Driver
+    // d=Class.forName("com.mysql.jdbc.Driver").newInstance()
+    // println d.class // class com.mysql.jdbc.Driver
     // DriverManager.registerDriver(new com.mysql.jdbc.Driver())
     // Sql sql=Sql.newInstance(
     // 'jdbc:mysql://172.27.234.3:53306/default',"root","root",'com.mysql.jdbc.Driver'
