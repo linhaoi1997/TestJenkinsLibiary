@@ -92,7 +92,7 @@ def call(String version) {
     MysqlDataSource ds = new MysqlDataSource()
     ds.user = 'root'
     ds.password = 'root'
-    ds.url = 'jdbc:mysql://172.27.234.3:53306/test'
+    ds.url = 'jdbc:mysql://172.27.234.3:53306/default'
     Sql sql=Sql.newInstance(ds)
     sql.close()
     
