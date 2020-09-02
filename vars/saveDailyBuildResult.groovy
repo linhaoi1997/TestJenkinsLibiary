@@ -27,6 +27,9 @@ import groovy.transform.Field
 
 @NonCPS
 def getResultFromAllure() {
+
+    echo "this is a test in getResultFromAllure"
+    
     def reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
 
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
@@ -80,6 +83,9 @@ def getResultFromAllure() {
 
 
 def call() {
+    
+    String str = "this is a test"
+    echo str
     
     getResultFromAllure()
 
