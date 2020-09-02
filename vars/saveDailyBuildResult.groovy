@@ -14,6 +14,10 @@ import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
 import groovy.transform.Field
 import groovy.sql.Sql
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource
+import com.mysql.jdbc.*
+import groovy.sql.*
+
 
 //可以指定maven仓库
 //@GrabResolver(name = 'aliyun', root = 'http://maven.aliyun.com/nexus/content/groups/public/')
@@ -82,6 +86,20 @@ def call(String version) {
         sql sql: sqlString
     }
 
+
+    /*  the commented code works fine
+    MysqlDataSource ds = new MysqlDataSource()
+    ds.user = 'root'
+    ds.password = ""
+    ds.url = 'jdbc:mysql://localhost:3306/test'
+    Sql sql=Sql.newInstance(ds)
+    sql.close()
+    */
+    d=Class.forName("com.mysql.jdbc.Driver").newInstance()
+    println d.class // class com.mysql.jdbc.Driver
+    Sql sql=Sql.newInstance(
+    'jdbc:mysql://172.27.234.3:53306/default',"root","root",'com.mysql.jdbc.Driver'
+    )
 
 
 
