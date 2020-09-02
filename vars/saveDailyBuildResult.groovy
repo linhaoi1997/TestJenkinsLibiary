@@ -102,9 +102,9 @@ def call(String version) {
 
      DriverManager.registerDriver(new com.mysql.jdbc.Driver())
 
-    Sql sql=Sql.newInstance(
-    'jdbc:mysql://172.27.234.3:53306/default',"root","root",'com.mysql.jdbc.Driver'
-    )
+    // Sql sql=Sql.newInstance(
+    // 'jdbc:mysql://172.27.234.3:53306/default',"root","root",'com.mysql.jdbc.Driver'
+    // )
 
 
 
