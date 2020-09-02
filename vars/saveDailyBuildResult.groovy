@@ -83,7 +83,7 @@ def call(String version='release/1.0.0') {
         
         echo "${version}"
         
-        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
+        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, 0, 0, NOW())"
 
         echo sqlString
@@ -99,7 +99,7 @@ def call(String version='release/1.0.0') {
     sql.eachRow("select * from Decimal_test"){row ->
             echo 'test'
     }
-    sql.execute("insert into Decimal_test (column_1, column_2, column_3,column_4) values (1000, 10,3, 'a')")
+    //sql.execute("insert into Decimal_test (column_1, column_2, column_3,column_4) values (1000, 10,3, 'a')")
     sql.close()
     
     // d=Class.forName("com.mysql.jdbc.Driver").newInstance()
