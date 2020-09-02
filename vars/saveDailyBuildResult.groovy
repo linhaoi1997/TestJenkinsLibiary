@@ -57,7 +57,7 @@ def getResultFromAllure() {
 }
 
 
-def call() {
+def call(String version) {
     
     getResultFromAllure()
 //     echo "this is a test bdfore sql"
@@ -75,14 +75,14 @@ def call() {
 // 			//sql.execute("insert into data_path (s_size, b_size, con,path,pan) values (1000, 10,${con}, ${path}, ${pan})")
 // 	}
     getDatabaseConnection(type: 'GLOBAL') {
-        map.each { feature, valueMap ->
-            def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${feature}', '${version}', " +
-                    "${valueMap['total']}, ${valueMap['passed']}, ${valueMap['unknown']}, ${valueMap['skipped']}, ${valueMap['failed']}, ${valueMap['broken']}, NOW())"
-            println(sqlString)
+        
+        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
+                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${lineCov}, ${branchCov}, NOW())"
 
-            sql sql: sqlString
-        }
+        sql sql: sqlString
     }
+
+
 
 
 		
