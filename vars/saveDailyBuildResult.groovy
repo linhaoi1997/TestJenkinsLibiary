@@ -5,7 +5,7 @@ import groovy.grape.Grape
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
 @Grab(group = 'org.jsoup', module = 'jsoup', version = '1.10.3')
 
-@Grab('mysql:mysql-connector-java:8.0.3')
+@Grab('mysql:mysql-connector-java:5.1.38')
 //@GrabConfig(systemClassLoader = true)
 
 import org.jsoup.Jsoup
@@ -96,8 +96,8 @@ def call(String version) {
     Sql sql=Sql.newInstance(ds)
     sql.close()
     */
-    d=Class.forName("com.mysql.jdbc.Driver").newInstance()
-    println d.class // class com.mysql.jdbc.Driver
+    //d=Class.forName("com.mysql.jdbc.Driver").newInstance()
+    //println d.class // class com.mysql.jdbc.Driver
     Sql sql=Sql.newInstance(
     'jdbc:mysql://172.27.234.3:53306/default',"root","root",'com.mysql.jdbc.Driver'
     )
