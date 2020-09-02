@@ -50,43 +50,6 @@ def getResultFromAllure() {
 
     echo "this is a testb in getResultFromAllure"
     
-    http.get(path: "${reportURL}data/behaviors.json") { resp, json ->
-        List featureJson = json.children
-
-        for (int i = 0; i < featureJson.size(); i++) {
-            String featureName = featureJson.get(i).name
-            Map<String, Integer> results = new HashMap<>()
-            results['passed'] = 0
-            results['failed'] = 0
-            results['skipped'] = 0
-            results['broken'] = 0
-            results['unknown'] = 0
-
-
-            List storyJson = featureJson.get(i).children
-            for (int j = 0; j < storyJson.size(); j++) {
-
-                List caseJson = storyJson.get(j).children
-                for (int k = 0; k < caseJson.size(); k++) {
-                    def caseInfo = caseJson.get(k)
-                    String status = caseInfo.status
-                    int num = results.get(status) + 1
-                    results[status] = num
-
-                }
-            }
-            int total = 0
-            results.each { key, value ->
-                total = total + value
-            }
-            results['total'] = total
-            map.put(featureName, results)
-        }
-
-
-    }
-    
-    echo "this is a test after getResultFromAllure"
 }
 
 
