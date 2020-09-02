@@ -1,7 +1,14 @@
 import groovy.grape.Grape
+import groovy.sql.Sql
 
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
 @Grab(group = 'org.jsoup', module = 'jsoup', version = '1.10.3')
+
+@Grab('mysql:mysql-connector-java:8.0.12')
+@GrabConfig(systemClassLoader = true)
+
+
+println sql.connection.catalog
 
 import org.jsoup.Jsoup
 import groovyx.net.http.HTTPBuilder
@@ -88,9 +95,18 @@ def call() {
     echo str
     
     getResultFromAllure()
+    
+    String userid = 'root'
+    String password = 'root'
 
-    getDatabaseConnection(type: 'GLOBAL') {
-        echo "database"
+    //getDatabaseConnection(type: 'GLOBAL') {
+    
+    echo "database1" 
+    
+    def sql = Sql.newInstance('jdbc:mysql://localhost:3306/weatherinfo?' + 'useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8', userid, password, 'com.mysql.cj.jdbc.Driver')
+    
+    println sql.connection.catalog 
+    echo "database2"
         //map.each { feature, valueMap ->
         //    def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${feature}', '${VERSION}', " +
         //            "${valueMap['total']}, ${valueMap['passed']}, ${valueMap['unknown']}, ${valueMap['skipped']}, ${valueMap['failed']}, ${valueMap['broken']}, NOW())"
@@ -99,7 +115,7 @@ def call() {
         //}
         //sql sql: sqlString
 
-    }
+    //}
 }
 
 
