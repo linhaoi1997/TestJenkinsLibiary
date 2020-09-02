@@ -88,19 +88,19 @@ def call(String version) {
     }
 
 
-    /*  the commented code works fine
+    // the commented code works fine
     MysqlDataSource ds = new MysqlDataSource()
     ds.user = 'root'
-    ds.password = ""
-    ds.url = 'jdbc:mysql://localhost:3306/test'
+    ds.password = 'root'
+    ds.url = 'jdbc:mysql://172.27.234.3:53306/test'
     Sql sql=Sql.newInstance(ds)
     sql.close()
-    */
+    
     //d=Class.forName("com.mysql.jdbc.Driver").newInstance()
     //println d.class // class com.mysql.jdbc.Driver
    
 
-     DriverManager.registerDriver(new com.mysql.jdbc.Driver())
+    // DriverManager.registerDriver(new com.mysql.jdbc.Driver())
 
     // Sql sql=Sql.newInstance(
     // 'jdbc:mysql://172.27.234.3:53306/default',"root","root",'com.mysql.jdbc.Driver'
