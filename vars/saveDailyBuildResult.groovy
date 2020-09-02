@@ -1,16 +1,19 @@
 import groovy.grape.Grape
-import groovy.sql.Sql
 
+//可以指定maven仓库
+//@GrabResolver(name = 'aliyun', root = 'http://maven.aliyun.com/nexus/content/groups/public/')
 @Grab(group = 'org.codehaus.groovy.modules.http-builder', module = 'http-builder', version = '0.7')
 @Grab(group = 'org.jsoup', module = 'jsoup', version = '1.10.3')
 
-@Grab('mysql:mysql-connector-java:5.1.7')
+@Grab('mysql:mysql-connector-java:5.1.25')
+@GrabConfig(systemClassLoader = true)
 
 import org.jsoup.Jsoup
 import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
 import groovy.transform.Field
+import groovy.sql.Sql
 
 //可以指定maven仓库
 //@GrabResolver(name = 'aliyun', root = 'http://maven.aliyun.com/nexus/content/groups/public/')
@@ -61,7 +64,7 @@ def call() {
     
     getResultFromAllure()
     echo "this is a test bdfore sql"
-	db_url="jdbc:mysql://172.27.234.3:53306/pdms_test"
+	db_url="jdbc:mysql://172.27.234.3:53306/pdms_test?useUnicode=true&characterEncoding=utf8"
 	username="root"
 	password="root"
     driverClass="com.mysql.jdbc.Driver"
