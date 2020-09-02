@@ -105,7 +105,7 @@ def call() {
     
     def sql = Sql.newInstance('jdbc:mysql://localhost:3306/weatherinfo?' + 'useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8', userid, password, 'com.mysql.cj.jdbc.Driver')
     
-    println sql.connection.catalog 
+    echo sql.connection.catalog 
     echo "database2"
         //map.each { feature, valueMap ->
         //    def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${feature}', '${VERSION}', " +
