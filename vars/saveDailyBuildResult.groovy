@@ -77,7 +77,7 @@ def call(String version) {
     getDatabaseConnection(type: 'GLOBAL') {
         
         def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
-                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${lineCov}, ${branchCov}, NOW())"
+                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, 0, 0, NOW())"
 
         sql sql: sqlString
     }
