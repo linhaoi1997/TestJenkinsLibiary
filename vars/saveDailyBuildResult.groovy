@@ -94,10 +94,11 @@ def call(String version) {
     ds.password = 'root'
     ds.url = 'jdbc:mysql://172.27.234.3:53306/pdms_test'
     Sql sql=Sql.newInstance(ds)
-    sql.eachRow("select * from SALES"){row ->
+    sql.eachRow("select * from Decimal_test"){row ->
             echo 'A'
 			echo 'B'
     }
+    sql.execute("insert into Decimal_test (column_1, column_2, column_3,column_4) values (1000, 10,3, 'a')")
     sql.close()
     
     //d=Class.forName("com.mysql.jdbc.Driver").newInstance()
