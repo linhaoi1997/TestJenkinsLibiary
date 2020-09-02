@@ -6,7 +6,7 @@ import groovy.grape.Grape
 @Grab(group = 'org.jsoup', module = 'jsoup', version = '1.10.3')
 
 @Grab('mysql:mysql-connector-java:5.1.25')
-@GrabConfig(systemClassLoader = true)
+//@GrabConfig(systemClassLoader = true)
 
 import org.jsoup.Jsoup
 import groovyx.net.http.HTTPBuilder
