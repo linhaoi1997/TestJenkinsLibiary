@@ -65,11 +65,11 @@ def getResultFromAllure() {
 def call(String version) {
     
     getResultFromAllure()
-//     echo "this is a test bdfore sql"
+//  echo "this is a test bdfore sql"
 // 	db_url="jdbc:mysql://172.27.234.3:53306/pdms_test?useUnicode=true&characterEncoding=utf8"
 // 	username="root"
 // 	password="root"
-//     driverClass="com.mysql.jdbc.Driver"
+//  driverClass="com.mysql.jdbc.Driver"
 // 	sql = Sql.newInstance(db_url, username, password, driverClass)
 // 	sql.eachRow("select * from SALES"){row ->
 //             echo row.id
@@ -81,9 +81,12 @@ def call(String version) {
 // 	}
     getDatabaseConnection(type: 'GLOBAL') {
         
+        echo "${version}"
+        
         def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, 0, 0, NOW())"
 
+        echo sqlString
         sql sql: sqlString
     }
 
