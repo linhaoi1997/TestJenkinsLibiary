@@ -59,24 +59,32 @@ def getResultFromAllure() {
 
 def call() {
     
-    String str = "this is a test"
-    echo str
-    
     getResultFromAllure()
-    echo "this is a test bdfore sql"
-	db_url="jdbc:mysql://172.27.234.3:53306/pdms_test?useUnicode=true&characterEncoding=utf8"
-	username="root"
-	password="root"
-    driverClass="com.mysql.jdbc.Driver"
-	sql = Sql.newInstance(db_url, username, password, driverClass)
-	sql.eachRow("select * from SALES"){row ->
-            echo row.id
-			echo row.path
-			def con ="un"
-			def path = "D://asd"
-			def pan = "E:"
-			//sql.execute("insert into data_path (s_size, b_size, con,path,pan) values (1000, 10,${con}, ${path}, ${pan})")
-	}
+//     echo "this is a test bdfore sql"
+// 	db_url="jdbc:mysql://172.27.234.3:53306/pdms_test?useUnicode=true&characterEncoding=utf8"
+// 	username="root"
+// 	password="root"
+//     driverClass="com.mysql.jdbc.Driver"
+// 	sql = Sql.newInstance(db_url, username, password, driverClass)
+// 	sql.eachRow("select * from SALES"){row ->
+//             echo row.id
+// 			echo row.path
+// 			def con ="un"
+// 			def path = "D://asd"
+// 			def pan = "E:"
+// 			//sql.execute("insert into data_path (s_size, b_size, con,path,pan) values (1000, 10,${con}, ${path}, ${pan})")
+// 	}
+    getDatabaseConnection(type: 'GLOBAL') {
+        map.each { feature, valueMap ->
+            def sqlString = "INSERT INTO func_test (name, build_id, feature, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${feature}', '${version}', " +
+                    "${valueMap['total']}, ${valueMap['passed']}, ${valueMap['unknown']}, ${valueMap['skipped']}, ${valueMap['failed']}, ${valueMap['broken']}, NOW())"
+            println(sqlString)
+
+            sql sql: sqlString
+        }
+    }
+
+
 		
 }
 
