@@ -32,9 +32,11 @@ def getResultFromAllure() {
 
     echo "this is a test in getResultFromAllure"
     
-    def reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+    def reportURL = "/view/SDP/job/kb-test1/80/allure/"
 
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
+     echo "this is a testa in getResultFromAllure"
+     
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
         println resp.status
@@ -46,6 +48,8 @@ def getResultFromAllure() {
         total = Integer.parseInt((String) json.statistic.total)
     }
 
+    echo "this is a testb in getResultFromAllure"
+    
     http.get(path: "${reportURL}data/behaviors.json") { resp, json ->
         List featureJson = json.children
 
