@@ -16,6 +16,7 @@ import groovy.transform.Field
 import groovy.sql.Sql
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource
 import com.mysql.jdbc.*
+import com.mysql.jdbc.Driver
 import groovy.sql.*
 
 
