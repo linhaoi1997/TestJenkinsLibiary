@@ -7,9 +7,6 @@ import groovy.sql.Sql
 @Grab('mysql:mysql-connector-java:8.0.12')
 @GrabConfig(systemClassLoader = true)
 
-
-println sql.connection.catalog
-
 import org.jsoup.Jsoup
 import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.ContentType.*
@@ -103,7 +100,7 @@ def call() {
     
     echo "database1" 
     
-    def sql = Sql.newInstance('jdbc:mysql://localhost:3306/weatherinfo?' + 'useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8', userid, password, 'com.mysql.cj.jdbc.Driver')
+    def sql = Sql.newInstance('jdbc:mysql://172.27.234.3:53306/weatherinfo?' + 'useUnicode=true&useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8', userid, password, 'com.mysql.cj.jdbc.Driver')
     
     echo sql.connection.catalog 
     echo "database2"
