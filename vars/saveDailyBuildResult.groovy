@@ -92,9 +92,14 @@ def call(String version) {
     MysqlDataSource ds = new MysqlDataSource()
     ds.user = 'root'
     ds.password = 'root'
-    ds.url = 'jdbc:mysql://172.27.234.3:53306/default'
+    ds.url = 'jdbc:mysql://172.27.234.3:53306/pdms_test'
     Sql sql=Sql.newInstance(ds)
+    sqlString = "select * from SALES"
+
+    sql sql: sqlString
+
     sql.close()
+    
     
     //d=Class.forName("com.mysql.jdbc.Driver").newInstance()
     //println d.class // class com.mysql.jdbc.Driver
