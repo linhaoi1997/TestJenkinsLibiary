@@ -62,7 +62,7 @@ def getResultFromAllure() {
 }
 
 
-def call(String version='release/1.0.0') {
+def call(String version="release/1.0.0") {
     
     getResultFromAllure()
 //  echo "this is a test bdfore sql"
@@ -99,7 +99,7 @@ def call(String version='release/1.0.0') {
     // sql.eachRow("select * from Decimal_test"){row ->
     //         echo 'test'
     // }
-    def sqlString = "INSERT INTO dashboard.daylybuild_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
+    def sqlString = "INSERT INTO dashboard.daylybuild_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
               "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken},NOW())"
 
     echo sqlString
