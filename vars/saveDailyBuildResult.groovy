@@ -93,13 +93,13 @@ def call(String version="release/1.0.0") {
     // the commented code works fine
     MysqlDataSource ds = new MysqlDataSource()
     ds.user = 'root'
-    ds.password = 'root'
-    ds.url = 'jdbc:mysql://172.27.234.3:53306/dashboard'
+    ds.password = '123456'
+    ds.url = 'jdbc:mysql://172.27.234.42:3306/dashboard'
     Sql sql=Sql.newInstance(ds)
     // sql.eachRow("select * from Decimal_test"){row ->
     //         echo 'test'
     // }
-    def sqlString = "INSERT INTO dashboard.daylybuild_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
+    def sqlString = "INSERT INTO dashboard.dailybuild_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
               "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken},NOW())"
 
     echo sqlString
