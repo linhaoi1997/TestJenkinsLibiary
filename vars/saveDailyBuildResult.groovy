@@ -39,7 +39,7 @@ import java.sql.DriverManager
 @NonCPS
 def getResultFromAllure() {
 
-    def reportURL = "/view/SDP/job/kb-test1/80/allure/"
+    def reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
     
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
