@@ -44,10 +44,33 @@ def sendWechatAlarm(String webhookURL, String message) {
     def object1 = jsonSlurper.parseText(s)
     print object1
 
+    http1.request( POST, JSON ) { req ->
 
-    http.post(path:'',body:object1,requestContentType:URLENC){resp->
-        assert resp.statusLine.statusCode == 200
+
+//        String picurl = "http://a1.qpic.cn/psc?/V50K8Aj22Pi7jG1cQHUv13mYFX1nzj4i/ruAMsa53pVQWN7FLK88i5tHP1AzYWSQYCpP9GLLjmX2kVPpmgDpWYZyT7qEjJ9gca9K5NwjMAhXGJm7RwGD61afF2eRZuzBuLTCavKor4Pw!/m&ek=1&kp=1&pt=0&bo=2wEJAQAAAAABF.I!&tl=3&vuin=1677684467&tm=1597251600&sce=60-3-3&rf=0-0"
+//        Map<String, String> bodyParam = new HashMap<>()
+//
+//        bodyParam['picurl'] = picurl
+//        bodyParam['title'] = "测试title"
+//        bodyParam['description'] = "测试description"
+//
+//        Map<String, Map<String, String>> articles = new HashMap<>()
+//        articles['articles'] = bodyParam
+//        articles1 = [articles]
+
+        body = object1
+
+
+        response.success = { resp, json ->
+            // TODO process json data
+            println resp.status
+        }
     }
+
+
+//    http.post(path:'',body:object1,requestContentType:URLENC){resp->
+//        assert resp.statusLine.statusCode == 200
+//    }
 
 }
 
