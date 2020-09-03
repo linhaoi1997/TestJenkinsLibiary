@@ -79,27 +79,31 @@ def call(String version='release/1.0.0') {
 // 			def pan = "E:"
 // 			//sql.execute("insert into data_path (s_size, b_size, con,path,pan) values (1000, 10,${con}, ${path}, ${pan})")
 // 	}
-    getDatabaseConnection(type: 'GLOBAL') {
+    // getDatabaseConnection(type: 'GLOBAL') {
         
-        echo "${version}"
+    //     echo "${version}"
         
-        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
-                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, 0, 0, NOW())"
+    //     def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
+    //             "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, 0, 0, NOW())"
 
-        echo sqlString
-        sql sql: sqlString
-    }
+    //     echo sqlString
+    //     sql sql: sqlString
+    // }
 
     // the commented code works fine
     MysqlDataSource ds = new MysqlDataSource()
     ds.user = 'root'
     ds.password = 'root'
-    ds.url = 'jdbc:mysql://172.27.234.3:53306/pdms_test'
+    ds.url = 'jdbc:mysql://172.27.234.3:53306/dashboard'
     Sql sql=Sql.newInstance(ds)
-    sql.eachRow("select * from Decimal_test"){row ->
-            echo 'test'
-    }
-    //sql.execute("insert into Decimal_test (column_1, column_2, column_3,column_4) values (1000, 10,3, 'a')")
+    // sql.eachRow("select * from Decimal_test"){row ->
+    //         echo 'test'
+    // }
+    def sqlString = "INSERT INTO dashboard.daylybuild_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
+              "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken},NOW())"
+
+    echo sqlString
+    sql.execute(sqlString)
     sql.close()
     
     // d=Class.forName("com.mysql.jdbc.Driver").newInstance()
@@ -109,9 +113,6 @@ def call(String version='release/1.0.0') {
     // 'jdbc:mysql://172.27.234.3:53306/default',"root","root",'com.mysql.jdbc.Driver'
     // )
 
-
-
-		
 }
 
 
