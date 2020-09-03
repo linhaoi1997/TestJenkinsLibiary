@@ -31,13 +31,9 @@ def sendWechatAlarm(String webhookURL, String message) {
     {
     "msgtype": "text",
     "text": {
-       "articles" : [
-           {
-               "content" : "${message}"
-           }
-        ]
+            "content" : "${message}"
+            }
     }
-   }
    """
     println(webhookURL)
     HTTPBuilder http = new HTTPBuilder(webhookURL)
@@ -58,7 +54,10 @@ def sendWechatAlarm(String webhookURL, String message) {
 //        Map<String, Map<String, String>> articles = new HashMap<>()
 //        articles['articles'] = bodyParam
 //        articles1 = [articles]
-
+//        body = [
+//                msgtype : 'text',
+//                text : 'lengfeng'
+//        ]
         body = object1
 
 
