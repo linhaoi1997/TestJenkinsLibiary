@@ -45,7 +45,7 @@ def sendWechatAlarm(String webhookURL, String message) {
     print object1
 
 
-    http.post(body:object1,requestContentType:URLENC){resp->
+    http.post(path:'',body:object1,requestContentType:URLENC){resp->
         assert resp.statusLine.statusCode == 200
     }
 
