@@ -39,7 +39,8 @@ def sendWechatAlarm(String webhookURL, String message) {
     }
    }
    """
-    HTTPBuilder http = new HTTPBuilder("${webhookURL}")
+    println(webhookURL)
+    HTTPBuilder http = new HTTPBuilder(webhookURL)
     def jsonSlurper = new groovy.json.JsonSlurper()
     def object1 = jsonSlurper.parseText(s)
     print object1
