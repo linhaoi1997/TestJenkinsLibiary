@@ -31,7 +31,8 @@ def sendWechatAlarm(String webhookURL, String message) {
     {
     "msgtype": "text",
     "text": {
-            "content" : "@所有人 ${message}"
+            "content" : "@所有人 ${message}",
+            "mentioned_list":["@all"]
             }
     }
    """
