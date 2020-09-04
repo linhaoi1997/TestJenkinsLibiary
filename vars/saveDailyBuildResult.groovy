@@ -59,53 +59,17 @@ def getResultFromAllure() {
 def call() {
     
     getResultFromAllure()
-//  echo "this is a test bdfore sql"
-// 	db_url="jdbc:mysql://172.27.234.3:53306/pdms_test?useUnicode=true&characterEncoding=utf8"
-// 	username="root"
-// 	password="root"
-//  driverClass="com.mysql.jdbc.Driver"
-// 	sql = Sql.newInstance(db_url, username, password, driverClass)
-// 	sql.eachRow("select * from SALES"){row ->
-//             echo row.id
-// 			echo row.path
-// 			def con ="un"
-// 			def path = "D://asd"
-// 			def pan = "E:"
-// 			//sql.execute("insert into data_path (s_size, b_size, con,path,pan) values (1000, 10,${con}, ${path}, ${pan})")
-// 	}
-    // getDatabaseConnection(type: 'GLOBAL') {
-        
-    //     echo "${version}"
-        
-    //     def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
-    //             "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, 0, 0, NOW())"
-
-    //     echo sqlString
-    //     sql sql: sqlString
-    // }
-
-    // the commented code works fine
     MysqlDataSource ds = new MysqlDataSource()
     ds.user = 'root'
     ds.password = 'root'
     ds.url = 'jdbc:mysql://172.27.234.42:3306/dashboard'
     Sql sql=Sql.newInstance(ds)
-    // sql.eachRow("select * from Decimal_test"){row ->
-    //         echo 'test'
-    // }
     def sqlString = "INSERT INTO dashboard.dailybuild_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
               "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken},NOW())"
 
     echo sqlString
     sql.execute(sqlString)
     sql.close()
-    
-    // d=Class.forName("com.mysql.jdbc.Driver").newInstance()
-    // println d.class // class com.mysql.jdbc.Driver
-    // DriverManager.registerDriver(new com.mysql.jdbc.Driver())
-    // Sql sql=Sql.newInstance(
-    // 'jdbc:mysql://172.27.234.3:53306/default',"root","root",'com.mysql.jdbc.Driver'
-    // )
 
 }
 
