@@ -62,9 +62,9 @@ def call() {
     MysqlDataSource ds = new MysqlDataSource()
     ds.user = 'root'
     ds.password = 'root'
-    ds.url = 'jdbc:mysql://172.27.234.42:3306/dashboard'
+    ds.url = 'jdbc:mysql://172.27.234.42:3306/holmes'
     Sql sql=Sql.newInstance(ds)
-    def sqlString = "INSERT INTO dashboard.dailybuild_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
+    def sqlString = "INSERT INTO holmes.func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
               "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken},NOW())"
 
     echo sqlString
