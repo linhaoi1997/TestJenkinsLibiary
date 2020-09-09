@@ -117,7 +117,7 @@ def int getBranchCov() {
 
 }
 
-def call(String coverage = null, String version="release/3.8.2") {
+def call(String coverage = null, String version="1.0.3") {
     getResultFromAllure()
 
     getDatabaseConnection(type: 'GLOBAL') {
