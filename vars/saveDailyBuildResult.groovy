@@ -34,6 +34,9 @@ import java.sql.DriverManager
 @Field int broken
 @Field int unknown
 @Field int total
+@Field int build_result = 0
+@Field int confirm = 0
+@Field allure_url= "http://auto.4paradigm.com/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
 @Field Map<String, Map<String, Integer>> map = new HashMap<>()
 
 @NonCPS
@@ -52,6 +55,13 @@ def getResultFromAllure() {
         unknown = Integer.parseInt((String) json.statistic.unknown)
         total = Integer.parseInt((String) json.statistic.total)
     }
+    if(total==passed && passed!=0) { 
+           build_result=1 //测试用例执行成功
+    } else{ 
+           build_result=2 //测试用例执行失败
+           confirm=1   //需要确认结果
+    }
+
     
 }
 
@@ -64,8 +74,8 @@ def call() {
     ds.password = 'root'
     ds.url = 'jdbc:mysql://172.27.234.42:3306/holmes'
     Sql sql=Sql.newInstance(ds)
-    def sqlString = "INSERT INTO holmes.func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
-              "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken},NOW())"
+    def sqlString = "INSERT INTO holmes.func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time，build_result,allure_url,confirm) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
+              "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken},NOW(),${build_result},${allure_url},${confirm})"
 
     echo sqlString
     sql.execute(sqlString)
