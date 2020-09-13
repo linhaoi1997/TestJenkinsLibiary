@@ -74,7 +74,7 @@ def call() {
     ds.password = 'root'
     ds.url = 'jdbc:mysql://172.27.234.42:3306/holmes'
     Sql sql=Sql.newInstance(ds)
-    def sqlString = "INSERT INTO holmes.func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time，build_result,allure_url,confirm) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
+    def sqlString = "INSERT INTO holmes.func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time,build_result,allure_url,confirm) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
               "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken},NOW(),${build_result},${allure_url},${confirm})"
 
     echo sqlString
