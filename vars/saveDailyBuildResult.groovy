@@ -56,7 +56,7 @@ def getResultFromAllure() {
         total = Integer.parseInt((String) json.statistic.total)
     }
 
-    if(total==passed && passed!=0) { 
+    if(total==passed && total != 0) { 
            build_result=1 //测试用例执行成功
     } else{ 
            build_result=2 //测试用例执行失败
