@@ -34,8 +34,8 @@ import java.sql.DriverManager
 @Field int broken
 @Field int unknown
 @Field int total
-@Field int build_result = 0
-@Field int confirm = 0
+@Field int build_result 
+@Field int confirm 
 
 @Field Map<String, Map<String, Integer>> map = new HashMap<>()
 
@@ -54,15 +54,16 @@ def getResultFromAllure() {
         broken = Integer.parseInt((String) json.statistic.broken)
         unknown = Integer.parseInt((String) json.statistic.unknown)
         total = Integer.parseInt((String) json.statistic.total)
+        if(total==passed && passed != 0) { 
+           build_result=1 //测试用例执行成功
+        } else{ 
+           build_result=2 //测试用例执行失败
+           confirm=1   //需要确认结果
+        }
         
     }
     
-    if(total==passed && passed != 0) { 
-           build_result=1 //测试用例执行成功
-    } else{ 
-           build_result=2 //测试用例执行失败
-           confirm=1   //需要确认结果
-    }
+    
     
     
     
