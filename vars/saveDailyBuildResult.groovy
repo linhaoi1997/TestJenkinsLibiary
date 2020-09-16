@@ -34,16 +34,15 @@ import java.sql.DriverManager
 @Field int broken
 @Field int unknown
 @Field int total
-@Field int build_result = 0
-@Field int confirm = 0
-@Field allure_url= "http://auto.4paradigm.com/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+
 @Field Map<String, Map<String, Integer>> map = new HashMap<>()
 
 @NonCPS
 def getResultFromAllure() {
 
     def reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
-    
+    def build_result = 0
+    def confirm = 0
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
@@ -64,6 +63,21 @@ def getResultFromAllure() {
            confirm=1   //需要确认结果
     }
     
+    MysqlDataSource ds = new MysqlDataSource()
+    ds.user = 'root'
+    ds.password = 'root'
+    ds.url = 'jdbc:mysql://172.27.234.42:3306/holmes'
+    
+    def allure_url= "http://auto.4paradigm.com/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+    
+    Sql sql=Sql.newInstance(ds)
+    def sqlString = "INSERT INTO holmes.func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time,build_result,allure_url,confirm) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
+              "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken},NOW(),${build_result},${allure_url},${confirm})"
+
+    echo sqlString
+    sql.execute(sqlString)
+    sql.close()
+    
     
 
 }
@@ -72,17 +86,7 @@ def getResultFromAllure() {
 def call() {
     
     getResultFromAllure()
-    MysqlDataSource ds = new MysqlDataSource()
-    ds.user = 'root'
-    ds.password = 'root'
-    ds.url = 'jdbc:mysql://172.27.234.42:3306/holmes'
-    Sql sql=Sql.newInstance(ds)
-    def sqlString = "INSERT INTO holmes.func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, create_time,build_result,allure_url,confirm) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${VERSION}', " +
-              "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken},NOW(),${build_result},${allure_url},${confirm})"
-
-    echo sqlString
-    sql.execute(sqlString)
-    sql.close()
+   
 
 }
 
