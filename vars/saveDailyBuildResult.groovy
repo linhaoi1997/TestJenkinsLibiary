@@ -34,8 +34,6 @@ import java.sql.DriverManager
 @Field int broken
 @Field int unknown
 @Field int total
-@Field int build_result = 0
-@Field int confirm = 0
 @Field allure_url= "http://auto.4paradigm.com/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
 @Field Map<String, Map<String, Integer>> map = new HashMap<>()
 
@@ -43,7 +41,8 @@ import java.sql.DriverManager
 def getResultFromAllure() {
 
     def reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
-    
+    def build_result = 0
+    def confirm = 0
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
@@ -55,20 +54,15 @@ def getResultFromAllure() {
         unknown = Integer.parseInt((String) json.statistic.unknown)
         total = Integer.parseInt((String) json.statistic.total)
         
-        if(total==passed && total != 0) { 
+    }
+    
+    if(total==passed && total != 0) { 
            build_result=1 //测试用例执行成功
-        } else{ 
+    } else{ 
            build_result=2 //测试用例执行失败
            confirm=1   //需要确认结果
-        }
     }
-
-}
-
-
-def call() {
     
-    getResultFromAllure()
     MysqlDataSource ds = new MysqlDataSource()
     ds.user = 'root'
     ds.password = 'root'
@@ -80,6 +74,13 @@ def call() {
     echo sqlString
     sql.execute(sqlString)
     sql.close()
+
+}
+
+
+def call() {
+    
+    getResultFromAllure()
 
 }
 
