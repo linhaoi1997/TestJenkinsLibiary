@@ -57,67 +57,9 @@ def getResultFromAllure() {
         total = Integer.parseInt((String) json.statistic.total)
     }
 
-    http.get(path: "${reportURL}data/behaviors.json") { resp, json ->
-        List featureJson = json.children
-
-        for (int i = 0; i < featureJson.size(); i++) {
-            String featureName = featureJson.get(i).name
-            Map<String, Integer> results = new HashMap<>()
-            results['passed'] = 0
-            results['failed'] = 0
-            results['skipped'] = 0
-            results['broken'] = 0
-            results['unknown'] = 0
-
-
-            List storyJson = featureJson.get(i).children
-            for (int j = 0; j < storyJson.size(); j++) {
-
-                List caseJson = storyJson.get(j).children
-                for (int k = 0; k < caseJson.size(); k++) {
-                    def caseInfo = caseJson.get(k)
-                    String status = caseInfo.status
-                    int num = results.get(status) + 1
-                    results[status] = num
-
-                }
-            }
-            int total = 0
-            results.each { key, value ->
-                total = total + value
-            }
-            results['total'] = total
-            map.put(featureName, results)
-        }
-
-
-    }
-}
-
-def int getLineCov() {
-    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
-    String doc = Jsoup.connect(htmlurl).get().getElementsByClass("pc_cov").text();
-    int cov = Integer.parseInt(doc.replace("%", ""))
-    println("当前行覆盖率为 ${cov}")
-    return cov
-}
-
-def int getBranchCov() {
-    def htmlurl = "${jenkinsURL}/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/_e4bba3_e7a081_e8a686_e79b96_e78e87_e68aa5_e5918a/index.html"
-    String branchAll = Jsoup.connect(htmlurl).get().select(".total > :nth-child(5)").text();
-    String branchPartial = Jsoup.connect(htmlurl).get().select(".total > :nth-child(6)").text();
-
-    println("all branch number: ${branchAll}")
-    println("cover branch number: ${branchPartial}")
-
-    def cov = Integer.parseInt(branchPartial) / Integer.parseInt(branchAll)
-    println("the branch cov is ${cov}")
-
-
-
-    return cov
 
 }
+
 
 def call() {
     getResultFromAllure()
