@@ -22,7 +22,7 @@ import groovy.transform.Field
 //@GrabConfig(systemClassLoader=true)
 
 //global variable
-@Field jenkinsURL = "http://auto.4paradigm.com"
+@Field jenkinsURL = "http://k8s.testing-studio.com:5003"
 
 @Field int passed
 @Field int failed
@@ -117,7 +117,7 @@ def int getBranchCov() {
 
 }
 
-def call(String coverage = null, String version="1.0.3") {
+def call() {
     getResultFromAllure()
 
     getDatabaseConnection(type: 'GLOBAL') {
@@ -129,16 +129,16 @@ def call(String coverage = null, String version="1.0.3") {
 //            sql sql: sqlString
 //        }
 
-        def lineCov = 0
-        def branchCov = 0
-        if (coverage != null && coverage != ""){
-            lineCov = getLineCov()
-            branchCov = getBranchCov() * 100
+//        def lineCov = 0
+//        def branchCov = 0
+//        if (coverage != null && coverage != ""){
+//            lineCov = getLineCov()
+//            branchCov = getBranchCov() * 100
+//
+//        }
 
-        }
-
-        def sqlString = "INSERT INTO func_test_summary (name, build_id, version, total, passed, unknown, skipped, failed, broken, line_cov, branch_cov, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', '${version}', " +
-                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, ${lineCov}, ${branchCov}, NOW())"
+        def sqlString = "INSERT INTO func_test_summary (name, build_id, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', " +
+                "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
 
         sql sql: sqlString
 
