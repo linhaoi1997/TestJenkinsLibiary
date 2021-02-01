@@ -34,12 +34,13 @@ import groovy.transform.Field
 
 @NonCPS
 def getResultFromAllure() {
-    def reportURL = ""
-    if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
-        reportURL = "/view/API/job/${jobName}/job/${env.BRANCH_NAME}/${BUILD_NUMBER}/allure/"
-    } else {
-        reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
-    }
+    def reportURL = "/job/Daily%20Build/allure/"
+
+//    if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
+//        reportURL = "http://k8s.testing-studio.com:5003/job/Daily%20Build/allure/"
+//    } else {
+//        reportURL = "/view/API/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
+//    }
 
 //    reportURL = "/view/API/job/sage-sdk-test/185/allure/"
 
