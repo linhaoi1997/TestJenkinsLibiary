@@ -22,7 +22,7 @@ import groovy.transform.Field
 //@GrabConfig(systemClassLoader=true)
 
 //global variable
-@Field jenkinsURL = "http://k8s.testing-studio.com:5003/"
+@Field jenkinsURL = "http://k8s.testing-studio.com:5003"
 
 @Field int passed
 @Field int failed
@@ -34,7 +34,7 @@ import groovy.transform.Field
 
 @NonCPS
 def getResultFromAllure() {
-    def reportURL = "/job/Daily%20Build/${BUILD_NUMBER}/"
+    def reportURL = "/job/Daily%20Build/${BUILD_NUMBER}/allure/"
 
 //    if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
 //        reportURL = "http://k8s.testing-studio.com:5003/job/Daily%20Build/allure/"
