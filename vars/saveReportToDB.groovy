@@ -43,6 +43,7 @@ def getResultFromAllure() {
 //    }
 
 //    reportURL = "/view/API/job/sage-sdk-test/185/allure/"
+    println(jenkinsURL+"${reportURL}widgets/summary.json")
 
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
