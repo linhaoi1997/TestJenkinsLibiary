@@ -22,7 +22,7 @@ import groovy.transform.Field
 //@GrabConfig(systemClassLoader=true)
 
 //global variable
-@Field jenkinsURL = "http://k8s.testing-studio.com:5003"
+@Field jenkinsURL = "http://k8s.testing-studio.com:5003/"
 
 @Field int passed
 @Field int failed
@@ -45,7 +45,7 @@ def getResultFromAllure() {
 //    reportURL = "/view/API/job/sage-sdk-test/185/allure/"
     println(jenkinsURL+"${reportURL}widgets/summary.json")
 
-    HTTPBuilder http = new HTTPBuilder(jenkinsURL)
+    HTTPBuilder http = new HTTPBuilder("http://k8s.testing-studio.com:5003")
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
         println resp.status
