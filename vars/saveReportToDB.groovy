@@ -34,7 +34,7 @@ import groovy.transform.Field
 
 @NonCPS
 def getResultFromAllure() {
-    def reportURL = "/job/Daily%20Build/${BUILD_NUMBER}/allure/"
+    def reportURL = "/job/DailyBuild/${BUILD_NUMBER}/allure/"
 
 //    if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
 //        reportURL = "http://k8s.testing-studio.com:5003/job/Daily%20Build/allure/"
