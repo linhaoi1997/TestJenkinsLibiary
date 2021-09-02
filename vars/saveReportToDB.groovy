@@ -55,12 +55,8 @@ def getResultFromAllure() {
         broken = Integer.parseInt((String) json.statistic.broken)
         unknown = Integer.parseInt((String) json.statistic.unknown)
         total = Integer.parseInt((String) json.statistic.total)
-        println passed
-        println failed
-        println skipped
-        println broken
-        println unknown
-        println total
+        println JOB_NAME
+        println BUILD_ID
     }
 
 
