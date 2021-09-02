@@ -22,7 +22,7 @@ import groovy.transform.Field
 //@GrabConfig(systemClassLoader=true)
 
 //global variable
-@Field jenkinsURL = "http://k8s.testing-studio.com:5003"
+@Field jenkinsURL = "http://192.168.1.165:8080/"
 
 @Field int passed
 @Field int failed
@@ -34,7 +34,7 @@ import groovy.transform.Field
 
 @NonCPS
 def getResultFromAllure() {
-    def reportURL = "/job/DailyBuild/${BUILD_NUMBER}/allure/"
+    def reportURL = "/job/${JOB_NAME}/${BUILD_NUMBER}/allure/"
 
 //    if (env.BRANCH_NAME != "" && env.BRANCH_NAME != null) {
 //        reportURL = "http://k8s.testing-studio.com:5003/job/Daily%20Build/allure/"
@@ -45,7 +45,7 @@ def getResultFromAllure() {
 //    reportURL = "/view/API/job/sage-sdk-test/185/allure/"
     println(jenkinsURL+"${reportURL}widgets/summary.json")
 
-    HTTPBuilder http = new HTTPBuilder("http://k8s.testing-studio.com:5003")
+    HTTPBuilder http = new HTTPBuilder("http://192.168.1.165:8080/")
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
         println resp.status
