@@ -55,6 +55,12 @@ def getResultFromAllure() {
         broken = Integer.parseInt((String) json.statistic.broken)
         unknown = Integer.parseInt((String) json.statistic.unknown)
         total = Integer.parseInt((String) json.statistic.total)
+        println passed
+        println failed
+        println skipped
+        println broken
+        println unknown
+        println total
     }
 
 
@@ -90,3 +96,4 @@ def call() {
 }
 
 
+//  create table func_test_summary(name VARCHAR(20),build_id Int,total Int,passed Int,skipped Int,failed Int, broken Int,create_time DATETIME)
