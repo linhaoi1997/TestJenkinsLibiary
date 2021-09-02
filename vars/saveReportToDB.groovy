@@ -55,8 +55,6 @@ def getResultFromAllure() {
         broken = Integer.parseInt((String) json.statistic.broken)
         unknown = Integer.parseInt((String) json.statistic.unknown)
         total = Integer.parseInt((String) json.statistic.total)
-        println JOB_NAME
-        println BUILD_ID
     }
 
 
@@ -85,6 +83,7 @@ def call() {
 
         def sqlString = "INSERT INTO func_test_summary (name, build_id, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
+        println sqlString
 
         sql sql: sqlString
 
