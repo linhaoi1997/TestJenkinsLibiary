@@ -22,7 +22,7 @@ import groovy.transform.Field
 //@GrabConfig(systemClassLoader=true)
 
 //global variable
-@Field jenkinsURL = "http://192.168.1.165:8080/"
+@Field jenkinsURL = "${JENKINS_URL}"
 
 @Field int passed
 @Field int failed
@@ -45,7 +45,7 @@ def getResultFromAllure() {
 //    reportURL = "/view/API/job/sage-sdk-test/185/allure/"
     println(jenkinsURL+"${reportURL}widgets/summary.json")
 
-    HTTPBuilder http = new HTTPBuilder("http://192.168.1.165:8080/")
+    HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
     http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
         println resp.status
@@ -91,4 +91,4 @@ def call() {
 }
 
 
-//  create table func_test_summary(name VARCHAR(20),build_id Int,total Int,passed Int,skipped Int,failed Int, broken Int,create_time DATETIME)
+//  create table func_test_summary(name VARCHAR(20),build_id Int,total Int,passed Int,unknown Int,skipped Int,failed Int, broken Int,create_time DATETIME)
