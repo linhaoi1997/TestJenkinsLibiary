@@ -9,6 +9,7 @@ import groovy.grape.Grape
 @Grab(group = 'org.jsoup', module = 'jsoup', version = '1.10.3')
 import org.jsoup.Jsoup
 import groovyx.net.http.HTTPBuilder
+import groovyx.net.http.Method
 
 
 import static groovyx.net.http.ContentType.*
