@@ -52,7 +52,7 @@ def getResultFromAllure() {
 
     http.request(Method.GET) { req ->
         uri.path = "${reportURL}widgets/summary.json"
-        headers.'Authorization' = "Basic ${"linhao:113ac10ad7a386d2c24015be1dc489a09d".bytes.encodeBase64().toString()}"
+        headers.'Authorization' = "Basic ${"${params.API_USERNAME}:${params.API_TOKEN}".bytes.encodeBase64().toString()}"
         response.success = { resp, json ->
         println resp.status
         println json
@@ -102,7 +102,7 @@ def call() {
 //
 //        }
 
-        def sqlString = "INSERT INTO func_test_summary (name, build_id, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', " +
+        def sqlString = "INSERT INTO statistics (name, build_id, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
         println sqlString
 
