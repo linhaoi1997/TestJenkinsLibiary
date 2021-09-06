@@ -47,7 +47,10 @@ def getResultFromAllure() {
 
     HTTPBuilder http = new HTTPBuilder(jenkinsURL)
     //根据responsedata中的Content-Type header，调用json解析器处理responsedata
-    http.get(path: "${reportURL}widgets/summary.json") { resp, json ->
+    http.get(
+        path: "${reportURL}widgets/summary.json"
+        headers.'Authorization' = "Basic bGluaGFvOjExM2FjMTBhZDdhMzg2ZDJjMjQwMTViZTFkYzQ4OWEwOWQ="
+    ) { resp, json ->
         println resp.status
         passed = Integer.parseInt((String) json.statistic.passed)
         failed = Integer.parseInt((String) json.statistic.failed)
