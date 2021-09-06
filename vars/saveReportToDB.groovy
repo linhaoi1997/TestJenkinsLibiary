@@ -102,7 +102,7 @@ def call() {
 //
 //        }
 
-        def sqlString = "INSERT INTO statistics (name, build_id, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', " +
+        def sqlString = "INSERT INTO func_test_summary (name, build_id, total, passed, unknown, skipped, failed, broken, create_time) VALUES ('${JOB_NAME}', '${BUILD_ID}', " +
                 "${total}, ${passed}, ${unknown}, ${skipped}, ${failed}, ${broken}, NOW())"
         println sqlString
 
